@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  return [
+    { params: { artistaId: 'artista1' } },
+    { params: { artistaId: 'artista2' } },
+    { params: { artistaId: 'artista3' } },
+  ];
+}
+
+const artistas = {
+  artista1: {
+    nombre: 'María González',
+    bio: 'Artista visual especializada en arte contemporáneo, con más de 10 años de experiencia explorando las intersecciones entre el arte digital y tradicional.',
+    imagen: 'https://via.placeholder.com/800x400',
+    obras: [
+      {
+        titulo: 'Metamorfosis Digital',
+        descripcion: 'Serie de fotografías intervenidas digitalmente',
+        imagen: 'https://via.placeholder.com/400x300',
+        tipo: 'imagen'
+      },
+      {
+        titulo: 'Espacios Infinitos',
+        descripcion: 'Instalación multimedia',
+        video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+        tipo: 'video'
+      },
+      {
+        titulo: 'Resonancias Urbanas',
+        descripcion: 'Serie fotográfica',
+        imagen: 'https://via.placeholder.com/400x300',
+        tipo: 'imagen'
+      }
+    ]
+  },
+  artista2: {
+    nombre: 'Carlos Ruiz',
+    bio: 'Artista multidisciplinario enfocado en la escultura y el arte sonoro. Su trabajo explora la relación entre el espacio y el sonido.',
+    imagen: 'https://via.placeholder.com/800x400',
+    obras: [
+      {
+        titulo: 'Ecos del Silencio',
+        descripcion: 'Instalación sonora',
+        video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+        tipo: 'video'
+      },
+      {
+        titulo: 'Formas del Tiempo',
+        descripcion: 'Esculturas sonoras',
+        imagen: 'https://via.placeholder.com/400x300',
+        tipo: 'imagen'
+      }
+    ]
+  },
+  artista3: {
+    nombre: 'Ana Martínez',
+    bio: 'Performer y artista visual que trabaja en la intersección entre el cuerpo, el espacio y la tecnología.',
+    imagen: 'https://via.placeholder.com/800x400',
+    obras: [
+      {
+        titulo: 'Cuerpos Digitales',
+        descripcion: 'Performance multimedia',
+        video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+        tipo: 'video'
+      },
+      {
+        titulo: 'Huellas Temporales',
+        descripcion: 'Serie fotográfica',
+        imagen: 'https://via.placeholder.com/400x300',
+        tipo: 'imagen'
+      },
+      {
+        titulo: 'Memorias Corporales',
+        descripcion: 'Videoarte',
+        video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+        tipo: 'video'
+      }
+    ]
+  }
+};
+
+const { artistaId } = Astro.params;
+const artista = artistas[artistaId];
+
+if (!artista) {
+  return Astro.redirect('/404');
+}
+---
+
+<Layout title={`Circulación - ${artista.nombre}`}>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+      <img src={artista.imagen} alt={artista.nombre} class="w-full h-96 object-cover" />
+      <div class="p-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">{artista.nombre}</h1>
+        <p class="text-xl text-gray-600">{artista.bio}</p>
+      </div>
+    </div>
+
+    <h2 class="text-3xl font-bold text-gray-900 mb-8">Obras y Proyectos</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {artista.obras.map(obra => (
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          {obra.tipo === 'video' ? (
+            <div class="aspect-w-16 aspect-h-9">
+              <iframe
+                src={obra.video}
+                class="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          ) : (
+            <img src={obra.imagen} alt={obra.titulo} class="w-full h-48 object-cover" />
+          )}
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">{obra.titulo}</h3>
+            <p class="text-gray-600">{obra.descripcion}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>

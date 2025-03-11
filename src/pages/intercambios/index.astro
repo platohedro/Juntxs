@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const ciudades = [
+  {
+    id: 'medellin',
+    nombre: 'Medellín',
+    descripcion: 'Experiencias culturales en Medellín',
+    imagen: 'https://via.placeholder.com/400x300'
+  },
+  {
+    id: 'bogota',
+    nombre: 'Bogotá',
+    descripcion: 'Experiencias culturales en Bogotá',
+    imagen: 'https://via.placeholder.com/400x300'
+  }
+];
+---
+
+<Layout title="Intercambios">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold text-white mb-8 text-center">Intercambios Culturales</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {ciudades.map(ciudad => (
+        <a href={`/intercambios/${ciudad.id}`} class="block group">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:scale-105">
+            <img src={ciudad.imagen} alt={ciudad.nombre} class="w-full h-64 object-cover" />
+            <div class="p-6">
+              <h2 class="text-2xl font-semibold text-gray-900 mb-2">{ciudad.nombre}</h2>
+              <p class="text-gray-600">{ciudad.descripcion}</p>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>

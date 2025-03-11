@@ -1,0 +1,47 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-fixed bg-cover bg-center" style="background-image: url('https://raw.githubusercontent.com/platohedro/Juntxs/refs/heads/main/Dise%C3%B1o%20sin%20t%C3%ADtulo.png');">
+    <nav class="bg-secondary/80 backdrop-blur-sm fixed w-full z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex">
+            <a href="/" class="flex items-center">
+              <span class="text-xl font-bold text-white">Juntxs</span>
+            </a>
+          </div>
+          <div class="flex items-center space-x-4">
+            <a href="/circulacion" class="text-white hover:text-primary transition-colors">Circulación</a>
+            <a href="/intercambios" class="text-white hover:text-primary transition-colors">Intercambios</a>
+            <a href="/sesiones-virtuales" class="text-white hover:text-primary transition-colors">Sesiones Virtuales</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <div class="pt-16">
+      <slot />
+    </div>
+
+    <footer class="bg-secondary/80 backdrop-blur-sm text-white py-8 mt-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-lg">Proyecto apoyado por el Ministerio de Cultura de Colombia</p>
+        <img src="https://mincultura.gov.co/areas/comunicaciones/images/logo-mincultura.png" alt="Ministerio de Cultura" class="h-16 mx-auto mt-4" />
+      </div>
+    </footer>
+  </body>
+</html>
