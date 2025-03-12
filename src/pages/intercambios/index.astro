@@ -4,13 +4,13 @@ import Layout from '../../layouts/Layout.astro';
 const ciudades = [
   {
     id: 'medellin',
-    nombre: 'Medellín',
+    nombre: 'Platohedro - Medellín ',
     descripcion: 'Experiencias culturales en Medellín',
-    imagen: 'https://via.placeholder.com/400x300'
+    imagen: '/imagenes/FACHADA1.jpg'
   },
   {
     id: 'bogota',
-    nombre: 'Bogotá',
+    nombre: 'El Eje- Bogotá',
     descripcion: 'Experiencias culturales en Bogotá',
     imagen: 'https://via.placeholder.com/400x300'
   }
@@ -20,6 +20,8 @@ const ciudades = [
 <Layout title="Juntxs: Encuentros vivos, cultura en movimiento | Intercambios">
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <h1 class="text-4xl font-bold text-white mb-8 text-center">Intercambios Culturales</h1>
+
+    <p class="text-white m-8">Nuestro objetivo es promover la diversidad cultural y la interacción entre artistas y audiencias, creando un espacio donde el arte y la cultura se encuentren de manera orgánica y natural.</p>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {ciudades.map(ciudad => (
