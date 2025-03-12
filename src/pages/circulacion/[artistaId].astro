@@ -1,107 +1,16 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-
-interface Obra {
-  titulo: string;
-  descripcion: string;
-  imagen?: string;
-  video?: string;
-  tipo: string;
-}
-
-interface Artista {
-  nombre: string;
-  bio: string;
-  imagen: string;
-  obras: Obra[];
-}
-
-interface Artistas {
-  [key: string]: Artista;
-}
+import { artistas } from '../../data/artistas';
+import type { Artista, Actividad } from '../../data/artistas';
 
 export async function getStaticPaths() {
-  return [
-    { params: { artistaId: 'artista1' } },
-    { params: { artistaId: 'artista2' } },
-    { params: { artistaId: 'artista3' } },
-  ];
+  return Object.keys(artistas).map(artistaId => ({
+    params: { artistaId }
+  }));
 }
 
-const artistas: Artistas = {
-  artista1: {
-    nombre: 'María C',
-    bio: 'Artista visual especializada en arte contemporáneo, con más de 10 años de experiencia explorando las intersecciones entre el arte digital y tradicional.',
-    imagen: '/imagenes/mariac.jpg',
-    obras: [
-      {
-        titulo: 'Actividad 1',
-        descripcion: 'Serie de fotografías intervenidas digitalmente',
-        imagen: 'https://via.placeholder.com/400x300',
-        tipo: 'imagen'
-      },
-      {
-        titulo: 'Actividad 2 ',
-        descripcion: 'Instalación multimedia',
-        video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-        tipo: 'video'
-      },
-      {
-        titulo: 'Actividad 3',
-        descripcion: 'Serie fotográfica',
-        imagen: 'https://via.placeholder.com/400x300',
-        tipo: 'imagen'
-      }
-    ]
-  },
-  artista2: {
-    nombre: 'Laura Sofia',
-    bio: 'Artista multidisciplinario enfocado en la escultura y el arte sonoro. Su trabajo explora la relación entre el espacio y el sonido.',
-    imagen: 'https://via.placeholder.com/800x400',
-    obras: [
-      {
-        titulo: 'Ecos del Silencio',
-        descripcion: 'Instalación sonora',
-        video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-        tipo: 'video'
-      },
-      {
-        titulo: 'Formas del Tiempo',
-        descripcion: 'Esculturas sonoras',
-        imagen: 'https://via.placeholder.com/400x300',
-        tipo: 'imagen'
-      }
-    ]
-  },
-  artista3: {
-    nombre: 'Sandra Ramirez',
-    bio: 'Performer y artista visual que trabaja en la intersección entre el cuerpo, el espacio y la tecnología.',
-    imagen: '/imagenes/sandra.jpeg',
-    obras: [
-      {
-        titulo: 'Cuerpos Digitales',
-        descripcion: 'Performance multimedia',
-        video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-        tipo: 'video'
-      },
-      {
-        titulo: 'Huellas Temporales',
-        descripcion: 'Serie fotográfica',
-        imagen: 'https://via.placeholder.com/400x300',
-        tipo: 'imagen'
-      },
-      {
-        titulo: 'Memorias Corporales',
-        descripcion: 'Videoarte',
-        video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-        tipo: 'video'
-      }
-    ]
-  }
-};
-
 const { artistaId } = Astro.params;
-const artista: Artista = artistas[artistaId as keyof Artistas];
+const artista = artistas[artistaId as keyof typeof artistas];
 
 // Redirección mejorada para páginas no encontradas
 if (!artista) {
@@ -121,25 +30,38 @@ if (!artista) {
 
     <h2 class="text-3xl font-bold text-white mb-8">Circulación Pie de Cuesta</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {artista.obras.map((obra: Obra) => (
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-          {obra.tipo === 'video' ? (
-            <div class="relative w-full" style="padding-top: 56.25%">
-              <iframe
-                src={obra.video}
-                class="absolute top-0 left-0 w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
+      {artista.actividades.map((actividad: Actividad) => (
+        <a href={`/circulacion/${artistaId}/${actividad.id}`} class="block transition-transform hover:scale-105">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden h-full">
+            {actividad.tipo === 'video' ? (
+              <div class="relative w-full" style="padding-top: 56.25%">
+                <iframe
+                  src={actividad.video}
+                  class="absolute top-0 left-0 w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            ) : (
+              <img src={actividad.imagen} alt={actividad.titulo} class="w-full h-48 object-cover" />
+            )}
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">{actividad.titulo}</h3>
+              <p class="text-gray-600 mb-3">{actividad.descripcion}</p>
+              {actividad.fecha && (
+                <p class="text-sm text-gray-500 mb-2"><span class="font-medium">Fecha:</span> {actividad.fecha}</p>
+              )}
+              {actividad.lugar && (
+                <p class="text-sm text-gray-500 mb-2"><span class="font-medium">Lugar:</span> {actividad.lugar}</p>
+              )}
+              <div class="mt-4">
+                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full font-medium">
+                  Ver más detalles
+                </span>
+              </div>
             </div>
-          ) : (
-            <img src={obra.imagen} alt={obra.titulo} class="w-full h-48 object-cover" />
-          )}
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">{obra.titulo}</h3>
-            <p class="text-gray-600">{obra.descripcion}</p>
           </div>
-        </div>
+        </a>
       ))}
     </div>
   </main>
