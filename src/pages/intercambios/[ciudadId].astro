@@ -1,6 +1,25 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
+interface Evento {
+  titulo: string;
+  fecha: string;
+  descripcion: string;
+  imagen?: string;
+  video?: string;
+}
+
+interface Ciudad {
+  nombre: string;
+  descripcion: string;
+  imagen: string;
+  eventos: Evento[];
+}
+
+interface Ciudades {
+  [key: string]: Ciudad;
+}
+
 export async function getStaticPaths() {
   return [
     { params: { ciudadId: 'medellin' } },
@@ -8,7 +27,7 @@ export async function getStaticPaths() {
   ];
 }
 
-const ciudades = {
+const ciudades: Ciudades = {
   medellin: {
     nombre: 'Medellín',
     descripcion: 'Ciudad de la eterna primavera, donde el arte y la cultura se fusionan con la innovación.',
@@ -62,7 +81,7 @@ const ciudades = {
 };
 
 const { ciudadId } = Astro.params;
-const ciudad = ciudades[ciudadId];
+const ciudad: Ciudad = ciudades[ciudadId as keyof Ciudades];
 
 if (!ciudad) {
   return Astro.redirect('/404');
@@ -81,7 +100,7 @@ if (!ciudad) {
 
     <h2 class="text-3xl font-bold text-gray-900 mb-8">Eventos y Actividades</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {ciudad.eventos.map(evento => (
+      {ciudad.eventos.map((evento: Evento) => (
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
           {evento.video ? (
             <div class="aspect-w-16 aspect-h-9">

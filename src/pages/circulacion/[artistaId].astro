@@ -1,6 +1,25 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
+interface Obra {
+  titulo: string;
+  descripcion: string;
+  imagen?: string;
+  video?: string;
+  tipo: string;
+}
+
+interface Artista {
+  nombre: string;
+  bio: string;
+  imagen: string;
+  obras: Obra[];
+}
+
+interface Artistas {
+  [key: string]: Artista;
+}
+
 export async function getStaticPaths() {
   return [
     { params: { artistaId: 'artista1' } },
@@ -9,11 +28,11 @@ export async function getStaticPaths() {
   ];
 }
 
-const artistas = {
+const artistas: Artistas = {
   artista1: {
     nombre: 'María C',
     bio: 'Artista visual especializada en arte contemporáneo, con más de 10 años de experiencia explorando las intersecciones entre el arte digital y tradicional.',
-    imagen: 'https://via.placeholder.com/800x400',
+    imagen: '/imagenes/mariac.jpg',
     obras: [
       {
         titulo: 'Metamorfosis Digital',
@@ -57,7 +76,7 @@ const artistas = {
   artista3: {
     nombre: 'Sandra Ramirez',
     bio: 'Performer y artista visual que trabaja en la intersección entre el cuerpo, el espacio y la tecnología.',
-    imagen: 'https://via.placeholder.com/800x400',
+    imagen: '/imagenes/sandra.jpeg',
     obras: [
       {
         titulo: 'Cuerpos Digitales',
@@ -82,7 +101,7 @@ const artistas = {
 };
 
 const { artistaId } = Astro.params;
-const artista = artistas[artistaId];
+const artista: Artista = artistas[artistaId as keyof Artistas];
 
 // Redirección mejorada para páginas no encontradas
 if (!artista) {
@@ -102,7 +121,7 @@ if (!artista) {
 
     <h2 class="text-3xl font-bold text-gray-900 mb-8">Obras y Proyectos</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {artista.obras.map((obra) => (
+      {artista.obras.map((obra: Obra) => (
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
           {obra.tipo === 'video' ? (
             <div class="relative w-full" style="padding-top: 56.25%">
