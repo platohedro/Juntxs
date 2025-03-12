@@ -22,7 +22,7 @@ export interface Artistas {
 }
 
 export const artistas: Artistas = {
-  artista1: {
+  maria: {
     nombre: 'María C',
     bio: 'Artista visual especializada en arte contemporáneo, con más de 10 años de experiencia explorando las intersecciones entre el arte digital y tradicional.',
     imagen: '/imagenes/mariac.jpg',
@@ -59,7 +59,7 @@ export const artistas: Artistas = {
       }
     ]
   },
-  artista2: {
+  laura: {
     nombre: 'Laura Sofia',
     bio: 'Artista multidisciplinario enfocado en la escultura y el arte sonoro. Su trabajo explora la relación entre el espacio y el sonido.',
     imagen: 'https://via.placeholder.com/800x400',
@@ -86,7 +86,7 @@ export const artistas: Artistas = {
       }
     ]
   },
-  artista3: {
+  sandra: {
     nombre: 'Sandra Ramirez',
     bio: 'Performer y artista visual que trabaja en la intersección entre el cuerpo, el espacio y la tecnología.',
     imagen: '/imagenes/sandra.jpeg',
