@@ -35,19 +35,19 @@ const artistas: Artistas = {
     imagen: '/imagenes/mariac.jpg',
     obras: [
       {
-        titulo: 'Metamorfosis Digital',
+        titulo: 'Actividad 1',
         descripcion: 'Serie de fotografías intervenidas digitalmente',
         imagen: 'https://via.placeholder.com/400x300',
         tipo: 'imagen'
       },
       {
-        titulo: 'Espacios Infinitos',
+        titulo: 'Actividad 2 ',
         descripcion: 'Instalación multimedia',
         video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
         tipo: 'video'
       },
       {
-        titulo: 'Resonancias Urbanas',
+        titulo: 'Actividad 3',
         descripcion: 'Serie fotográfica',
         imagen: 'https://via.placeholder.com/400x300',
         tipo: 'imagen'
@@ -119,7 +119,7 @@ if (!artista) {
       </div>
     </div>
 
-    <h2 class="text-3xl font-bold text-gray-900 mb-8">Obras y Proyectos</h2>
+    <h2 class="text-3xl font-bold text-white mb-8">Circulación Pie de Cuesta</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {artista.obras.map((obra: Obra) => (
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
