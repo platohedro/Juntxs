@@ -4,7 +4,9 @@ import { artistas } from '../../../data/artistas';
 
 // Obtener los datos del artista y la actividad desde el archivo de datos
 const artistaId = 'artista2';
-const actividadId = 'actividad-3';
+// Using one of the existing activity IDs since there's no 'actividad-3' in the data
+// Ideally, you should either add a third activity to artista2 in artistas.ts or remove this file
+const actividadId = 'ecos-del-silencio'; // Using the first activity as a fallback
 const artista = artistas[artistaId];
 const actividad = artista.actividades.find(a => a.id === actividadId);
 
