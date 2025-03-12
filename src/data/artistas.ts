@@ -24,7 +24,7 @@ export interface Artistas {
 export const artistas: Artistas = {
   maria: {
     nombre: 'María C',
-    bio: 'Artista visual especializada en arte contemporáneo, con más de 10 años de experiencia explorando las intersecciones entre el arte digital y tradicional.',
+    bio: 'Maria Carolina Ardila nació en Bogotá y se crió en Bucaramanga. Se mueve entre el quehacer del arte, la escritura y lo audiovisual. Actualmente vive en Medellín, se dedica a ser escritora fantasma y crear cosas. En el ámbito artístico mayoritariamente juega con (y desde) su cuerpa, sonidos, videos, cosas encontradas y circuitos. Busca hibridar y nutrir los medios de creación desde la multidisciplinariedad para llegar a nuevos espacios y ficciones que se inserten en la cotidianidad. ',
     imagen: '/imagenes/mariac.jpg',
     actividades: [
       {
@@ -61,8 +61,8 @@ export const artistas: Artistas = {
   },
   laura: {
     nombre: 'Laura Sofia',
-    bio: 'Artista multidisciplinario enfocado en la escultura y el arte sonoro. Su trabajo explora la relación entre el espacio y el sonido.',
-    imagen: 'https://via.placeholder.com/800x400',
+    bio: 'Laura Sofía Montoya Gómez nació, creció y vive en Medellín. Es arquitecta, docente universitaria y magíster en Arquitectura, Crítica y Proyecto. Es amante de los gatos y aficionada a la jardinería. Hace 13 años, con algunxs amigxs, cofundó Proyecto NN, organización sin ánimo de lucro interesada en apoyar procesos comunitarios de apropiación y transformación del espacio.',
+    imagen: '/imagenes/luara.png',
     actividades: [
       {
         id: 'ecos-del-silencio',
@@ -87,8 +87,8 @@ export const artistas: Artistas = {
     ]
   },
   sandra: {
-    nombre: 'Sandra Ramirez',
-    bio: 'Performer y artista visual que trabaja en la intersección entre el cuerpo, el espacio y la tecnología.',
+    nombre: 'Sandra Ramírez Giraldo',
+    bio: 'Narradora visual, andariega de los Andes, bogadora de Chicha, atisbadora y aprendiz en las artes de caminar y contemplar. Ha desarrollado talleres de fotografía y sensibilización en zonas rurales de Colombia,Venezuela, Ecuador, Perú y Bolivia, vinculándose en procesos para la construcción de memorias colectivas; una búsqueda por elogiar lo cotidiano, por retratar la vida como resistencia. ',
     imagen: '/imagenes/sandra.jpeg',
     actividades: [
       {
