@@ -26,7 +26,7 @@ export const ciudades: Ciudades = {
     eventos: [
       {
         id: 'festival-arte-urbano',
-        titulo: 'Festival de Arte Urbano',
+        titulo: 'Actividad en plato 1',
         fecha: '15-20 Marzo, 2024',
         descripcion: 'Intervenciones artísticas en diferentes espacios de la ciudad',
         imagen: 'https://via.placeholder.com/400x300'
@@ -39,39 +39,39 @@ export const ciudades: Ciudades = {
         video: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
       },
       {
-        id: 'taller-arte-digital',
-        titulo: 'Taller de Arte Digital',
+        id: 'Visita el Faro',
+        titulo: 'Visita el Faro',
         fecha: '12 Abril, 2024',
         descripcion: 'Workshop sobre nuevas tecnologías en el arte',
-        imagen: 'https://via.placeholder.com/400x300'
+        imagen: '/imagenes/Visita_Faro_Eleje_1.jpg'
       }
     ]
   },
   bogota: {
     nombre: 'Bogotá',
     descripcion: 'Capital cultural de Colombia, centro de convergencia artística y creativa.',
-    imagen: 'https://via.placeholder.com/1200x400',
+    imagen: '/imagenes/foto2.jpg',
     eventos: [
       {
-        id: 'exposicion-arte-contemporaneo',
-        titulo: 'Exposición de Arte Contemporáneo',
+        id: 'Taller de Art of hosing',
+        titulo: 'Taller de Art of hosing',
         fecha: '1-30 Mayo, 2024',
         descripcion: 'Muestra internacional en el Museo de Arte Moderno',
-        imagen: 'https://via.placeholder.com/400x300'
+        imagen: '/imagenes/foto3.jpg'
       },
       {
-        id: 'ciclo-performance',
-        titulo: 'Ciclo de Performance',
+        id: 'Taller Danzar la vida',
+        titulo: 'Taller Danzar la vida',
         fecha: '10-15 Mayo, 2024',
         descripcion: 'Serie de presentaciones en espacios alternativos',
-        video: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+        imagen: '/imagenes/foto3.jpg'
       },
       {
-        id: 'conversatorio-arte-ciudad',
-        titulo: 'Conversatorio: Arte y Ciudad',
+        id: 'Visita a proyectos',
+        titulo: 'Visita a proyectos',
         fecha: '20 Mayo, 2024',
         descripcion: 'Diálogo entre artistas locales e internacionales',
-        imagen: 'https://via.placeholder.com/400x300'
+        imagen: '/imagenes/foto2.jpg'
       }
     ]
   }

@@ -1,45 +1,46 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import type { Evento, Ciudad, Ciudades } from '../../../data/ciudades';
 import { ciudades } from '../../../data/ciudades';
 
-interface Evento {
-  titulo: string;
-  fecha: string;
-  descripcion: string;
-  imagen?: string;
-  video?: string;
-  id?: string;
+// Definir explícitamente la interfaz para los parámetros de ruta
+interface StaticPathParams {
+  ciudadId: string;
+  eventoId: string;
 }
 
-interface Ciudad {
-  nombre: string;
-  descripcion: string;
-  imagen: string;
-  eventos: Evento[];
-}
-
-interface Ciudades {
-  [key: string]: Ciudad;
-}
-
+// Función para generar rutas estáticas con tipos correctos
 export async function getStaticPaths() {
-  let paths = [];
-  for (const ciudadId in ciudades) {
-    const ciudad = ciudades[ciudadId];
-    for (const evento of ciudad.eventos) {
-      paths.push({ params: { ciudadId, eventoId: evento.id ?? '' } });
-    }
-  }
+  const paths: Array<{params: StaticPathParams}> = [];
+  
+  // Iterar sobre cada ciudad y sus eventos
+  Object.entries(ciudades).forEach(([ciudadId, ciudad]) => {
+    ciudad.eventos.forEach(evento => {
+      // Asegurar que el ID del evento nunca sea undefined
+      const eventoId = evento.id || '';
+      
+      // Solo agregar la ruta si el ID del evento es válido
+      if (eventoId) {
+        paths.push({
+          params: { ciudadId, eventoId }
+        });
+      }
+    });
+  });
+  
   return paths;
 }
 
-const { ciudadId, eventoId } = Astro.params;
-const ciudad = ciudades[ciudadId];
+// Obtener y validar los parámetros de la URL
+const { ciudadId, eventoId } = Astro.params as StaticPathParams;
 
+// Verificar que la ciudad existe
+const ciudad = ciudades[ciudadId];
 if (!ciudad) {
   return Astro.redirect('/404');
 }
 
+// Buscar el evento específico
 const evento = ciudad.eventos.find(e => e.id === eventoId);
 if (!evento) {
   return Astro.redirect('/404');
