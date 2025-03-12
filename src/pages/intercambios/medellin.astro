@@ -2,39 +2,9 @@
 import Layout from '../../layouts/Layout.astro';
 import { ciudades } from '../../data/ciudades';
 
-interface Evento {
-  titulo: string;
-  fecha: string;
-  descripcion: string;
-  imagen?: string;
-  video?: string;
-  id?: string;
-}
-
-interface Ciudad {
-  nombre: string;
-  descripcion: string;
-  imagen: string;
-  eventos: Evento[];
-}
-
-interface Ciudades {
-  [key: string]: Ciudad;
-}
-
-export async function getStaticPaths() {
-  return [
-    { params: { ciudadId: 'medellin' } },
-    { params: { ciudadId: 'bogota' } },
-  ];
-}
-
-const { ciudadId } = Astro.params;
-const ciudad: Ciudad = ciudades[ciudadId as keyof Ciudades];
-
-if (!ciudad) {
-  return Astro.redirect('/404');
-}
+// Obtener los datos de la ciudad desde el archivo de datos
+const ciudadId = 'medellin';
+const ciudad = ciudades[ciudadId];
 ---
 
 <Layout title={`Intercambios - ${ciudad.nombre}`}>
@@ -44,6 +14,15 @@ if (!ciudad) {
       <div class="p-8">
         <h1 class="text-4xl font-bold text-gray-900 mb-4">{ciudad.nombre}</h1>
         <p class="text-xl text-gray-600">{ciudad.descripcion}</p>
+        
+        <!-- Aquí puedes agregar contenido personalizado para Medellín -->
+        <div class="mt-6 p-4 bg-gray-100 rounded-lg">
+          <h2 class="text-2xl font-semibold mb-3">Sobre Platohedro</h2>
+          <p>Platohedro es un espacio cultural y artístico ubicado en el barrio Buenos Aires de Medellín, 
+          que promueve la experimentación, la colaboración y el intercambio de saberes.</p>
+          
+          <!-- Puedes agregar más contenido personalizado aquí -->
+        </div>
       </div>
     </div>
 
@@ -51,7 +30,7 @@ if (!ciudad) {
 
     <p class="text-white m-8">Nuestro objetivo es promover la diversidad cultural y la interacción entre artistas y audiencias, creando un espacio donde el arte y la cultura se encuentren de manera orgánica y natural.</p>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {ciudad.eventos.map((evento: Evento) => (
+      {ciudad.eventos.map((evento) => (
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
           {evento.video ? (
             <div class="aspect-w-16 aspect-h-9">
@@ -70,7 +49,7 @@ if (!ciudad) {
             <p class="text-gray-500 mb-2">{evento.fecha}</p>
             <p class="text-gray-600 line-clamp-2">{evento.descripcion}</p>
             <a 
-              href={`/intercambios/${ciudadId}/${evento.id}`} 
+              href={`/intercambios/medellin/${evento.id}`} 
               class="mt-4 inline-block px-4 py-2 bg-primary text-white rounded-md hover:bg-purple-700 transition-colors"
             >
               Ver más

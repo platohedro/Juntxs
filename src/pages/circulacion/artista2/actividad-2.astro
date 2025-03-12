@@ -1,0 +1,166 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { artistas } from '../../../data/artistas';
+
+// Obtener los datos del artista y la actividad desde el archivo de datos
+const artistaId = 'artista2';
+const actividadId = 'actividad-2';
+const artista = artistas[artistaId];
+const actividad = artista.actividades.find(a => a.id === actividadId);
+
+// Contenido adicional personalizado para esta actividad
+const contenidoAdicional = {
+  descripcionDetallada: `
+    Este taller de creación sonora busca explorar las posibilidades expresivas del sonido como 
+    material artístico, a través de ejercicios prácticos de escucha, grabación y composición. 
+    Los participantes aprenderán técnicas básicas de grabación de campo, edición de audio y 
+    creación de paisajes sonoros, utilizando herramientas digitales y analógicas accesibles.
+  `,
+  metodologia: `
+    El taller se desarrolla en tres módulos: escucha activa, registro sonoro y composición. 
+    Cada sesión combina aspectos teóricos y prácticos, con ejercicios individuales y colectivos 
+    que permiten a los participantes experimentar con diferentes aproximaciones al sonido. 
+    Se trabajará tanto en espacios interiores como exteriores, explorando las posibilidades 
+    sonoras del entorno urbano y natural de Pie de Cuesta.
+  `,
+  dirigidoA: `
+    El taller está dirigido a personas interesadas en explorar el sonido como medio expresivo, 
+    sin necesidad de conocimientos previos en música o tecnología. Es especialmente relevante 
+    para artistas visuales, músicos experimentales, realizadores audiovisuales, educadores y 
+    cualquier persona curiosa por ampliar sus herramientas creativas.
+  `,
+  requisitos: [
+    'Traer auriculares personales',
+    'Dispositivo móvil con capacidad de grabación (opcional)',
+    'Libreta de apuntes',
+    'Ropa cómoda para actividades al aire libre'
+  ],
+  cronograma: [
+    { dia: 'Día 1', contenido: 'Introducción a la escucha activa y ejercicios de percepción sonora' },
+    { dia: 'Día 2', contenido: 'Técnicas de grabación de campo y documentación sonora' },
+    { dia: 'Día 3', contenido: 'Edición básica de audio y composición de paisajes sonoros' },
+    { dia: 'Día 4', contenido: 'Desarrollo de proyectos personales y presentación final' }
+  ],
+  imagenes: [
+    'https://via.placeholder.com/400x300',
+    'https://via.placeholder.com/400x300',
+    'https://via.placeholder.com/400x300'
+  ]
+};
+---
+
+<Layout title={`${actividad.titulo} - ${artista.nombre}`}>
+  <main class="max-w-5xl mx-auto px-4 py-12">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <img src={actividad.imagen} alt={actividad.titulo} class="w-full min-h-[60vh] sm:h-96 object-cover" />
+      <div class="p-4 sm:p-6 md:p-8">
+        <div class="flex flex-wrap items-center justify-between mb-4 sm:mb-6">
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">{actividad.titulo}</h1>
+          <a href={`/circulacion/${artistaId}`} class="mt-2 inline-flex items-center text-blue-600 hover:text-blue-800">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Volver a {artista.nombre}
+          </a>
+        </div>
+        
+        <div class="flex flex-wrap text-gray-600 mb-4 sm:mb-6">
+          {actividad.fecha && (
+            <div class="mr-6 mb-2">
+              <span class="font-medium text-gray-700">Fecha:</span> {actividad.fecha}
+            </div>
+          )}
+          {actividad.lugar && (
+            <div class="mb-2">
+              <span class="font-medium text-gray-700">Lugar:</span> {actividad.lugar}
+            </div>
+          )}
+        </div>
+        
+        <div class="prose prose-lg max-w-none mb-6 sm:mb-8">
+          <p class="text-gray-700">{actividad.descripcionCompleta || actividad.descripcion}</p>
+        </div>
+        
+        <!-- Contenido adicional personalizado -->
+        <div class="mb-6 sm:mb-8">
+          <h2 class="text-xl sm:text-2xl font-semibold mb-3">Sobre el taller</h2>
+          <p class="text-gray-700">{contenidoAdicional.descripcionDetallada}</p>
+        </div>
+        
+        <div class="mb-6 sm:mb-8">
+          <h2 class="text-xl sm:text-2xl font-semibold mb-3">Metodología</h2>
+          <p class="text-gray-700">{contenidoAdicional.metodologia}</p>
+        </div>
+        
+        <div class="mb-6 sm:mb-8">
+          <h2 class="text-xl sm:text-2xl font-semibold mb-3">Dirigido a</h2>
+          <p class="text-gray-700">{contenidoAdicional.dirigidoA}</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-semibold mb-3">Requisitos</h2>
+            <ul class="list-disc pl-5 space-y-1">
+              {contenidoAdicional.requisitos.map(requisito => (
+                <li class="text-gray-700">{requisito}</li>
+              ))}
+            </ul>
+          </div>
+          
+          <div>
+            <h2 class="text-xl sm:text-2xl font-semibold mb-3">Cronograma</h2>
+            <div class="space-y-3">
+              {contenidoAdicional.cronograma.map(item => (
+                <div class="border-l-4 border-primary pl-3">
+                  <p class="font-medium">{item.dia}</p>
+                  <p class="text-sm text-gray-600">{item.contenido}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        <!-- Galería de imágenes -->
+        <div>
+          <h2 class="text-xl sm:text-2xl font-semibold mb-4">Imágenes de referencia</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {contenidoAdicional.imagenes.map(imagen => (
+              <img src={imagen} alt="Imagen del taller" class="rounded-lg shadow-md h-40 sm:h-48 w-full object-cover" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="mt-8 sm:mt-12">
+      <h2 class="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 text-center sm:text-left">Otras actividades de {artista.nombre}</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+        {artista.actividades
+          .filter(a => a.id !== actividadId)
+          .map(a => (
+            <a href={`/circulacion/${artistaId}/${a.id}`} class="block transition-transform hover:scale-105">
+              <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                {a.tipo === 'video' ? (
+                  <div class="relative w-full h-40 bg-gray-200">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                  </div>
+                ) : (
+                  a.imagen && <img src={a.imagen} alt={a.titulo} class="w-full h-40 object-cover" />
+                )}
+                <div class="p-4">
+                  <h3 class="text-lg font-semibold text-gray-900 mb-1">{a.titulo}</h3>
+                  <p class="text-sm text-gray-600 line-clamp-2">{a.descripcion}</p>
+                </div>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </main>
+</Layout>

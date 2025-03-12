@@ -1,0 +1,124 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { ciudades } from '../../../data/ciudades';
+
+// Obtener los datos del evento desde el archivo de datos
+const ciudadId = 'bogota';
+const eventoId = 'Visita a proyectos';
+const ciudad = ciudades[ciudadId];
+const evento = ciudad.eventos.find(e => e.id === eventoId);
+
+// Contenido adicional personalizado para este evento
+const contenidoAdicional = {
+  descripcionDetallada: `
+    La visita a proyectos es una oportunidad para conocer de primera mano iniciativas culturales 
+    y artísticas que están transformando el panorama creativo de Bogotá. Durante esta jornada, 
+    visitaremos espacios independientes, colectivos artísticos y proyectos comunitarios que están 
+    generando nuevas formas de producción, circulación y apropiación del arte en la ciudad.
+  `,
+  proyectos: [
+    { 
+      nombre: 'Espacio Cultural Comunitario', 
+      descripcion: 'Iniciativa que trabaja con comunidades locales a través de prácticas artísticas participativas.' 
+    },
+    { 
+      nombre: 'Laboratorio de Arte Digital', 
+      descripcion: 'Espacio de experimentación y creación con nuevas tecnologías y medios digitales.' 
+    },
+    { 
+      nombre: 'Colectivo de Arte Urbano', 
+      descripcion: 'Grupo de artistas que intervienen el espacio público a través de murales y arte callejero.' 
+    }
+  ],
+  horario: '9:00 AM - 5:00 PM',
+  puntoEncuentro: 'Centro Cultural El Eje, Calle 45 #15-35, Bogotá',
+  incluye: [
+    'Transporte entre proyectos',
+    'Almuerzo comunitario',
+    'Material informativo'
+  ],
+  galeria: [
+    '/imagenes/foto2.jpg',
+    '/imagenes/foto3.jpg'
+  ]
+};
+---
+
+<Layout title={evento.titulo}>
+  <main class="max-w-5xl mx-auto px-4 py-12">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-8">
+      <img src={evento.imagen} alt={evento.titulo} class="w-full h-96 object-cover" />
+      <div class="p-8">
+        <h1 class="text-4xl font-bold mb-4">{evento.titulo}</h1>
+        <p class="text-gray-600 mb-6 text-xl">{evento.fecha}</p>
+        
+        <!-- Descripción original del evento -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-3">Descripción</h2>
+          <p class="text-gray-700">{evento.descripcion}</p>
+        </div>
+        
+        <!-- Contenido personalizado adicional -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-3">Sobre la visita</h2>
+          <p class="text-gray-700">{contenidoAdicional.descripcionDetallada}</p>
+        </div>
+        
+        <!-- Información logística -->
+        <div class="mb-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <h3 class="text-xl font-semibold mb-2">Horario</h3>
+            <p>{contenidoAdicional.horario}</p>
+          </div>
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <h3 class="text-xl font-semibold mb-2">Punto de encuentro</h3>
+            <p>{contenidoAdicional.puntoEncuentro}</p>
+          </div>
+        </div>
+        
+        <!-- Proyectos que se visitarán -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-3">Proyectos que visitaremos</h2>
+          <div class="space-y-4">
+            {contenidoAdicional.proyectos.map(proyecto => (
+              <div class="border-l-4 border-primary pl-4">
+                <h3 class="font-semibold text-lg">{proyecto.nombre}</h3>
+                <p>{proyecto.descripcion}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <!-- Qué incluye -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-3">La visita incluye</h2>
+          <ul class="list-disc pl-5 space-y-1">
+            {contenidoAdicional.incluye.map(item => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+        
+        <!-- Galería de imágenes -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4">Galería</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {contenidoAdicional.galeria.map(imagen => (
+              <img src={imagen} alt="Imagen de proyectos" class="rounded-lg shadow-md h-48 w-full object-cover" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Botón para volver a la página de la ciudad -->
+    <div class="text-center mt-8">
+      <a 
+        href="/intercambios/bogota" 
+        class="inline-block px-6 py-3 bg-primary text-white rounded-md hover:bg-purple-700 transition-colors"
+      >
+        Volver a eventos de Bogotá
+      </a>
+    </div>
+  </main>
+</Layout>

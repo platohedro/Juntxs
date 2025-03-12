@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { artistas } from '../../data/artistas';
+import type { Artista, Actividad } from '../../data/artistas';
+
+// Obtener los datos del artista desde el archivo de datos
+const artistaId = 'artista3';
+const artista = artistas[artistaId];
+
+// Contenido adicional personalizado para este artista
+const contenidoAdicional = {
+  trayectoria: `
+    Sandra Ramirez es una artista interdisciplinaria cuyo trabajo explora la relación entre 
+    el cuerpo, la tecnología y el espacio público. A través de performances, videoarte y 
+    fotografía, investiga cómo la tecnología transforma nuestra experiencia corporal y 
+    nuestras relaciones sociales. Su obra se caracteriza por un enfoque crítico y poético 
+    que cuestiona las narrativas dominantes sobre el cuerpo y la identidad.
+  `,
+  formacion: [
+    'Doctorado en Artes y Nuevos Medios, Universidad Complutense de Madrid',
+    'Maestría en Performance, Universidad Nacional de Colombia',
+    'Pregrado en Artes Visuales, Universidad de los Andes'
+  ],
+  proyectos: [
+    {
+      nombre: 'Cuerpos en Red',
+      descripcion: 'Proyecto de investigación-creación sobre la corporalidad en entornos digitales'
+    },
+    {
+      nombre: 'Memorias Encarnadas',
+      descripcion: 'Serie de performances que exploran la memoria colectiva a través del cuerpo'
+    },
+    {
+      nombre: 'Territorios Virtuales',
+      descripcion: 'Instalación multimedia sobre la relación entre espacio físico y digital'
+    }
+  ]
+};
+---
+
+<Layout title={`Circulación - ${artista.nombre}`}>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+      <img src={artista.imagen} alt={artista.nombre} class="w-full min-h-[80vh] sm:h-96 object-cover" />
+      <div class="p-4 sm:p-6 md:p-8">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-4">{artista.nombre}</h1>
+        <p class="text-base sm:text-lg md:text-xl text-gray-600 mb-4 sm:mb-6">{artista.bio}</p>
+        
+        <!-- Contenido personalizado adicional -->
+        <div class="mt-6 sm:mt-8">
+          <h2 class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Trayectoria</h2>
+          <p class="text-gray-700">{contenidoAdicional.trayectoria}</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mt-6 sm:mt-8">
+          <!-- Formación -->
+          <div>
+            <h2 class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Formación</h2>
+            <ul class="list-disc pl-5 space-y-1 sm:space-y-2">
+              {contenidoAdicional.formacion.map(item => (
+                <li class="text-gray-700">{item}</li>
+              ))}
+            </ul>
+          </div>
+          
+          <!-- Proyectos -->
+          <div>
+            <h2 class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Proyectos destacados</h2>
+            <div class="space-y-3">
+              {contenidoAdicional.proyectos.map(proyecto => (
+                <div class="border-l-4 border-primary pl-3 sm:pl-4">
+                  <h3 class="font-semibold">{proyecto.nombre}</h3>
+                  <p class="text-sm sm:text-base text-gray-600">{proyecto.descripcion}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-8 text-center sm:text-left">Circulación Pie de Cuesta</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+      {artista.actividades.map((actividad: Actividad) => (
+        <a href={`/circulacion/artista3/${actividad.id}`} class="block transition-transform hover:scale-105">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden h-full">
+            {actividad.tipo === 'video' ? (
+              <div class="relative w-full" style="padding-top: 56.25%">
+                <iframe
+                  src={actividad.video}
+                  class="absolute top-0 left-0 w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            ) : (
+              <img src={actividad.imagen} alt={actividad.titulo} class="w-full h-40 sm:h-48 object-cover" />
+            )}
+            <div class="p-4 sm:p-6">
+              <h3 class="text-lg sm:text-xl font-semibold text-gray-900 mb-2">{actividad.titulo}</h3>
+              <p class="text-sm sm:text-base text-gray-600 mb-3">{actividad.descripcion}</p>
+              {actividad.fecha && (
+                <p class="text-xs sm:text-sm text-gray-500 mb-1 sm:mb-2"><span class="font-medium">Fecha:</span> {actividad.fecha}</p>
+              )}
+              {actividad.lugar && (
+                <p class="text-xs sm:text-sm text-gray-500 mb-1 sm:mb-2"><span class="font-medium">Lugar:</span> {actividad.lugar}</p>
+              )}
+              <div class="mt-3 sm:mt-4">
+                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 sm:px-3 py-1 rounded-full font-medium">
+                  Ver más detalles
+                </span>
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>

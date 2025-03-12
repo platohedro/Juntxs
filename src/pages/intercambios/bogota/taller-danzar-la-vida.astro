@@ -1,0 +1,118 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { ciudades } from '../../../data/ciudades';
+
+// Obtener los datos del evento desde el archivo de datos
+const ciudadId = 'bogota';
+const eventoId = 'Taller Danzar la vida';
+const ciudad = ciudades[ciudadId];
+const evento = ciudad.eventos.find(e => e.id === eventoId);
+
+// Contenido adicional personalizado para este evento
+const contenidoAdicional = {
+  descripcionDetallada: `
+    El taller "Danzar la Vida" es una experiencia corporal y sensorial que invita a los participantes 
+    a reconectar con su cuerpo, sus emociones y su entorno a través del movimiento libre y consciente. 
+    Esta propuesta integra elementos de danza contemporánea, biodanza y prácticas somáticas para 
+    explorar nuevas formas de habitar el cuerpo y relacionarse con el espacio.
+  `,
+  programacion: [
+    { hora: '10:00', actividad: 'Bienvenida y calentamiento' },
+    { hora: '10:30', actividad: 'Exploración corporal individual' },
+    { hora: '11:30', actividad: 'Dinámicas de movimiento colectivo' },
+    { hora: '14:00', actividad: 'Improvisación guiada' },
+    { hora: '15:30', actividad: 'Círculo de cierre y reflexión' }
+  ],
+  facilitadores: [
+    'Colectivo de Danza El Eje',
+    'Invitados especiales'
+  ],
+  requisitos: [
+    'Ropa cómoda',
+    'Botella de agua',
+    'Esterilla o manta',
+    'Disposición para explorar y jugar'
+  ],
+  galeria: [
+    '/imagenes/foto3.jpg',
+    '/imagenes/foto2.jpg'
+  ]
+};
+---
+
+<Layout title={evento.titulo}>
+  <main class="max-w-5xl mx-auto px-4 py-12">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-8">
+      <img src={evento.imagen} alt={evento.titulo} class="w-full h-96 object-cover" />
+      <div class="p-8">
+        <h1 class="text-4xl font-bold mb-4">{evento.titulo}</h1>
+        <p class="text-gray-600 mb-6 text-xl">{evento.fecha}</p>
+        
+        <!-- Descripción original del evento -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-3">Descripción</h2>
+          <p class="text-gray-700">{evento.descripcion}</p>
+        </div>
+        
+        <!-- Contenido personalizado adicional -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-3">Sobre el taller</h2>
+          <p class="text-gray-700">{contenidoAdicional.descripcionDetallada}</p>
+        </div>
+        
+        <!-- Programación -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-3">Programación</h2>
+          <ul class="space-y-2">
+            {contenidoAdicional.programacion.map(item => (
+              <li class="flex">
+                <span class="font-medium w-20">{item.hora}</span>
+                <span>{item.actividad}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <!-- Facilitadores -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-3">Facilitadores</h2>
+          <ul class="list-disc pl-5 space-y-1">
+            {contenidoAdicional.facilitadores.map(facilitador => (
+              <li>{facilitador}</li>
+            ))}
+          </ul>
+        </div>
+        
+        <!-- Requisitos -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-3">¿Qué necesitas traer?</h2>
+          <ul class="list-disc pl-5 space-y-1">
+            {contenidoAdicional.requisitos.map(requisito => (
+              <li>{requisito}</li>
+            ))}
+          </ul>
+        </div>
+        
+        <!-- Galería de imágenes -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4">Galería</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {contenidoAdicional.galeria.map(imagen => (
+              <img src={imagen} alt="Imagen del taller" class="rounded-lg shadow-md h-48 w-full object-cover" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Botón para volver a la página de la ciudad -->
+    <div class="text-center mt-8">
+      <a 
+        href="/intercambios/bogota" 
+        class="inline-block px-6 py-3 bg-primary text-white rounded-md hover:bg-purple-700 transition-colors"
+      >
+        Volver a eventos de Bogotá
+      </a>
+    </div>
+  </main>
+</Layout>

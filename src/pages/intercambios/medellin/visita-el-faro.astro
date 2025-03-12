@@ -1,0 +1,123 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { ciudades } from '../../../data/ciudades';
+
+// Obtener los datos del evento desde el archivo de datos
+const ciudadId = 'medellin';
+const eventoId = 'visita-el-faro';
+const ciudad = ciudades[ciudadId];
+const evento = ciudad.eventos.find(e => e.id === eventoId);
+
+// Contenido adicional personalizado para este evento
+const contenidoAdicional = {
+  descripcionDetallada: `
+    El Faro es un espacio cultural independiente ubicado en la Comuna 13 de Medellín, 
+    que funciona como laboratorio de creación, formación y exhibición de proyectos artísticos 
+    con enfoque comunitario. Durante esta visita, conoceremos sus instalaciones, 
+    metodologías de trabajo y proyectos actuales, además de compartir con los artistas 
+    y gestores que hacen parte de esta iniciativa.
+  `,
+  programacion: [
+    { hora: '10:00', actividad: 'Encuentro en Platohedro' },
+    { hora: '10:30', actividad: 'Desplazamiento a El Faro' },
+    { hora: '11:00', actividad: 'Recorrido por las instalaciones' },
+    { hora: '12:00', actividad: 'Almuerzo comunitario' },
+    { hora: '14:00', actividad: 'Presentación de proyectos' },
+    { hora: '16:00', actividad: 'Taller colaborativo' },
+    { hora: '18:00', actividad: 'Regreso a Platohedro' }
+  ],
+  proyectos: [
+    'Escuela de Arte Comunitario',
+    'Laboratorio de Medios Digitales',
+    'Programa de Residencias Artísticas',
+    'Radio Comunitaria'
+  ],
+  recomendaciones: [
+    'Llevar ropa y calzado cómodo',
+    'Protector solar y gorra',
+    'Botella de agua reutilizable',
+    'Cámara fotográfica (opcional)'
+  ],
+  galeria: [
+    '/imagenes/Visita_Faro_Eleje_1.jpg',
+    '/imagenes/enplato.jpg'
+  ]
+};
+---
+
+<Layout title={evento.titulo}>
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-8">
+      <img src={evento.imagen} alt={evento.titulo} class="w-full min-h-[80vh] sm:h-96 object-cover" />
+      <div class="p-4 sm:p-8">
+        <h1 class="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">{evento.titulo}</h1>
+        <p class="text-gray-600 mb-4 sm:mb-6 text-lg sm:text-xl">{evento.fecha}</p>
+        
+        <!-- Descripción original del evento -->
+        <div class="mb-6 sm:mb-8">
+          <h2 class="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">Descripción</h2>
+          <p class="text-gray-700">{evento.descripcion}</p>
+        </div>
+        
+        <!-- Contenido personalizado adicional -->
+        <div class="mb-6 sm:mb-8">
+          <h2 class="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">Sobre El Faro</h2>
+          <p class="text-gray-700">{contenidoAdicional.descripcionDetallada}</p>
+        </div>
+        
+        <!-- Programación -->
+        <div class="mb-6 sm:mb-8">
+          <h2 class="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">Itinerario</h2>
+          <ul class="space-y-2">
+            {contenidoAdicional.programacion.map(item => (
+              <li class="flex">
+                <span class="font-medium w-16 sm:w-20">{item.hora}</span>
+                <span>{item.actividad}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <!-- Proyectos -->
+        <div class="mb-6 sm:mb-8">
+          <h2 class="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">Proyectos que conoceremos</h2>
+          <ul class="list-disc pl-5 space-y-1">
+            {contenidoAdicional.proyectos.map(proyecto => (
+              <li>{proyecto}</li>
+            ))}
+          </ul>
+        </div>
+        
+        <!-- Recomendaciones -->
+        <div class="mb-6 sm:mb-8">
+          <h2 class="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">Recomendaciones</h2>
+          <ul class="list-disc pl-5 space-y-1">
+            {contenidoAdicional.recomendaciones.map(recomendacion => (
+              <li>{recomendacion}</li>
+            ))}
+          </ul>
+        </div>
+        
+        <!-- Galería de imágenes -->
+        <div>
+          <h2 class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Galería</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {contenidoAdicional.galeria.map(imagen => (
+              <img src={imagen} alt="Imagen de El Faro" class="rounded-lg shadow-md h-40 sm:h-48 w-full object-cover" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Botón para volver a la página de la ciudad -->
+    <div class="text-center mt-6 sm:mt-8">
+      <a 
+        href="/intercambios/medellin" 
+        class="inline-block px-5 sm:px-6 py-2 sm:py-3 bg-primary text-white rounded-md hover:bg-purple-700 transition-colors"
+      >
+        Volver a eventos de Medellín
+      </a>
+    </div>
+  </main>
+</Layout>

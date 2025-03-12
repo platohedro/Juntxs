@@ -1,0 +1,103 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { ciudades } from '../../../data/ciudades';
+
+// Obtener los datos del evento desde el archivo de datos
+const ciudadId = 'medellin';
+const eventoId = 'actividad-en-plato';
+const ciudad = ciudades[ciudadId];
+const evento = ciudad.eventos.find(e => e.id === eventoId);
+
+// Si quieres puedes sobrescribir o complementar la información del evento
+const contenidoAdicional = {
+  descripcionDetallada: `
+    La Actividad en Plato es un espacio de encuentro y experimentación artística 
+    que busca generar diálogos entre diferentes disciplinas y saberes. 
+    Durante esta actividad, artistas locales e invitados compartirán sus procesos 
+    creativos y realizarán intervenciones colaborativas.
+  `,
+  programacion: [
+    { hora: '15:00', actividad: 'Apertura y bienvenida' },
+    { hora: '15:30', actividad: 'Presentación de proyectos' },
+    { hora: '17:00', actividad: 'Taller participativo' },
+    { hora: '19:00', actividad: 'Cierre y conversatorio' }
+  ],
+  participantes: [
+    'Colectivo Artístico Local',
+    'Artistas invitados de Bogotá',
+    'Comunidad del barrio Buenos Aires'
+  ],
+  galeria: [
+    '/imagenes/actividad1.jpg',
+    '/imagenes/actividad2.jpg',
+    '/imagenes/actividad3.jpg'
+  ]
+};
+---
+
+<Layout title={evento.titulo}>
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-8">
+      <img src={evento.imagen} alt={evento.titulo} class="w-full min-h-[80vh] sm:h-96 object-cover" />
+      <div class="p-4 sm:p-8">
+        <h1 class="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">{evento.titulo}</h1>
+        <p class="text-gray-600 mb-4 sm:mb-6 text-lg sm:text-xl">{evento.fecha}</p>
+        
+        <!-- Descripción original del evento -->
+        <div class="mb-6 sm:mb-8">
+          <h2 class="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">Descripción</h2>
+          <p class="text-gray-700">{evento.descripcion}</p>
+        </div>
+        
+        <!-- Contenido personalizado adicional -->
+        <div class="mb-6 sm:mb-8">
+          <h2 class="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">Sobre la actividad</h2>
+          <p class="text-gray-700">{contenidoAdicional.descripcionDetallada}</p>
+        </div>
+        
+        <!-- Programación -->
+        <div class="mb-6 sm:mb-8">
+          <h2 class="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">Programación</h2>
+          <ul class="space-y-2">
+            {contenidoAdicional.programacion.map(item => (
+              <li class="flex">
+                <span class="font-medium w-16 sm:w-20">{item.hora}</span>
+                <span>{item.actividad}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <!-- Participantes -->
+        <div class="mb-6 sm:mb-8">
+          <h2 class="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">Participantes</h2>
+          <ul class="list-disc pl-5 space-y-1">
+            {contenidoAdicional.participantes.map(participante => (
+              <li>{participante}</li>
+            ))}
+          </ul>
+        </div>
+        
+        <!-- Galería de imágenes -->
+        <div>
+          <h2 class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Galería</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {contenidoAdicional.galeria.map(imagen => (
+              <img src={imagen} alt="Imagen de la actividad" class="rounded-lg shadow-md h-40 sm:h-48 w-full object-cover" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Botón para volver a la página de la ciudad -->
+    <div class="text-center mt-6 sm:mt-8">
+      <a 
+        href="/intercambios/medellin" 
+        class="inline-block px-5 sm:px-6 py-2 sm:py-3 bg-primary text-white rounded-md hover:bg-purple-700 transition-colors"
+      >
+        Volver a eventos de Medellín
+      </a>
+    </div>
+  </main>
+</Layout>
