@@ -24,17 +24,22 @@ const artistas = [
 ---
 
 <Layout title="Circulación - Artistas">
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <h1 class="text-4xl font-bold text-white mb-8 text-center">Nuestros Artistas</h1>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <h1 class="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-8 text-center">Circulación</h1>
+
+    <p class="text-base sm:text-lg text-white mb-6 sm:mb-8 max-w-3xl mx-auto">
+      Cada artista representa un enfoque único en el arte y la cultura, explorando diferentes medios y técnicas para expresar su visión. 
+      Nuestra plataforma celebra la diversidad creativa y ofrece un espacio para que artistas emergentes y establecidos compartan su trabajo con nuevas audiencias.
+    </p>
     
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
       {artistas.map(artista => (
         <a href={`/circulacion/${artista.id}`} class="block group">
           <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:scale-105">
-            <img src={artista.imagen} alt={artista.nombre} class="w-full h-48 object-cover" />
-            <div class="p-6">
-              <h2 class="text-2xl font-semibold text-gray-900 mb-2">{artista.nombre}</h2>
-              <p class="text-gray-600">{artista.descripcion}</p>
+            <img src={artista.imagen} alt={artista.nombre} class="w-full h-40 sm:h-48 object-cover" />
+            <div class="p-4 sm:p-6">
+              <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-2">{artista.nombre}</h2>
+              <p class="text-sm sm:text-base text-gray-600">{artista.descripcion}</p>
             </div>
           </div>
         </a>

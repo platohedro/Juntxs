@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 
 const artistas = {
   artista1: {
-    nombre: 'María González',
+    nombre: 'María C',
     bio: 'Artista visual especializada en arte contemporáneo, con más de 10 años de experiencia explorando las intersecciones entre el arte digital y tradicional.',
     imagen: 'https://via.placeholder.com/800x400',
     obras: [
@@ -36,7 +36,7 @@ const artistas = {
     ]
   },
   artista2: {
-    nombre: 'Carlos Ruiz',
+    nombre: 'Laura Sofia',
     bio: 'Artista multidisciplinario enfocado en la escultura y el arte sonoro. Su trabajo explora la relación entre el espacio y el sonido.',
     imagen: 'https://via.placeholder.com/800x400',
     obras: [
@@ -55,7 +55,7 @@ const artistas = {
     ]
   },
   artista3: {
-    nombre: 'Ana Martínez',
+    nombre: 'Sandra Ramirez',
     bio: 'Performer y artista visual que trabaja en la intersección entre el cuerpo, el espacio y la tecnología.',
     imagen: 'https://via.placeholder.com/800x400',
     obras: [
@@ -84,6 +84,7 @@ const artistas = {
 const { artistaId } = Astro.params;
 const artista = artistas[artistaId];
 
+// Redirección mejorada para páginas no encontradas
 if (!artista) {
   return Astro.redirect('/404');
 }
@@ -101,13 +102,13 @@ if (!artista) {
 
     <h2 class="text-3xl font-bold text-gray-900 mb-8">Obras y Proyectos</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {artista.obras.map(obra => (
+      {artista.obras.map((obra) => (
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
           {obra.tipo === 'video' ? (
-            <div class="aspect-w-16 aspect-h-9">
+            <div class="relative w-full" style="padding-top: 56.25%">
               <iframe
                 src={obra.video}
-                class="w-full h-full"
+                class="absolute top-0 left-0 w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
               ></iframe>

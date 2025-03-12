@@ -1,57 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Circulacion from '../components/Circulacion.astro';
+import Intercambios from '../components/Intercambios.astro';
+import SesionesVirtuales from '../components/SesionesVirtuales.astro';
 ---
 
 <Layout title="Juntxs">
   <main class="snap-y snap-mandatory h-screen overflow-y-auto">
     <!-- Hero Section -->
-    <section class="h-screen snap-start flex items-center justify-center relative">
-      <div class="bg-secondary/80 backdrop-blur-sm p-8 rounded-lg text-white text-center max-w-3xl mx-4">
-        <h1 class="text-5xl md:text-6xl font-bold mb-8">Juntxs</h1>
-        <p class="text-xl md:text-2xl">Un espacio de encuentro para el arte y la cultura</p>
-      </div>
-    </section>
+  <Hero />
 
     <!-- Circulación Section -->
-    <section class="h-screen snap-start flex items-center justify-center relative">
-      <div class="bg-secondary/80 backdrop-blur-sm p-8 rounded-lg text-white max-w-4xl mx-4">
-        <h2 class="text-4xl font-bold mb-6">Circulación</h2>
-        <div class="flex flex-col md:flex-row gap-8 items-center">
-          <img src="https://via.placeholder.com/400x300" alt="Circulación" class="w-full md:w-1/2 rounded-lg" />
-          <div>
-            <p class="text-lg mb-6">Conoce a nuestros artistas y sus obras, una selección de talento que representa la diversidad cultural de nuestro país.</p>
-            <a href="/circulacion" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/80 transition-colors">Ver más</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    <Circulacion />
     <!-- Intercambios Section -->
-    <section class="h-screen snap-start flex items-center justify-center relative">
-      <div class="bg-secondary/80 backdrop-blur-sm p-8 rounded-lg text-white max-w-4xl mx-4">
-        <h2 class="text-4xl font-bold mb-6">Intercambios</h2>
-        <div class="flex flex-col md:flex-row gap-8 items-center">
-          <div class="order-2 md:order-1">
-            <p class="text-lg mb-6">Experiencias culturales en Medellín y Bogotá, conectando artistas y comunidades a través del arte.</p>
-            <a href="/intercambios" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/80 transition-colors">Ver más</a>
-          </div>
-          <img src="https://via.placeholder.com/400x300" alt="Intercambios" class="w-full md:w-1/2 rounded-lg order-1 md:order-2" />
-        </div>
-      </div>
-    </section>
+    <Intercambios />
 
     <!-- Sesiones Virtuales Section -->
-    <section class="h-screen snap-start flex items-center justify-center relative">
-      <div class="bg-secondary/80 backdrop-blur-sm p-8 rounded-lg text-white max-w-4xl mx-4">
-        <h2 class="text-4xl font-bold mb-6">Sesiones Virtuales</h2>
-        <div class="flex flex-col md:flex-row gap-8 items-center">
-          <img src="https://via.placeholder.com/400x300" alt="Sesiones Virtuales" class="w-full md:w-1/2 rounded-lg" />
-          <div>
-            <p class="text-lg mb-6">Contenido multimedia de nuestros eventos, llevando el arte y la cultura al espacio digital.</p>
-            <a href="/sesiones-virtuales" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/80 transition-colors">Ver más</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <SesionesVirtuales />
   </main>
 </Layout>
