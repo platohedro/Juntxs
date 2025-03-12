@@ -1,0 +1,71 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { ciudades } from '../../../data/ciudades';
+
+interface Evento {
+  titulo: string;
+  fecha: string;
+  descripcion: string;
+  imagen?: string;
+  video?: string;
+  id?: string;
+}
+
+interface Ciudad {
+  nombre: string;
+  descripcion: string;
+  imagen: string;
+  eventos: Evento[];
+}
+
+interface Ciudades {
+  [key: string]: Ciudad;
+}
+
+export async function getStaticPaths() {
+  let paths = [];
+  for (const ciudadId in ciudades) {
+    const ciudad = ciudades[ciudadId];
+    for (const evento of ciudad.eventos) {
+      paths.push({ params: { ciudadId, eventoId: evento.id ?? '' } });
+    }
+  }
+  return paths;
+}
+
+const { ciudadId, eventoId } = Astro.params;
+const ciudad = ciudades[ciudadId];
+
+if (!ciudad) {
+  return Astro.redirect('/404');
+}
+
+const evento = ciudad.eventos.find(e => e.id === eventoId);
+if (!evento) {
+  return Astro.redirect('/404');
+}
+---
+
+<Layout title={`${evento.titulo} - ${ciudad.nombre}`}>
+  <main class="max-w-5xl mx-auto px-4 py-12">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      {evento.video ? (
+        <div class="aspect-w-16 aspect-h-9">
+          <iframe
+            src={evento.video}
+            class="w-full h-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      ) : (
+        evento.imagen && <img src={evento.imagen} alt={evento.titulo} class="w-full object-cover" />
+      )}
+      <div class="p-8">
+        <h1 class="text-4xl font-bold mb-4">{evento.titulo}</h1>
+        <p class="text-gray-600 mb-2">{evento.fecha}</p>
+        <p class="text-gray-700">{evento.descripcion}</p>
+      </div>
+    </div>
+  </main>
+</Layout>

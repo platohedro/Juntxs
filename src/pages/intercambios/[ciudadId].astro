@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { ciudades } from '../../data/ciudades';
 
 interface Evento {
   titulo: string;
@@ -7,6 +8,7 @@ interface Evento {
   descripcion: string;
   imagen?: string;
   video?: string;
+  id?: string;
 }
 
 interface Ciudad {
@@ -26,59 +28,6 @@ export async function getStaticPaths() {
     { params: { ciudadId: 'bogota' } },
   ];
 }
-
-const ciudades: Ciudades = {
-  medellin: {
-    nombre: 'Platohedro - Medellín',
-    descripcion: 'Ciudad de la eterna primavera, donde el arte y la cultura se fusionan con la innovación.',
-    imagen: '/imagenes/FACHADA1.jpg',
-    eventos: [
-      {
-        titulo: 'Festival de Arte Urbano',
-        fecha: '15-20 Marzo, 2024',
-        descripcion: 'Intervenciones artísticas en diferentes espacios de la ciudad',
-        imagen: 'https://via.placeholder.com/400x300'
-      },
-      {
-        titulo: 'Encuentro de Artistas Emergentes',
-        fecha: '5-8 Abril, 2024',
-        descripcion: 'Exposición colectiva en la Galería de Arte Moderno',
-        video: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-      },
-      {
-        titulo: 'Taller de Arte Digital',
-        fecha: '12 Abril, 2024',
-        descripcion: 'Workshop sobre nuevas tecnologías en el arte',
-        imagen: 'https://via.placeholder.com/400x300'
-      }
-    ]
-  },
-  bogota: {
-    nombre: 'Bogotá',
-    descripcion: 'Capital cultural de Colombia, centro de convergencia artística y creativa.',
-    imagen: 'https://via.placeholder.com/1200x400',
-    eventos: [
-      {
-        titulo: 'Exposición de Arte Contemporáneo',
-        fecha: '1-30 Mayo, 2024',
-        descripcion: 'Muestra internacional en el Museo de Arte Moderno',
-        imagen: 'https://via.placeholder.com/400x300'
-      },
-      {
-        titulo: 'Ciclo de Performance',
-        fecha: '10-15 Mayo, 2024',
-        descripcion: 'Serie de presentaciones en espacios alternativos',
-        video: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-      },
-      {
-        titulo: 'Conversatorio: Arte y Ciudad',
-        fecha: '20 Mayo, 2024',
-        descripcion: 'Diálogo entre artistas locales e internacionales',
-        imagen: 'https://via.placeholder.com/400x300'
-      }
-    ]
-  }
-};
 
 const { ciudadId } = Astro.params;
 const ciudad: Ciudad = ciudades[ciudadId as keyof Ciudades];
@@ -119,7 +68,13 @@ if (!ciudad) {
           <div class="p-6">
             <h3 class="text-xl font-semibold text-gray-900 mb-2">{evento.titulo}</h3>
             <p class="text-gray-500 mb-2">{evento.fecha}</p>
-            <p class="text-gray-600">{evento.descripcion}</p>
+            <p class="text-gray-600 line-clamp-2">{evento.descripcion}</p>
+            <a 
+              href={`/intercambios/${ciudadId}/${evento.id}`} 
+              class="mt-4 inline-block px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+            >
+              Ver más
+            </a>
           </div>
         </div>
       ))}

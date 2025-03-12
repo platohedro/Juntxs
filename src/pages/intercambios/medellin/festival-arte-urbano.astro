@@ -1,0 +1,29 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const evento = {
+  titulo: 'Festival de Arte Urbano',
+  fecha: '15-20 Marzo, 2024',
+  descripcion: 'Intervenciones artísticas en diferentes espacios de la ciudad',
+  imagen: 'https://via.placeholder.com/400x300'
+};
+---
+
+<Layout title={evento.titulo}>
+  <main class="max-w-5xl mx-auto px-4 py-12">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <img src={evento.imagen} alt={evento.titulo} class="w-full object-cover" />
+      <div class="p-8">
+        <h1 class="text-4xl font-bold mb-4">{evento.titulo}</h1>
+        <p class="text-gray-600 mb-2">{evento.fecha}</p>
+        <p class="text-gray-700">{evento.descripcion}</p>
+
+        <h2>HOLA </h2>
+
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" class="w-full h-64" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      
+      
+      <div></div>
+    </div>
+  </main>
+</Layout>
