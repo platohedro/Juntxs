@@ -14,21 +14,86 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <style>
+      /* Estilos para garantizar que el menú sea visible según el tamaño de pantalla */
+      @media (min-width: 768px) {
+        #desktop-menu {
+          display: flex !important;
+        }
+        #mobile-menu-button {
+          display: none !important;
+        }
+      }
+      
+      @media (max-width: 767px) {
+        #desktop-menu {
+          display: none !important;
+        }
+        #mobile-menu-button {
+          display: block !important;
+        }
+      }
+      
+      /* Estilos del menú móvil */
+      #mobile-menu {
+        display: none;
+        background-color: rgba(55, 65, 81, 0.9);
+        backdrop-filter: blur(4px);
+      }
+      
+      #mobile-menu.show {
+        display: block;
+      }
+      
+      .mobile-link {
+        display: block;
+        padding: 0.75rem 1rem;
+        color: white;
+        border-radius: 0.375rem;
+      }
+      
+      .mobile-link:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    </style>
   </head>
   <body class="min-h-screen bg-fixed bg-cover bg-center" style="background-image: url('https://raw.githubusercontent.com/platohedro/Juntxs/refs/heads/main/Dise%C3%B1o%20sin%20t%C3%ADtulo.png');">
     <nav class="bg-secondary/80 backdrop-blur-sm fixed w-full z-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-          <div class="flex">
+          <!-- Logo -->
+          <div class="flex items-center">
             <a href="/" class="flex items-center">
               <span class="text-xl font-bold text-white">Juntxs</span>
             </a>
           </div>
-          <div class="flex items-center space-x-4">
+          
+          <!-- Menú Desktop -->
+          <div id="desktop-menu" class="items-center space-x-4">
             <a href="/circulacion" class="text-white hover:text-primary transition-colors">Circulación</a>
             <a href="/intercambios" class="text-white hover:text-primary transition-colors">Intercambios</a>
             <a href="/sesiones-virtuales" class="text-white hover:text-primary transition-colors">Sesiones Virtuales</a>
+            <a href="/acercade" class="text-white hover:text-primary transition-colors">Acerca de</a>
           </div>
+          
+          <!-- Botón Menú Móvil -->
+          <button id="mobile-menu-button" type="button" class="text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Menú Móvil -->
+      <div id="mobile-menu">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+          <a href="/circulacion" class="mobile-link">Circulación</a>
+          <a href="/intercambios" class="mobile-link">Intercambios</a>
+          <a href="/sesiones-virtuales" class="mobile-link">Sesiones Virtuales</a>
+          <a href="/acercade" class="mobile-link">Acerca de</a>
         </div>
       </div>
     </nav>
@@ -43,5 +108,19 @@ const { title } = Astro.props;
         <img src="https://mincultura.gov.co/areas/comunicaciones/images/logo-mincultura.png" alt="Ministerio de Cultura" class="h-16 mx-auto mt-4" />
       </div>
     </footer>
+
+    <script is:inline>
+      // Código para el menú móvil
+      window.addEventListener('load', function() {
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (menuButton && mobileMenu) {
+          menuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('show');
+          });
+        }
+      });
+    </script>
   </body>
 </html>
