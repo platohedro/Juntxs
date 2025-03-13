@@ -3,32 +3,40 @@ import Layout from '../../../layouts/Layout.astro';
 import { artistas } from '../../../data/artistas';
 
 // Obtener los datos del artista y la actividad desde el archivo de datos
-const artistaId = 'maria';
-const actividadId = 'actividad-2';
+const artistaId = 'sandra';
+const actividadId = 'Memorias de Elena y Oro';
 const artista = artistas[artistaId];
-const actividad = artista.actividades.find(a => a.id === actividadId);
+const actividad = artista?.actividades.find(a => a.id === actividadId);
 
 // Contenido adicional personalizado para esta actividad
 const contenidoAdicional = {
   descripcionDetallada: `
-    Esta instalación multimedia explora la relación entre el cuerpo, el espacio y la tecnología 
-    en la era digital. A través de proyecciones, sonido envolvente y elementos interactivos, 
-    la obra crea un entorno inmersivo que invita a los espectadores a reflexionar sobre cómo 
-    la tecnología transforma nuestra experiencia sensorial y nuestra percepción del mundo.
+    Esta instalación sonora explora la relación entre el sonido, el espacio y la memoria colectiva. 
+    A través de grabaciones de campo realizadas en diferentes lugares de Pie de Cuesta, la obra 
+    crea un paisaje sonoro que invita a los visitantes a experimentar el territorio desde una 
+    perspectiva sensorial y afectiva, reconociendo los sonidos como parte fundamental de nuestro 
+    patrimonio cultural inmaterial.
+  `,
+  procesoCreativo: `
+    El proceso creativo incluyó tres meses de trabajo de campo, recolectando sonidos de diferentes 
+    espacios urbanos y rurales de Pie de Cuesta: mercados, plazas, calles, ríos, bosques y hogares. 
+    Estos materiales fueron posteriormente procesados y organizados espacialmente para crear una 
+    experiencia inmersiva que permite al público recorrer auditivamente el territorio.
   `,
   elementosTecnicos: [
-    'Proyección de video mapping sobre superficies tridimensionales',
-    'Sistema de sonido cuadrafónico',
-    'Sensores de movimiento para interacción con el público',
-    'Programación en Max/MSP y TouchDesigner'
+    'Sistema de sonido multicanal (8 canales)',
+    'Altavoces direccionales',
+    'Sensores de presencia',
+    'Controladores MIDI personalizados',
+    'Software de procesamiento de audio en tiempo real'
   ],
-  colaboradores: [
-    { nombre: 'Juan Pérez', rol: 'Diseño sonoro' },
-    { nombre: 'Ana Martínez', rol: 'Programación interactiva' },
-    { nombre: 'Carlos Rodríguez', rol: 'Asistente técnico' }
+  horarios: [
+    { dia: 'Lunes a Viernes', hora: '10:00 - 18:00' },
+    { dia: 'Sábados', hora: '11:00 - 20:00' },
+    { dia: 'Domingos', hora: '11:00 - 16:00' }
   ],
-  duracion: '45 minutos (sesión continua)',
   imagenes: [
+    'https://via.placeholder.com/400x300',
     'https://via.placeholder.com/400x300',
     'https://via.placeholder.com/400x300',
     'https://via.placeholder.com/400x300'
@@ -36,46 +44,36 @@ const contenidoAdicional = {
 };
 ---
 
-<Layout title={`${actividad.titulo} - ${artista.nombre}`}>
+<Layout title={`${actividad?.titulo || 'Memorias de Elena y Oro'} - ${artista?.nombre || 'Sandra Ramírez Giraldo'}`}>
   <main class="max-w-5xl mx-auto px-4 py-12">
     <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-      <div class="aspect-w-16 aspect-h-9">
-        <iframe
-          src={actividad.video}
-          class="w-full h-full"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
+      <img src={actividad?.imagen || 'https://via.placeholder.com/400x300'} alt={actividad?.titulo || 'Memorias de Elena y Oro'} class="w-full min-h-[60vh] sm:h-96 object-cover" />
       <div class="p-4 sm:p-6 md:p-8">
         <div class="flex flex-wrap items-center justify-between mb-4 sm:mb-6">
-          <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">{actividad.titulo}</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">{actividad?.titulo || 'Memorias de Elena y Oro'}</h1>
           <a href={`/circulacion/${artistaId}`} class="mt-2 inline-flex items-center text-blue-600 hover:text-blue-800">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Volver a {artista.nombre}
+            Volver a {artista?.nombre || 'Sandra Ramírez Giraldo'}
           </a>
         </div>
         
         <div class="flex flex-wrap text-gray-600 mb-4 sm:mb-6">
-          {actividad.fecha && (
+          {actividad?.fecha && (
             <div class="mr-6 mb-2">
               <span class="font-medium text-gray-700">Fecha:</span> {actividad.fecha}
             </div>
           )}
-          {actividad.lugar && (
+          {actividad?.lugar && (
             <div class="mb-2">
               <span class="font-medium text-gray-700">Lugar:</span> {actividad.lugar}
             </div>
           )}
-          <div class="w-full sm:w-auto mb-2 sm:mb-0 sm:mr-6 mt-2 sm:mt-0">
-            <span class="font-medium text-gray-700">Duración:</span> {contenidoAdicional.duracion}
-          </div>
         </div>
         
         <div class="prose prose-lg max-w-none mb-6 sm:mb-8">
-          <p class="text-gray-700">{actividad.descripcionCompleta || actividad.descripcion}</p>
+          <p class="text-gray-700">{actividad?.descripcionCompleta || actividad?.descripcion || 'Performance que explora la relación entre el cuerpo humano y las tecnologías digitales.'}</p>
         </div>
         
         <!-- Contenido adicional personalizado -->
@@ -85,32 +83,39 @@ const contenidoAdicional = {
         </div>
         
         <div class="mb-6 sm:mb-8">
-          <h2 class="text-xl sm:text-2xl font-semibold mb-3">Elementos técnicos</h2>
-          <ul class="list-disc pl-5 space-y-1">
-            {contenidoAdicional.elementosTecnicos.map(elemento => (
-              <li class="text-gray-700">{elemento}</li>
-            ))}
-          </ul>
+          <h2 class="text-xl sm:text-2xl font-semibold mb-3">Proceso creativo</h2>
+          <p class="text-gray-700">{contenidoAdicional.procesoCreativo}</p>
         </div>
         
-        <div class="mb-6 sm:mb-8">
-          <h2 class="text-xl sm:text-2xl font-semibold mb-3">Equipo colaborador</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {contenidoAdicional.colaboradores.map(colaborador => (
-              <div class="bg-gray-50 p-3 rounded-lg">
-                <p class="font-medium">{colaborador.nombre}</p>
-                <p class="text-sm text-gray-600">{colaborador.rol}</p>
-              </div>
-            ))}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-semibold mb-3">Elementos técnicos</h2>
+            <ul class="list-disc pl-5 space-y-1">
+              {contenidoAdicional.elementosTecnicos.map(elemento => (
+                <li class="text-gray-700">{elemento}</li>
+              ))}
+            </ul>
+          </div>
+          
+          <div>
+            <h2 class="text-xl sm:text-2xl font-semibold mb-3">Horarios</h2>
+            <div class="space-y-2">
+              {contenidoAdicional.horarios.map(horario => (
+                <div class="flex justify-between border-b border-gray-200 pb-2">
+                  <span class="font-medium">{horario.dia}</span>
+                  <span>{horario.hora}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         
         <!-- Galería de imágenes -->
         <div>
-          <h2 class="text-xl sm:text-2xl font-semibold mb-4">Imágenes de la instalación</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <h2 class="text-xl sm:text-2xl font-semibold mb-4">Galería</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {contenidoAdicional.imagenes.map(imagen => (
-              <img src={imagen} alt="Imagen de la instalación" class="rounded-lg shadow-md h-40 sm:h-48 w-full object-cover" />
+              <img src={imagen} alt="Imagen de la instalación sonora" class="rounded-lg shadow-md h-40 sm:h-48 w-full object-cover" />
             ))}
           </div>
         </div>
@@ -118,9 +123,9 @@ const contenidoAdicional = {
     </div>
     
     <div class="mt-8 sm:mt-12">
-      <h2 class="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">Otras actividades de {artista.nombre}</h2>
+      <h2 class="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 text-center sm:text-left">Otras actividades de {artista?.nombre || 'Sandra Ramírez Giraldo'}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-        {artista.actividades
+        {artista?.actividades
           .filter(a => a.id !== actividadId)
           .map(a => (
             <a href={`/circulacion/${artistaId}/${a.id}`} class="block transition-transform hover:scale-105">

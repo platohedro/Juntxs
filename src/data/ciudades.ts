@@ -21,7 +21,7 @@ export interface Ciudades {
 export const ciudades: Ciudades = {
   medellin: {
     nombre: 'Platohedro - Medellín',
-    descripcion: 'Ciudad de la eterna primavera, donde el arte y la cultura se fusionan con la innovación.',
+    descripcion: 'Intercambio con en Medellín con el ecosistema de platohedro',
     imagen: '/imagenes/FACHADA1.jpg',
     eventos: [
       {

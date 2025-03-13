@@ -4,35 +4,31 @@ import { artistas } from '../../../data/artistas';
 
 // Obtener los datos del artista y la actividad desde el archivo de datos
 const artistaId = 'maria';
-const actividadId = 'actividad-3';
+const actividadId = 'micro ficciones con Agueros - encuentro2';
 const artista = artistas[artistaId];
 const actividad = artista.actividades.find(a => a.id === actividadId);
 
 // Contenido adicional personalizado para esta actividad
 const contenidoAdicional = {
   descripcionDetallada: `
-    Esta serie fotográfica documenta la vida cotidiana en Pie de Cuesta, capturando momentos 
-    íntimos y reveladores de la comunidad local. A través de un enfoque documental y poético, 
-    las imágenes buscan visibilizar las historias no contadas y celebrar la diversidad cultural 
-    de la región, mostrando la riqueza de sus tradiciones, oficios y formas de habitar el territorio.
+    Esta instalación multimedia explora la relación entre el cuerpo, el espacio y la tecnología 
+    en la era digital. A través de proyecciones, sonido envolvente y elementos interactivos, 
+    la obra crea un entorno inmersivo que invita a los espectadores a reflexionar sobre cómo 
+    la tecnología transforma nuestra experiencia sensorial y nuestra percepción del mundo.
   `,
-  metodologia: `
-    El proyecto se desarrolló a partir de un proceso de inmersión en la comunidad durante tres meses, 
-    estableciendo vínculos de confianza con sus habitantes y participando en sus actividades diarias. 
-    Las fotografías fueron tomadas con el consentimiento y la participación activa de las personas 
-    retratadas, quienes compartieron sus historias y perspectivas.
-  `,
-  temas: [
-    'Oficios tradicionales',
-    'Celebraciones comunitarias',
-    'Relación con el territorio',
-    'Transformaciones urbanas',
-    'Memoria e identidad'
+  elementosTecnicos: [
+    'Proyección de video mapping sobre superficies tridimensionales',
+    'Sistema de sonido cuadrafónico',
+    'Sensores de movimiento para interacción con el público',
+    'Programación en Max/MSP y TouchDesigner'
   ],
-  galeria: [
-    'https://via.placeholder.com/400x300',
-    'https://via.placeholder.com/400x300',
-    'https://via.placeholder.com/400x300',
+  colaboradores: [
+    { nombre: 'Juan Pérez', rol: 'Diseño sonoro' },
+    { nombre: 'Ana Martínez', rol: 'Programación interactiva' },
+    { nombre: 'Carlos Rodríguez', rol: 'Asistente técnico' }
+  ],
+  duracion: '45 minutos (sesión continua)',
+  imagenes: [
     'https://via.placeholder.com/400x300',
     'https://via.placeholder.com/400x300',
     'https://via.placeholder.com/400x300'
@@ -40,64 +36,81 @@ const contenidoAdicional = {
 };
 ---
 
-<Layout title={`${actividad.titulo} - ${artista.nombre}`}>
+<Layout title={`${actividad?.titulo || 'Micro ficciones con Agüeros - encuentro 2'} - ${artista?.nombre || 'María C'}`}>
   <main class="max-w-5xl mx-auto px-4 py-12">
     <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-      <img src={actividad.imagen} alt={actividad.titulo} class="w-full min-h-[60vh] sm:h-96 object-cover" />
+      <div class="aspect-w-16 aspect-h-9">
+        <iframe
+          src={actividad?.video || 'https://www.youtube.com/embed/dQw4w9WgXcQ'}
+          class="w-full h-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
       <div class="p-4 sm:p-6 md:p-8">
         <div class="flex flex-wrap items-center justify-between mb-4 sm:mb-6">
-          <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">{actividad.titulo}</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">{actividad?.titulo || 'Micro ficciones con Agüeros - encuentro 2'}</h1>
           <a href={`/circulacion/${artistaId}`} class="mt-2 inline-flex items-center text-blue-600 hover:text-blue-800">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Volver a {artista.nombre}
+            Volver a {artista?.nombre || 'María C'}
           </a>
         </div>
         
         <div class="flex flex-wrap text-gray-600 mb-4 sm:mb-6">
-          {actividad.fecha && (
+          {actividad?.fecha && (
             <div class="mr-6 mb-2">
               <span class="font-medium text-gray-700">Fecha:</span> {actividad.fecha}
             </div>
           )}
-          {actividad.lugar && (
+          {actividad?.lugar && (
             <div class="mb-2">
               <span class="font-medium text-gray-700">Lugar:</span> {actividad.lugar}
             </div>
           )}
+          <div class="w-full sm:w-auto mb-2 sm:mb-0 sm:mr-6 mt-2 sm:mt-0">
+            <span class="font-medium text-gray-700">Duración:</span> {contenidoAdicional.duracion}
+          </div>
         </div>
         
         <div class="prose prose-lg max-w-none mb-6 sm:mb-8">
-          <p class="text-gray-700">{actividad.descripcionCompleta || actividad.descripcion}</p>
+          <p class="text-gray-700">{actividad?.descripcionCompleta || actividad?.descripcion || 'Instalación multimedia que explora la relación entre el cuerpo, el espacio y la tecnología en la era digital.'}</p>
         </div>
         
         <!-- Contenido adicional personalizado -->
         <div class="mb-6 sm:mb-8">
-          <h2 class="text-xl sm:text-2xl font-semibold mb-3">Sobre la serie</h2>
+          <h2 class="text-xl sm:text-2xl font-semibold mb-3">Sobre la instalación</h2>
           <p class="text-gray-700">{contenidoAdicional.descripcionDetallada}</p>
         </div>
         
         <div class="mb-6 sm:mb-8">
-          <h2 class="text-xl sm:text-2xl font-semibold mb-3">Metodología</h2>
-          <p class="text-gray-700">{contenidoAdicional.metodologia}</p>
-        </div>
-        
-        <div class="mb-6 sm:mb-8">
-          <h2 class="text-xl sm:text-2xl font-semibold mb-3">Temas explorados</h2>
-          <ul class="list-disc pl-5 grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {contenidoAdicional.temas.map(tema => (
-              <li class="text-gray-700">{tema}</li>
+          <h2 class="text-xl sm:text-2xl font-semibold mb-3">Elementos técnicos</h2>
+          <ul class="list-disc pl-5 space-y-1">
+            {contenidoAdicional.elementosTecnicos.map(elemento => (
+              <li class="text-gray-700">{elemento}</li>
             ))}
           </ul>
         </div>
         
+        <div class="mb-6 sm:mb-8">
+          <h2 class="text-xl sm:text-2xl font-semibold mb-3">Equipo colaborador</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {contenidoAdicional.colaboradores.map(colaborador => (
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <p class="font-medium">{colaborador.nombre}</p>
+                <p class="text-sm text-gray-600">{colaborador.rol}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        
         <!-- Galería de imágenes -->
         <div>
-          <h2 class="text-xl sm:text-2xl font-semibold mb-4">Galería</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {contenidoAdicional.galeria.map(imagen => (
-              <img src={imagen} alt="Fotografía de la serie" class="rounded-lg shadow-md h-40 sm:h-48 w-full object-cover" />
+          <h2 class="text-xl sm:text-2xl font-semibold mb-4">Imágenes de la instalación</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {contenidoAdicional.imagenes.map(imagen => (
+              <img src={imagen} alt="Imagen de la instalación" class="rounded-lg shadow-md h-40 sm:h-48 w-full object-cover" />
             ))}
           </div>
         </div>
@@ -105,9 +118,9 @@ const contenidoAdicional = {
     </div>
     
     <div class="mt-8 sm:mt-12">
-      <h2 class="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">Otras actividades de {artista.nombre}</h2>
+      <h2 class="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">Otras actividades de {artista?.nombre || 'María C'}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-        {artista.actividades
+        {artista?.actividades
           .filter(a => a.id !== actividadId)
           .map(a => (
             <a href={`/circulacion/${artistaId}/${a.id}`} class="block transition-transform hover:scale-105">

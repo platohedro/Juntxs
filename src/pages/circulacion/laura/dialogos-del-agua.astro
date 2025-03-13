@@ -4,7 +4,7 @@ import { artistas } from '../../../data/artistas';
 
 // Obtener los datos del artista y la actividad desde el archivo de datos
 const artistaId = 'laura';
-const actividadId = 'ecos-del-silencio';
+const actividadId = 'Diálogos del agua';
 const artista = artistas[artistaId];
 const actividad = artista.actividades.find(a => a.id === actividadId);
 
@@ -44,28 +44,28 @@ const contenidoAdicional = {
 };
 ---
 
-<Layout title={`${actividad.titulo} - ${artista.nombre}`}>
+<Layout title={`${actividad?.titulo || 'Diálogos del agua'} - ${artista?.nombre || 'Laura Sofia'}`}>
   <main class="max-w-5xl mx-auto px-4 py-12">
     <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-      <img src={actividad.imagen} alt={actividad.titulo} class="w-full min-h-[60vh] sm:h-96 object-cover" />
+      <img src={actividad?.imagen || 'https://via.placeholder.com/400x300'} alt={actividad?.titulo || 'Diálogos del agua'} class="w-full min-h-[60vh] sm:h-96 object-cover" />
       <div class="p-4 sm:p-6 md:p-8">
         <div class="flex flex-wrap items-center justify-between mb-4 sm:mb-6">
-          <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">{actividad.titulo}</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">{actividad?.titulo || 'Diálogos del agua'}</h1>
           <a href={`/circulacion/${artistaId}`} class="mt-2 inline-flex items-center text-blue-600 hover:text-blue-800">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Volver a {artista.nombre}
+            Volver a {artista?.nombre || 'Laura Sofia'}
           </a>
         </div>
         
         <div class="flex flex-wrap text-gray-600 mb-4 sm:mb-6">
-          {actividad.fecha && (
+          {actividad?.fecha && (
             <div class="mr-6 mb-2">
               <span class="font-medium text-gray-700">Fecha:</span> {actividad.fecha}
             </div>
           )}
-          {actividad.lugar && (
+          {actividad?.lugar && (
             <div class="mb-2">
               <span class="font-medium text-gray-700">Lugar:</span> {actividad.lugar}
             </div>
@@ -73,7 +73,7 @@ const contenidoAdicional = {
         </div>
         
         <div class="prose prose-lg max-w-none mb-6 sm:mb-8">
-          <p class="text-gray-700">{actividad.descripcionCompleta || actividad.descripcion}</p>
+          <p class="text-gray-700">{actividad?.descripcionCompleta || actividad?.descripcion || 'Instalación sonora que transforma el silencio en una experiencia sensorial tangible.'}</p>
         </div>
         
         <!-- Contenido adicional personalizado -->
@@ -123,9 +123,9 @@ const contenidoAdicional = {
     </div>
     
     <div class="mt-8 sm:mt-12">
-      <h2 class="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 text-center sm:text-left">Otras actividades de {artista.nombre}</h2>
+      <h2 class="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 text-center sm:text-left">Otras actividades de {artista?.nombre || 'Laura Sofia'}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-        {artista.actividades
+        {artista?.actividades
           .filter(a => a.id !== actividadId)
           .map(a => (
             <a href={`/circulacion/${artistaId}/${a.id}`} class="block transition-transform hover:scale-105">
