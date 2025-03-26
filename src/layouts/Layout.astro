@@ -55,9 +55,36 @@ const { title } = Astro.props;
       .mobile-link:hover {
         background-color: rgba(255, 255, 255, 0.1);
       }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+
+      body {
+        background-image: url('https://raw.githubusercontent.com/platohedro/Juntxs/refs/heads/main/Dise%C3%B1o%20sin%20t%C3%ADtulo.png');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+      }
+
+      #site-footer {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 40;
+      }
+
+      #site-footer.visible {
+        display: block;
+      }
     </style>
   </head>
-  <body class="min-h-screen bg-fixed bg-center" style="background-image: url('https://raw.githubusercontent.com/platohedro/Juntxs/refs/heads/main/Dise%C3%B1o%20sin%20t%C3%ADtulo.png'); background-size: 150%;">
+  <body>
     <nav class="bg-secondary/80 backdrop-blur-sm fixed w-full z-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -102,12 +129,12 @@ const { title } = Astro.props;
       <slot />
     </div>
 
-    <footer class="bg-secondary/80 backdrop-blur-sm text-white py-8 mt-16">
+    <footer id="site-footer" class="bg-secondary/80 backdrop-blur-sm text-white py-4 w-full">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        
-        <img src="/imagenes/CULTURAS_BLANCO.png" alt="Ministerio de Cultura" class="h-16  mx-auto mt-4" />
-
-        <p class="text-lg  mt-8">Proyecto apoyado por el Ministerio de Cultura de Colombia</p>
+        <div class="flex flex-col items-center justify-center gap-2">
+          <img src="/imagenes/CULTURAS_BLANCO.png" alt="Ministerio de Cultura" class="h-10" />
+          <p class="text-sm">Proyecto apoyado por el Ministerio de Cultura de Colombia</p>
+        </div>
       </div>
     </footer>
 
@@ -122,6 +149,16 @@ const { title } = Astro.props;
             mobileMenu.classList.toggle('show');
           });
         }
+
+        // Código para mostrar el footer al hacer scroll hasta abajo
+        const footer = document.getElementById('site-footer');
+        window.addEventListener('scroll', function() {
+          if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 200) {
+            footer.classList.add('visible');
+          } else {
+            footer.classList.remove('visible');
+          }
+        });
       });
     </script>
   </body>
