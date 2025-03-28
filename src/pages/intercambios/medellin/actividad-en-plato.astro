@@ -23,14 +23,17 @@ const contenidoAdicional = {
     { hora: '19:00', actividad: 'Cierre y conversatorio' }
   ],
   participantes: [
-    'Colectivo Artístico Local',
-    'Artistas invitados de Bogotá',
-    'Comunidad del barrio Buenos Aires'
+    '',
+    '',
+    ''
   ],
   galeria: [
-    '/imagenes/actividad1.jpg',
-    '/imagenes/actividad2.jpg',
-    '/imagenes/actividad3.jpg'
+    '/imagenes/Eleje_visita_Plato/Medellin_Eleje_.jpg',
+    '/imagenes/Eleje_visita_Plato/Medellin_Eleje_1.jpg',
+    '/imagenes/Eleje_visita_Plato/Medellin_Eleje_2.jpg',
+    '/imagenes/Eleje_visita_Plato/Medellin_Eleje_3.jpg',
+    '/imagenes/Eleje_visita_Plato/Medellin_Eleje_4.jpg',
+    '/imagenes/Eleje_visita_Plato/Medellin_Eleje_5.jpg',
   ]
 };
 ---
@@ -40,23 +43,23 @@ const contenidoAdicional = {
     <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-8">
       <img src="/imagenes/enplato.jpg" alt="otra cosa" class="w-full min-h-[80vh] sm:h-96 object-cover" />
       <div class="p-4 sm:p-8">
-        <h1 class="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">Actividad en Plato</h1>
+        <h1 class="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">Actividad en Plato -  La Escuela Ambulante  / LEA</h1>
         <p class="text-gray-600 mb-4 sm:mb-6 text-lg sm:text-xl">20 de noviembre</p>
         
         <!-- Descripción original del evento -->
         <div class="mb-6 sm:mb-8">
-          <h2 class="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">Descripción</h2>
-          <p class="text-gray-700">Una actividad muy parchada</p>
+          <h2 class="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">Sobre la actividad</h2>
+          <p class="text-gray-700">Consistió en la realización de un taller sobre formulación de proyectos artísticos y culturales, través de un ejercicio práctico con los proyectos (ya formulados o en ideación) de las personas participantes, brindando elementos y técnicas para la estructuración del proyecto desde los mínimos elementos que todo proyecto debe considerar: antecedentes, justificación, objetivos, actividades, presupuesto y cronograma. </p>
         </div>
         
         <!-- Contenido personalizado adicional -->
-        <div class="mb-6 sm:mb-8">
-          <h2 class="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">Sobre la actividad</h2>
+        <!-- <div class="mb-6 sm:mb-8">
+          <h2 class="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3"></h2>
           <p class="text-gray-700">{contenidoAdicional.descripcionDetallada}</p>
-        </div>
+        </div> -->
         
         <!-- Programación -->
-        <div class="mb-6 sm:mb-8">
+        <!-- <div class="mb-6 sm:mb-8">
           <h2 class="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">Programación</h2>
           <ul class="space-y-2">
             {contenidoAdicional.programacion.map(item => (
@@ -66,17 +69,17 @@ const contenidoAdicional = {
               </li>
             ))}
           </ul>
-        </div>
+        </div> -->
         
         <!-- Participantes -->
-        <div class="mb-6 sm:mb-8">
+        <!-- <div class="mb-6 sm:mb-8">
           <h2 class="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">Participantes</h2>
           <ul class="list-disc pl-5 space-y-1">
             {contenidoAdicional.participantes.map(participante => (
               <li>{participante}</li>
             ))}
           </ul>
-        </div>
+        </div> -->
         
         <!-- Galería de imágenes -->
         <div>

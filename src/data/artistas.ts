@@ -53,7 +53,7 @@ export const artistas: Artistas = {
   laura: {
     nombre: 'Laura Sofia',
     bio: 'Laura Sofía Montoya Gómez nació, creció y vive en Medellín. Es arquitecta, docente universitaria y magíster en Arquitectura, Crítica y Proyecto. Es amante de los gatos y aficionada a la jardinería. Hace 13 años, con algunxs amigxs, cofundó Proyecto NN, organización sin ánimo de lucro interesada en apoyar procesos comunitarios de apropiación y transformación del espacio.',
-    imagen: '/imagenes/luara.png',
+    imagen: '/imagenes/luara2.png',
     actividades: [
       {
         id: 'Diálogos del agua',
