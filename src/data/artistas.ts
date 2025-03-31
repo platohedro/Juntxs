@@ -56,7 +56,7 @@ export const artistas: Artistas = {
     imagen: '/imagenes/luara2.png',
     actividades: [
       {
-        id: 'Diálogos del agua',
+        id: 'dialogos-del-agua',
         titulo: 'Diálogos del agua',
         descripcion: 'Instalación sonora',
         descripcionCompleta: 'Una instalación que transforma el silencio en una experiencia sensorial tangible. Utilizando tecnología de sonido espacial, la obra crea paisajes sonoros que responden a la presencia y movimiento de los espectadores, generando una experiencia única e irrepetible.',
@@ -74,7 +74,7 @@ export const artistas: Artistas = {
     imagen: '/imagenes/sandra.jpeg',
     actividades: [
       {
-        id: 'Memorias de Elena y Oro',
+        id: 'memorias-de-elena-y-el-oro',
         titulo: 'Memorias de Elena y Oro',
         descripcion: 'Performance multimedia',
         descripcionCompleta: 'Performance que explora la relación entre el cuerpo humano y las tecnologías digitales. A través de proyecciones, sensores de movimiento y sonido en tiempo real, la artista crea un diálogo entre lo físico y lo virtual, cuestionando los límites de la corporalidad en la era digital.',
