@@ -28,8 +28,7 @@ const ciudad = ciudades[ciudadId];
 
     <h2 class="text-3xl font-bold text-white mb-8">Eventos y Actividades</h2>
 
-    <p class="text-white m-8">Nuestro objetivo es promover la diversidad cultural y la interacción entre artistas y audiencias, creando un espacio donde el arte y la cultura se encuentren de manera orgánica y natural.</p>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {ciudad.eventos.map((evento) => (
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
           {evento.video ? (
