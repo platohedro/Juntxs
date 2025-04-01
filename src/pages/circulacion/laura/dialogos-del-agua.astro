@@ -36,10 +36,12 @@ const contenidoAdicional = {
     { dia: 'Domingos', hora: '11:00 - 16:00' }
   ],
   imagenes: [
-    'https://via.placeholder.com/400x300',
-    'https://via.placeholder.com/400x300',
-    'https://via.placeholder.com/400x300',
-    'https://via.placeholder.com/400x300'
+    '/imagenes/laura/laura1.webp',
+    '/imagenes/laura/laura2.webp',
+    '/imagenes/laura/laura3.webp',
+    '/imagenes/laura/laura4.webp',
+    '/imagenes/laura/laura5.webp',
+    '/imagenes/laura/laura6.webp'
   ]
 };
 ---
@@ -47,7 +49,17 @@ const contenidoAdicional = {
 <Layout title={`${actividad?.titulo || 'Diálogos del agua'} - ${artista?.nombre || 'Laura Sofia'}`}>
   <main class="max-w-5xl mx-auto px-4 py-12">
     <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-      <img src={actividad?.imagen || 'https://via.placeholder.com/400x300'} alt={actividad?.titulo || 'Diálogos del agua'} class="w-full min-h-[60vh] sm:h-96 object-cover" />
+      <div class="relative w-full min-h-[60vh] sm:h-96">
+        <img 
+          src={actividad?.imagen || '/imagenes/laura/laura1.webp'}
+          alt={actividad?.titulo || 'Diálogos del agua'}
+          class="w-full h-full object-cover"
+          loading="eager"
+          width="1200"
+          height="600"
+          onerror="this.onerror=null; this.src='/imagenes/laura/laura1.webp'"
+        />
+      </div>
       <div class="p-4 sm:p-6 md:p-8">
         <div class="flex flex-wrap items-center justify-between mb-4 sm:mb-6">
           <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">{actividad?.titulo || 'Diálogos del agua'}</h1>
@@ -77,27 +89,27 @@ const contenidoAdicional = {
         </div>
         
         <!-- Contenido adicional personalizado -->
-        <div class="mb-6 sm:mb-8">
+        <!-- <div class="mb-6 sm:mb-8">
           <h2 class="text-xl sm:text-2xl font-semibold mb-3">Sobre la instalación</h2>
           <p class="text-gray-700">{contenidoAdicional.descripcionDetallada}</p>
-        </div>
+        </div> -->
         
-        <div class="mb-6 sm:mb-8">
+        <!-- <div class="mb-6 sm:mb-8">
           <h2 class="text-xl sm:text-2xl font-semibold mb-3">Proceso creativo</h2>
           <p class="text-gray-700">{contenidoAdicional.procesoCreativo}</p>
-        </div>
+        </div> -->
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
-          <div>
+          <!-- <div>
             <h2 class="text-xl sm:text-2xl font-semibold mb-3">Elementos técnicos</h2>
             <ul class="list-disc pl-5 space-y-1">
               {contenidoAdicional.elementosTecnicos.map(elemento => (
                 <li class="text-gray-700">{elemento}</li>
               ))}
             </ul>
-          </div>
+          </div> -->
           
-          <div>
+          <!-- <div>
             <h2 class="text-xl sm:text-2xl font-semibold mb-3">Horarios</h2>
             <div class="space-y-2">
               {contenidoAdicional.horarios.map(horario => (
@@ -107,22 +119,34 @@ const contenidoAdicional = {
                 </div>
               ))}
             </div>
-          </div>
+          </div> -->
         </div>
         
         <!-- Galería de imágenes -->
         <div>
           <h2 class="text-xl sm:text-2xl font-semibold mb-4">Galería</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {contenidoAdicional.imagenes.map(imagen => (
-              <img src={imagen} alt="Imagen de la instalación sonora" class="rounded-lg shadow-md h-40 sm:h-48 w-full object-cover" />
+            {contenidoAdicional.imagenes.map((imagen, index) => (
+              <a href={imagen} class="glightbox" data-gallery="gallery1">
+                <picture>
+                  <source type="image/webp" srcset={imagen.replace(/\.[^/.]+$/, "") + ".webp"} />
+                  <img 
+                    src={imagen} 
+                    alt={`Imagen ${index + 1} de la instalación`} 
+                    class="rounded-lg shadow-md h-40 sm:h-48 w-full object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                    loading="lazy"
+                    width="400"
+                    height="300"
+                  />
+                </picture>
+              </a>
             ))}
           </div>
         </div>
       </div>
     </div>
     
-    <div class="mt-8 sm:mt-12">
+    <!-- <div class="mt-8 sm:mt-12">
       <h2 class="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 text-center sm:text-left">Otras actividades de {artista?.nombre || 'Laura Sofia'}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
         {artista?.actividades
@@ -151,6 +175,36 @@ const contenidoAdicional = {
           ))
         }
       </div>
-    </div>
+    </div> -->
   </main>
 </Layout>
+
+<script>
+  // Initialize GLightbox when the page loads
+  document.addEventListener('astro:page-load', () => {
+    // @ts-ignore
+    if (typeof window.GLightbox !== 'undefined') {
+      // @ts-ignore
+      const lightbox = window.GLightbox({
+        selector: '.glightbox',
+        touchNavigation: true,
+        loop: true,
+        autoplayVideos: true
+      });
+    }
+  });
+
+  // Fallback for when astro:page-load is not triggered
+  window.addEventListener('load', () => {
+    // @ts-ignore
+    if (typeof window.GLightbox !== 'undefined') {
+      // @ts-ignore
+      const lightbox = window.GLightbox({
+        selector: '.glightbox',
+        touchNavigation: true,
+        loop: true,
+        autoplayVideos: true
+      });
+    }
+  });
+</script>

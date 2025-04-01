@@ -14,6 +14,14 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/phb.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <!-- GLightbox CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <script>
+      // TypeScript declaration for GLightbox
+      interface Window {
+        GLightbox: any;
+      }
+    </script>
     <style>
       /* Estilos para garantizar que el menú sea visible según el tamaño de pantalla */
       @media (min-width: 768px) {
@@ -159,6 +167,43 @@ const { title } = Astro.props;
             footer.classList.remove('visible');
           }
         });
+      });
+    </script>
+    <!-- GLightbox JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    
+    <!-- Image optimization utilities -->
+    <script>
+      // Lazy loading for images
+      document.addEventListener('DOMContentLoaded', function() {
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        
+        if ('loading' in HTMLImageElement.prototype) {
+          // Browser supports native lazy loading
+          console.log('Browser supports native lazy loading');
+        } else {
+          // Browser doesn't support native lazy loading
+          // Implement a fallback with Intersection Observer
+          const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const image = entry.target as HTMLImageElement;
+                if (image.dataset.src) {
+                  image.src = image.dataset.src;
+                }
+                if (image.dataset.srcset) {
+                  image.srcset = image.dataset.srcset;
+                }
+                image.classList.remove('lazy');
+                observer.unobserve(image);
+              }
+            });
+          });
+          
+          lazyImages.forEach(image => {
+            imageObserver.observe(image);
+          });
+        }
       });
     </script>
   </body>

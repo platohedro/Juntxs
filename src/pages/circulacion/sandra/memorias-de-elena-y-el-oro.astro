@@ -49,7 +49,17 @@ const contenidoAdicional = {
 <Layout title={`${actividad?.titulo || 'Memorias de Elena y Oro'} - ${artista?.nombre || 'Sandra Ramírez Giraldo'}`}>
   <main class="max-w-5xl mx-auto px-4 py-12">
     <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-      <img src={actividad?.imagen || 'https://via.placeholder.com/400x300'} alt={actividad?.titulo || 'Memorias de Elena y Oro'} class="w-full min-h-[60vh] sm:h-96 object-cover" />
+      <div class="relative w-full min-h-[60vh] sm:h-96">
+        <img 
+          src={actividad?.imagen || '/imagenes/sandra/sandra1.JPG'}
+          alt={actividad?.titulo || 'Memorias de Elena y Oro'}
+          class="w-full h-full object-cover"
+          loading="eager"
+          width="1200"
+          height="600"
+          onerror="this.onerror=null; this.src='/imagenes/sandra/sandra1.JPG'"
+        />
+      </div>
       <div class="p-4 sm:p-6 md:p-8">
         <div class="flex flex-wrap items-center justify-between mb-4 sm:mb-6">
           <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">{actividad?.titulo || 'Memorias de Elena y Oro'}</h1>
@@ -78,8 +88,8 @@ const contenidoAdicional = {
           <p class="text-gray-700">{actividad?.descripcionCompleta || actividad?.descripcion || 'Performance que explora la relación entre el cuerpo humano y las tecnologías digitales.'}</p>
         </div>
         
-        <!-- Contenido adicional personalizado -->
-        <!-- <div class="mb-6 sm:mb-8">
+        {/* Contenido adicional personalizado */}
+        {/* <div class="mb-6 sm:mb-8">
           <h2 class="text-xl sm:text-2xl font-semibold mb-3">Sobre la instalación</h2>
           <p class="text-gray-700">{contenidoAdicional.descripcionDetallada}</p>
         </div>
@@ -87,9 +97,9 @@ const contenidoAdicional = {
         <div class="mb-6 sm:mb-8">
           <h2 class="text-xl sm:text-2xl font-semibold mb-3">Proceso creativo</h2>
           <p class="text-gray-700">{contenidoAdicional.procesoCreativo}</p>
-        </div> -->
+        </div> */}
         
-        <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
+        {/* <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
           <div>
             <h2 class="text-xl sm:text-2xl font-semibold mb-3">Elementos técnicos</h2>
             <ul class="list-disc pl-5 space-y-1">
@@ -110,20 +120,35 @@ const contenidoAdicional = {
               ))}
             </div>
           </div>
-        </div> -->
+        </div> */}
         
-        <!-- Galería de imágenes -->
+        {/* Galería de imágenes */}
         <div>
           <h2 class="text-xl sm:text-2xl font-semibold mb-4">Galería</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {contenidoAdicional.imagenes.map(imagen => (
-              <img src={imagen} alt="Imagen de la instalación sonora" class="rounded-lg shadow-md h-40 sm:h-48 w-full object-cover" />
-            ))}
+            {contenidoAdicional.imagenes.map((imagen, index) => {
+              const imagePath = imagen.startsWith('/') ? imagen : `/${imagen}`;
+              return (
+                <a href={imagePath} class="glightbox block relative aspect-[4/3] rounded-lg shadow-md overflow-hidden" data-gallery="gallery1">
+                  <img 
+                    src={imagePath}
+                    alt={`Imagen ${index + 1} de la instalación`} 
+                    class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                    loading="lazy"
+                    width="400"
+                    height="300"
+                    onerror="this.onerror=null; this.src='/imagenes/sandra/sandra1.JPG'"
+                  />
+                  <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-opacity"></div>
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>
     </div>
     
+    {/* Otras actividades de {artista?.nombre || 'Sandra Ramírez Giraldo'} */}
     <!-- <div class="mt-8 sm:mt-12">
       <h2 class="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 text-center sm:text-left">Otras actividades de {artista?.nombre || 'Sandra Ramírez Giraldo'}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
@@ -132,7 +157,9 @@ const contenidoAdicional = {
           .map(a => (
             <a href={`/circulacion/${artistaId}/${a.id}`} class="block transition-transform hover:scale-105">
               <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                {a.tipo === 'video' ? (
+                {a.imagen ? (
+                  <img src={a.imagen} alt={a.titulo} class="w-full h-40 object-cover" />
+                ) : (
                   <div class="relative w-full h-40 bg-gray-200">
                     <div class="absolute inset-0 flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -141,8 +168,6 @@ const contenidoAdicional = {
                       </svg>
                     </div>
                   </div>
-                ) : (
-                  a.imagen && <img src={a.imagen} alt={a.titulo} class="w-full h-40 object-cover" />
                 )}
                 <div class="p-4">
                   <h3 class="text-lg font-semibold text-gray-900 mb-1">{a.titulo}</h3>
@@ -156,3 +181,33 @@ const contenidoAdicional = {
     </div> -->
   </main>
 </Layout>
+
+<script>
+  // Initialize GLightbox when the page loads
+  document.addEventListener('astro:page-load', () => {
+    // @ts-ignore
+    if (typeof window.GLightbox !== 'undefined') {
+      // @ts-ignore
+      const lightbox = window.GLightbox({
+        selector: '.glightbox',
+        touchNavigation: true,
+        loop: true,
+        autoplayVideos: true
+      });
+    }
+  });
+
+  // Fallback for when astro:page-load is not triggered
+  window.addEventListener('load', () => {
+    // @ts-ignore
+    if (typeof window.GLightbox !== 'undefined') {
+      // @ts-ignore
+      const lightbox = window.GLightbox({
+        selector: '.glightbox',
+        touchNavigation: true,
+        loop: true,
+        autoplayVideos: true
+      });
+    }
+  });
+</script>

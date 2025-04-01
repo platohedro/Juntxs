@@ -29,10 +29,14 @@ const contenidoAdicional = {
     vanguardias del fotomontaje.
   `,
   galeria: [
-    'https://via.placeholder.com/400x300',
-    'https://via.placeholder.com/400x300',
-    'https://via.placeholder.com/400x300',
-    'https://via.placeholder.com/400x300'
+    '/imagenes/maria/maria1.webp',
+    '/imagenes/maria/maria2.webp',
+    '/imagenes/maria/maria3.webp',
+    '/imagenes/maria/maria4.webp',
+    '/imagenes/maria/maria5.webp',
+    '/imagenes/maria/maria6.webp',
+    '/imagenes/maria/maria7.webp',
+    '/imagenes/maria/maria8.webp'
   ]
 };
 ---
@@ -40,7 +44,17 @@ const contenidoAdicional = {
 <Layout title={`${actividad?.titulo || 'Micro ficciones con Agüeros - encuentro 1'} - ${artista?.nombre || 'María C'}`}>
   <main class="max-w-5xl mx-auto px-4 py-12">
     <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-      <img src={actividad?.imagen || 'https://via.placeholder.com/400x300'} alt={actividad?.titulo || 'Micro ficciones con Agüeros - encuentro 1'} class="w-full min-h-[60vh] sm:h-96 object-cover" />
+      <div class="relative w-full min-h-[60vh] sm:h-96">
+        <img 
+          src={actividad?.imagen || '/imagenes/maria/maria1.webp'}
+          alt={actividad?.titulo || 'Micro ficciones con Agüeros - encuentro 1'}
+          class="w-full h-full object-cover"
+          loading="eager"
+          width="1200"
+          height="600"
+          onerror="this.onerror=null; this.src='/imagenes/maria/maria1.webp'"
+        />
+      </div>
       <div class="p-4 sm:p-6 md:p-8">
         <div class="flex flex-wrap items-center justify-between mb-4 sm:mb-6">
           <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">{actividad?.titulo || 'Micro ficciones con Agüeros - encuentro 1'}</h1>
@@ -70,7 +84,7 @@ const contenidoAdicional = {
         </div>
         
         <!-- Contenido adicional personalizado -->
-        <div class="mb-6 sm:mb-8">
+        <!-- <div class="mb-6 sm:mb-8">
           <h2 class="text-xl sm:text-2xl font-semibold mb-3">Proceso creativo</h2>
           <p class="text-gray-700">{contenidoAdicional.procesoCreativo}</p>
         </div>
@@ -87,21 +101,42 @@ const contenidoAdicional = {
               <li class="text-gray-700">{tecnica}</li>
             ))}
           </ul>
+        </div> -->
+
+
+        <div class="mb-6 sm:mb-8 pb-8">
+          <h2 class="text-2xl font-semibold mb-4">Agüeros de río</h2>
+        <p class="text-gray-600 mb-6">Este video es un registro de la performance "Agüeros de río" que se realizó en el marco del proyecto "Circulación" en 2022.</p>
+        <div class="aspect-w-16 aspect-h-9 lg:aspect-w-8 lg:aspect-h-6 rounded-xl">
+          <iframe src="https://player.vimeo.com/video/1040939940?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="w-full h-96 lg:h-[60vh]" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" title="Agüeros de río"></iframe>
+        </div>
         </div>
         
         <!-- Galería de imágenes -->
         <div>
           <h2 class="text-xl sm:text-2xl font-semibold mb-4">Galería</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {contenidoAdicional.galeria.map(imagen => (
-              <img src={imagen} alt="Imagen de la serie fotográfica" class="rounded-lg shadow-md h-48 w-full object-cover" />
+            {contenidoAdicional.galeria.map((imagen, index) => (
+              <a href={imagen} class="glightbox" data-gallery="gallery1">
+                <picture>
+                  <source type="image/webp" srcset={imagen.replace(/\.[^/.]+$/, "") + ".webp"} />
+                  <img 
+                    src={imagen} 
+                    alt={`Imagen ${index + 1} de la serie fotográfica`} 
+                    class="rounded-lg shadow-md h-48 w-full object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                    loading="lazy"
+                    width="400"
+                    height="300"
+                  />
+                </picture>
+              </a>
             ))}
           </div>
         </div>
       </div>
     </div>
     
-    <div class="mt-8 sm:mt-12">
+    <!-- <div class="mt-8 sm:mt-12">
       <h2 class="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">Otras actividades de {artista?.nombre || 'María C'}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
         {artista?.actividades
@@ -130,6 +165,36 @@ const contenidoAdicional = {
           ))
         }
       </div>
-    </div>
+    </div> -->
   </main>
 </Layout>
+
+<script>
+  // Initialize GLightbox when the page loads
+  document.addEventListener('astro:page-load', () => {
+    // @ts-ignore
+    if (typeof window.GLightbox !== 'undefined') {
+      // @ts-ignore
+      const lightbox = window.GLightbox({
+        selector: '.glightbox',
+        touchNavigation: true,
+        loop: true,
+        autoplayVideos: true
+      });
+    }
+  });
+
+  // Fallback for when astro:page-load is not triggered
+  window.addEventListener('load', () => {
+    // @ts-ignore
+    if (typeof window.GLightbox !== 'undefined') {
+      // @ts-ignore
+      const lightbox = window.GLightbox({
+        selector: '.glightbox',
+        touchNavigation: true,
+        loop: true,
+        autoplayVideos: true
+      });
+    }
+  });
+</script>
