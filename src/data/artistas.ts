@@ -32,7 +32,7 @@ export const artistas: Artistas = {
         titulo: 'micro ficciones con Agueros - encuentro1',
         descripcion: 'Serie de fotografías intervenidas digitalmente',
         descripcionCompleta: 'Una exploración visual que combina técnicas fotográficas tradicionales con intervenciones digitales, creando un diálogo entre lo analógico y lo digital. Esta serie reflexiona sobre la memoria y la transformación de los espacios urbanos.',
-        fecha: '10 Marzo, 2024',
+        fecha: '26 Octubre, 2024',
         lugar: 'Galería Principal, Pie de Cuesta',
         imagen: 'https://via.placeholder.com/400x300',
         tipo: 'imagen'
@@ -42,7 +42,7 @@ export const artistas: Artistas = {
         titulo: 'micro ficciones con Agüeros - encuentro2',
         descripcion: 'Instalación multimedia',
         descripcionCompleta: 'Instalación que combina elementos visuales, sonoros y espaciales para crear una experiencia inmersiva. La obra invita a los espectadores a reflexionar sobre las relaciones entre el cuerpo, el espacio y la tecnología en la era digital.',
-        fecha: '15 Marzo, 2024',
+        fecha: '28 Octubre, 2024',
         lugar: 'Centro Cultural, Pie de Cuesta',
         video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
         tipo: 'video'
@@ -60,7 +60,7 @@ export const artistas: Artistas = {
         titulo: 'Diálogos del agua',
         descripcion: 'Instalación sonora',
         descripcionCompleta: 'Una instalación que transforma el silencio en una experiencia sensorial tangible. Utilizando tecnología de sonido espacial, la obra crea paisajes sonoros que responden a la presencia y movimiento de los espectadores, generando una experiencia única e irrepetible.',
-        fecha: '5 Abril, 2024',
+        fecha: '28 Octubre, 2024',
         lugar: 'Auditorio Municipal, Pie de Cuesta',
         video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
         tipo: 'video'
@@ -78,7 +78,7 @@ export const artistas: Artistas = {
         titulo: 'Memorias de Elena y Oro',
         descripcion: 'Performance multimedia',
         descripcionCompleta: 'Performance que explora la relación entre el cuerpo humano y las tecnologías digitales. A través de proyecciones, sensores de movimiento y sonido en tiempo real, la artista crea un diálogo entre lo físico y lo virtual, cuestionando los límites de la corporalidad en la era digital.',
-        fecha: '15 Abril, 2024',
+        fecha: '15 Octubre, 2024',
         lugar: 'Teatro Municipal, Pie de Cuesta',
         video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
         tipo: 'video'
