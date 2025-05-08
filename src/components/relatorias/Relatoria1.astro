@@ -1,0 +1,1516 @@
+---
+---
+
+<!-- Componente Relatoria1 -->
+<!-- Font Awesome ya debe estar incluido en el Layout principal -->
+<!-- Si no está incluido en el Layout, descomentar la siguiente línea -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
+
+<!-- Google Fonts ya debe estar incluido en el Layout principal -->
+<!-- Si no está incluido en el Layout, descomentar la siguiente línea -->
+<!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
+
+<!-- Estilos CSS específicos para la relatoría -->
+    <style>
+        /* Variables de colores */
+        :root {
+            --navy: #192b39;
+            --skyblue: #5296c5;
+            --bluegreen: #396d8e;
+            --purple: #8a65c9;
+            --pink: #e35d86;
+            --teal: #3b9d9d;
+        }
+
+        /* No necesitamos estilos para body, ya que usamos el Layout */
+        /* Contenedor principal de la relatoría con fondo semitransparente para mejorar legibilidad */
+        .relatoria-container {
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            line-height: 1.6;
+            font-size: 16px;
+            background-color: rgba(25, 43, 57, 0.85);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 1200px;
+            margin: 2rem auto;
+            overflow: hidden;
+        }
+
+        /* Contenedor interno para el contenido */
+        .content-container {
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        /* Elementos decorativos y animaciones */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes float-alt {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes spin-slow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        .decorative-element {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .float-alt {
+            animation: float-alt 7s ease-in-out infinite;
+        }
+
+        .pulse-slow {
+            animation: pulse-slow 8s ease-in-out infinite;
+        }
+
+        .spin-slow {
+            animation: spin-slow 15s linear infinite;
+        }
+
+        .wiggle {
+            animation: wiggle 3s ease-in-out infinite;
+        }
+
+        /* Encabezado y título */
+        header {
+            padding: 50px 0;
+            position: relative;
+            overflow: hidden;
+            background: rgba(25, 43, 57, 0.7);
+        }
+
+        .header-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0;
+            background: linear-gradient(135deg, var(--skyblue), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 30px;
+        }
+
+        .logo-circle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        .logo-circle-outer {
+            background: rgba(82, 150, 197, 0.1);
+            animation: pulse-slow 8s ease-in-out infinite;
+        }
+
+        .logo-circle-middle {
+            background: rgba(82, 150, 197, 0.05);
+            animation: pulse-slow 8s ease-in-out infinite;
+            animation-delay: 0.5s;
+            transform: scale(0.9);
+        }
+
+        .logo-circle-inner {
+            background: linear-gradient(135deg, var(--skyblue), var(--bluegreen));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: scale(0.8);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .logo-circle-inner:hover {
+            transform: scale(0.85);
+        }
+
+        .main-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin: 0 0 10px;
+            text-align: center;
+            animation: float-alt 7s ease-in-out infinite;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-style: italic;
+            text-align: center;
+            opacity: 0.9;
+            margin: 10px 0;
+            color: var(--skyblue);
+        }
+
+        .divider {
+            height: 3px;
+            width: 100px;
+            margin: 0 auto 20px;
+            background: linear-gradient(90deg, var(--skyblue), var(--bluegreen));
+            border-radius: 2px;
+        }
+
+        /* Tarjetas de información */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: rgba(25, 43, 57, 0.8);
+            border: 1px solid rgba(82, 150, 197, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(82, 150, 197, 0.2);
+            background: rgba(57, 109, 142, 0.4);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(82, 150, 197, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            animation: pulse-slow 8s ease-in-out infinite;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--skyblue);
+            letter-spacing: 0.5px;
+        }
+
+        .card-subtitle {
+            margin: 5px 0 0;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Secciones de detonantes */
+        .detonante-section {
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .detonante-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .detonante-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            opacity: 0.4;
+            margin-right: 20px;
+            color: var(--skyblue);
+            line-height: 1;
+            animation: pulse-slow 8s ease-in-out infinite;
+        }
+
+        .detonante-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+            color: white;
+            flex: 1;
+            letter-spacing: 0.5px;
+        }
+
+        .detonante-subtitle {
+            font-size: 1.2rem;
+            font-style: italic;
+            opacity: 0.8;
+            margin: 5px 0 0;
+            color: var(--skyblue);
+        }
+
+        /* Elementos específicos de cada detonante */
+        .question-bubble {
+            background: rgba(57, 109, 142, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+            border: 1px solid rgba(82, 150, 197, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .question-icon {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 40px;
+            height: 40px;
+            background: var(--skyblue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 3s infinite;
+            z-index: 2;
+        }
+
+        .question-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 15px;
+            color: var(--skyblue);
+        }
+
+        .question-quote {
+            font-style: italic;
+            position: relative;
+            padding-left: 20px;
+            border-left: 3px solid var(--skyblue);
+        }
+
+        /* Tarjetas específicas para cada enfoque */
+        .approach-card {
+            background: rgba(57, 109, 142, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(82, 150, 197, 0.1);
+        }
+
+        .approach-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(82, 150, 197, 0.2);
+            border-color: rgba(82, 150, 197, 0.3);
+        }
+
+        .approach-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(82, 150, 197, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            animation: pulse-slow 8s ease-in-out infinite;
+        }
+
+        .approach-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 0 5px;
+            text-align: center;
+        }
+
+        .approach-description {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            text-align: center;
+            margin: 0;
+        }
+        
+        /* Elementos de personas y citas */
+        .person-card {
+            display: flex;
+            align-items: flex-start;
+            background: rgba(25, 43, 57, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(82, 150, 197, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .person-card:hover {
+            box-shadow: 0 10px 30px rgba(82, 150, 197, 0.2);
+        }
+
+        .person-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple), var(--skyblue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .person-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple), var(--skyblue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .person-content {
+            flex: 1;
+        }
+
+        .person-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0 0 5px;
+            color: var(--skyblue);
+            letter-spacing: 0.5px;
+        }
+
+        .person-role {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin: 0 0 15px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .person-quote {
+            font-style: italic;
+            background: rgba(82, 150, 197, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            position: relative;
+            border-left: 3px solid rgba(82, 150, 197, 0.3);
+        }
+
+        .person-quote::before {
+            content: '"';
+            font-size: 2rem;
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            opacity: 0.3;
+            color: var(--skyblue);
+        }
+
+        /* Ilustraciones y gráficos SVG */
+        .illustration {
+            max-width: 100%;
+            height: auto;
+            margin: 30px auto;
+            display: block;
+        }
+        
+        /* Pregunta y respuesta */
+        .question-box {
+            background: rgba(57, 109, 142, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--skyblue);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .question-box:hover {
+            background: rgba(57, 109, 142, 0.3);
+            transform: translateX(5px);
+        }
+        
+        .question-text {
+            display: flex;
+            align-items: center;
+            font-style: italic;
+        }
+        
+        .question-text i {
+            margin-right: 10px;
+            color: var(--skyblue);
+        }
+
+        /* Estilos del footer */
+        footer {
+            background: linear-gradient(90deg, var(--skyblue), var(--bluegreen));
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+            color: white;
+        }
+
+        .footer-logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .footer-text {
+            font-size: 1.2rem;
+            margin: 10px 0 5px;
+            opacity: 0.7;
+        }
+
+        .footer-credits {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin: 20px 0 0;
+        }
+
+        /* Estilos para tarjetas de información */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            .relatoria-container {
+                padding: 1rem;
+                margin: 1rem;
+            }
+            
+            .detonante-cards,
+            .approach-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .person-card {
+                flex-direction: column;
+            }
+            
+            .person-avatar {
+                margin-right: 0;
+                margin-bottom: 1rem;
+                align-self: center;
+            }
+        }
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 3rem;
+            }
+
+            .detonante-title {
+                font-size: 2rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detonante-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .detonante-number {
+                margin-bottom: 10px;
+            }
+            
+            .person-card {
+                flex-direction: column;
+            }
+            
+            .person-avatar {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<div class="relatoria-container">
+    <!-- Elementos decorativos fijos -->
+    <div class="decorative-element" style="top: 10%; left: 5%;">
+        <svg width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="25" fill="none" stroke="#5296c5" stroke-width="1" stroke-dasharray="5 3" class="spin-slow"/>
+        </svg>
+    </div>
+    <div class="decorative-element" style="top: 20%; right: 5%;">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+            <polygon points="40,5 55,30 40,55 25,30" fill="none" stroke="#396d8e" stroke-width="1" class="spin-slow"/>
+        </svg>
+    </div>
+    <div class="decorative-element" style="bottom: 20%; left: 7%;">
+        <svg width="70" height="70" viewBox="0 0 70 70">
+            <path d="M10,35 Q35,10 60,35 Q35,60 10,35Z" fill="none" stroke="#5296c5" stroke-width="1" class="float-alt"/>
+        </svg>
+    </div>
+    
+    <!-- HEADER: Información del Encuentro -->
+    <header>
+        <div class="header-pattern">
+            <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                    <pattern id="pattern-circles" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <circle cx="10" cy="10" r="1" fill="var(--skyblue)" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#pattern-circles)"/>
+            </svg>
+        </div>
+
+        <!-- Elementos decorativos flotantes -->
+        <div class="decorative-element" style="top: 10%; left: 5%;">
+            <svg width="150" height="150" viewBox="0 0 150 150">
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--skyblue);stop-opacity:0.3" />
+                        <stop offset="100%" style="stop-color:var(--bluegreen);stop-opacity:0.3" />
+                    </linearGradient>
+                </defs>
+                <circle cx="75" cy="75" r="70" fill="url(#grad1)" class="pulse-slow"/>
+                <path d="M75,20 A55,55 0 1,1 75,130 A55,55 0 1,1 75,20" fill="none" stroke="var(--purple)" stroke-width="1" stroke-dasharray="5,3" class="spin-slow"/>
+                <text x="75" y="80" text-anchor="middle" fill="var(--skyblue)" font-size="24" class="float">✨</text>
+            </svg>
+        </div>
+
+        <div class="decorative-element" style="top: 20%; right: 5%;">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+                <defs>
+                    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--purple);stop-opacity:0.3" />
+                        <stop offset="100%" style="stop-color:var(--pink);stop-opacity:0.3" />
+                    </linearGradient>
+                </defs>
+                <circle cx="60" cy="60" r="55" fill="url(#grad2)" class="spin-slow"/>
+                <path d="M60,20 A40,40 0 1,1 60,100 A40,40 0 1,1 60,20" fill="none" stroke="var(--pink)" stroke-width="1" stroke-dasharray="4,4" class="pulse-slow"/>
+                <text x="60" y="65" text-anchor="middle" fill="var(--teal)" font-size="20" class="float-alt">⭐</text>
+                <circle cx="40" cy="40" r="5" fill="var(--skyblue)" class="float"/>
+            </svg>
+        </div>
+
+        <div class="decorative-element" style="bottom: 30%; right: 20%;">
+            <svg width="100" height="100" viewBox="0 0 100 100">
+                <polygon points="50,10 90,50 50,90 10,50" fill="none" stroke="var(--purple)" stroke-width="1" class="spin-slow"/>
+                <text x="50" y="55" text-anchor="middle" fill="var(--purple)" font-size="20" class="float">🌸</text>
+            </svg>
+        </div>
+        
+        <div class="container header-content">
+            <!-- Logo y título principal -->
+            <h1 class="main-title">JUNTX</h1>
+            <div class="divider"></div>
+            <p class="subtitle">Relatoría Gráfica - Encuentro II</p>
+            <p style="text-align: center; color: rgba(82, 150, 197, 0.8); margin-top: 5px;">Proyecto apoyado por el Ministerio de las Culturas, las Artes y los Saberes</p>
+            <p style="text-align: center; color: rgba(82, 150, 197, 0.6); font-size: 1.2rem; margin-top: 2px;">a través del Programa Nacional de Concertación</p>
+
+            <!-- Información del evento en tarjetas -->
+
+            
+            <!-- Información del evento en tarjetas -->  
+            <div class="card-grid">
+                <!-- Tarjeta de fecha y lugar -->
+                <div class="info-card" style="padding: 20px; min-height: 180px;">
+                    <div class="card-header" style="margin-bottom: 12px;">
+                        <div class="card-icon" style="min-width: 40px; width: 40px; height: 40px;">
+                            <i class="fas fa-calendar-alt" style="color: var(--skyblue); font-size: 1.5rem;"></i>
+                        </div>
+                        <div>
+                            <h3 class="card-title" style="color: white; font-size: 1.2rem; margin: 0;">Fecha y Lugar</h3>
+                            <div style="height: 2px; width: 40px; background: rgba(82, 150, 197, 0.5); border-radius: 1px; margin-top: 3px;"></div>
+                        </div>
+                    </div>
+                    <p style="color: white; margin: 0 0 8px; font-size: 1.1rem;">Jueves 20 de febrero de 2025</p>
+                    <p style="color: var(--skyblue); display: flex; align-items: center; margin: 0 0 8px;">
+                        <i class="fas fa-map-marker-alt" style="margin-right: 8px; font-size: 0.8rem;"></i>
+                        <span>Online, Platohedro, Medellín</span>
+                    </p>
+                    <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; display: flex; align-items: center; margin: 8px 0 0;">
+                        <i class="fas fa-clock" style="margin-right: 8px; font-size: 0.8rem;"></i>
+                        <span>Duración: 2 horas</span>
+                    </p>
+                </div>
+                
+                <!-- Tarjeta de organizadores -->
+                <div class="info-card" style="padding: 20px; min-height: 180px;">
+                    <div class="card-header" style="margin-bottom: 12px;">
+                        <div class="card-icon" style="min-width: 40px; width: 40px; height: 40px;">
+                            <i class="fas fa-users-cog" style="color: var(--skyblue); font-size: 1.5rem;"></i>
+                        </div>
+                        <div>
+                            <h3 class="card-title" style="color: white; font-size: 1.2rem; margin: 0;">Organización</h3>
+                            <div style="height: 2px; width: 40px; background: rgba(82, 150, 197, 0.5); border-radius: 1px; margin-top: 3px;"></div>
+                        </div>
+                    </div>
+                    <p style="color: white; margin: 0 0 8px; font-size: 1.1rem;">Colectivo El Eje</p>
+                    <p style="color: var(--skyblue); margin: 0 0 12px;">En el marco de Encuentros Vivos</p>
+                    <div>
+                        <p style="color: rgba(255, 255, 255, 0.9); font-size: 1rem; margin: 0 0 4px;">Participantes:</p>
+                        <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin: 0;">Laura Díaz García y Sandy Morales Serrato</p>
+                    </div>
+                </div>
+                
+                <!-- Tarjeta de invitados -->
+                <div class="info-card" style="padding: 20px; min-height: 180px;">
+                    <div class="card-header" style="margin-bottom: 12px;">
+                        <div class="card-icon" style="min-width: 40px; width: 40px; height: 40px;">
+                            <i class="fas fa-user-circle" style="color: var(--skyblue); font-size: 1.5rem;"></i>
+                        </div>
+                        <div>
+                            <h3 class="card-title" style="color: white; font-size: 1.2rem; margin: 0;">Invitadas Especiales</h3>
+                            <div style="height: 2px; width: 40px; background: rgba(82, 150, 197, 0.5); border-radius: 1px; margin-top: 3px;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                            <div style="min-width: 30px; width: 30px; height: 30px; border-radius: 50%; background: rgba(138, 101, 201, 0.3); display: flex; align-items: center; justify-content: center; margin-right: 8px;">
+                                <i class="fas fa-user" style="color: var(--purple); font-size: 0.9rem;"></i>
+                            </div>
+                            <div>
+                                <p style="color: white; font-size: 1.1rem; margin: 0;">Irene Criollo</p>
+                                <p style="color: rgba(82, 150, 197, 0.8); font-size: 0.8rem; margin: 0;">Fundación Semilla Criolla, Puerto Colombia</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <div style="min-width: 30px; width: 30px; height: 30px; border-radius: 50%; background: rgba(227, 93, 134, 0.3); display: flex; align-items: center; justify-content: center; margin-right: 8px;">
+                                <i class="fas fa-user" style="color: var(--pink); font-size: 0.9rem;"></i>
+                            </div>
+                            <div>
+                                <p style="color: white; font-size: 1.1rem; margin: 0;">Estefanía Gómez Vásquez</p>
+                                <p style="color: rgba(82, 150, 197, 0.8); font-size: 0.8rem; margin: 0;">10 asistentes externos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Descripción general del encuentro -->
+            <div style="background: rgba(25, 43, 57, 0.6); backdrop-filter: blur(10px); border-radius: 16px; padding: 25px; border: 1px solid rgba(82, 150, 197, 0.2); margin-top: 40px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);">
+                <h2 style="font-size: 1.5rem; color: var(--skyblue); margin-bottom: 15px; display: flex; align-items: center;">
+                    <i class="fas fa-info-circle" style="margin-right: 10px;"></i>
+                    Sobre este encuentro
+                </h2>
+                <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 15px;">Junto a las profesionales Irene Criollo y Estefanía Gómez Vásquez, reflexionamos sobre los cuidados en los vínculos y los procesos dentro de organizaciones y colectivos artísticos y culturales.</p>
+                <p style="color: rgba(255, 255, 255, 0.8); font-style: italic;">Esta fue una sesión de intercambio de conocimientos: prácticas culturales, prácticas colectivas y cuidados; voces femeninas desde diferentes territorios.</p>
+                
+                <!-- Ilustración decorativa -->
+                <div style="margin-top: 25px; display: flex; justify-content: center;">
+                    <svg width="200" height="80" viewBox="0 0 200 80" style="opacity: 0.7;">
+                        <!-- Figuras conectadas representando colaboración -->
+                        <circle cx="50" cy="40" r="12" fill="rgba(82, 150, 197, 0.3)" class="pulse-slow" />
+                        <circle cx="100" cy="40" r="12" fill="rgba(138, 101, 201, 0.3)" class="pulse-slow" style="animation-delay: 0.5s" />
+                        <circle cx="150" cy="40" r="12" fill="rgba(227, 93, 134, 0.3)" class="pulse-slow" style="animation-delay: 1s" />
+                        
+                        <!-- Líneas de conexión -->
+                        <path d="M62,40 L88,40" stroke="#5296c5" stroke-width="1" stroke-dasharray="3 2" />
+                        <path d="M112,40 L138,40" stroke="#5296c5" stroke-width="1" stroke-dasharray="3 2" />
+                        
+                        <!-- Íconos dentro de los círculos -->
+                        <text x="50" y="44" text-anchor="middle" fill="#ffffff" font-size="10">👥</text>
+                        <text x="100" y="44" text-anchor="middle" fill="#ffffff" font-size="10">💬</text>
+                        <text x="150" y="44" text-anchor="middle" fill="#ffffff" font-size="10">❤️</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- DETONANTE I: Cuidados desde lo individual y lo colectivo -->
+    <section class="detonante-section">
+        <div class="content-container">
+            <div class="detonante-header">
+                <div class="detonante-number">01</div>
+                <div>
+                    <h2 class="detonante-title">Cuidados desde lo individual y lo colectivo</h2>
+                    <p class="detonante-subtitle">Reflexiones sobre los distintos niveles de cuidado</p>
+                </div>
+            </div>
+            
+            <!-- Pregunta principal en burbuja -->
+            <div class="question-bubble">
+                <div class="question-icon">
+                    <i class="fas fa-question" style="color: white;"></i>
+                </div>
+                <h3 class="question-title">¿Cómo entendemos los cuidados?</h3>
+                <div class="question-quote">
+                    <p>"Se empieza a responder esta pregunta como una decisión radical del cuidado desde el placer: un cuerpo consentido y cuidado no está presto para la guerra."</p>
+                </div>
+                <p style="margin-top: 20px;">Desde el reconocimiento de lo que necesita mi cuerpo y lo que necesita mi mente en el espacio presente, una apuesta para que el cuidado propio se conecte con el cuidado del otro, de los territorios, de los procesos sociales y así se vincule la vida de una forma más integral.</p>
+            </div>
+            
+            <!-- Estefanía Gómez - Persona Card -->
+            <div class="person-card">
+                <div class="person-avatar" style="background: linear-gradient(135deg, var(--pink), var(--purple));">
+                    <i class="fas fa-user" style="color: white; font-size: 2rem;"></i>
+                </div>
+                <div class="person-content">
+                    <h3 class="person-name">Estefanía Gómez</h3>
+                    <p class="person-role">hace un llamado a estar en presencia plena y mover el cuerpo</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                        <div style="background: rgba(227, 93, 134, 0.1); padding: 15px; border-radius: 8px; border-left: 3px solid rgba(227, 93, 134, 0.4);">
+                            <div style="display: flex; align-items: center;">
+                                <div style="width: 30px; height: 30px; border-radius: 50%; background: rgba(227, 93, 134, 0.2); display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                                    <i class="fas fa-question" style="color: var(--pink); font-size: 0.8rem;"></i>
+                                </div>
+                                <p style="font-style: italic; margin: 0; font-size: 1.2rem;">¿qué necesito en este instante?</p>
+                            </div>
+                        </div>
+                        <div style="background: rgba(227, 93, 134, 0.1); padding: 15px; border-radius: 8px; border-left: 3px solid rgba(227, 93, 134, 0.4);">
+                            <div style="display: flex; align-items: center;">
+                                <div style="width: 30px; height: 30px; border-radius: 50%; background: rgba(227, 93, 134, 0.2); display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                                    <i class="fas fa-exclamation" style="color: var(--pink); font-size: 0.8rem;"></i>
+                                </div>
+                                <p style="font-style: italic; margin: 0; font-size: 1.2rem;">¡lo que sea, hay que hacerlo!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Preguntas para reflexión -->
+            <div style="margin: 40px 0;">
+                <h3 style="text-align: center; color: var(--skyblue); font-size: 1.3rem; margin-bottom: 25px; font-style: italic;">Preguntas para tener en cuenta de forma íntima</h3>
+                
+                <div class="question-box">
+                    <p class="question-text">
+                        <i class="fas fa-question-circle"></i>
+                        ¿Qué pasa con el cuerpo cuando lo sueltas?
+                    </p>
+                </div>
+                
+                <div class="question-box">
+                    <p class="question-text">
+                        <i class="fas fa-question-circle"></i>
+                        ¿Cómo me sostengo en el momento presente, en el movimiento y en la respiración que sólo me pertenece a mí?
+                    </p>
+                </div>
+                
+                <div class="question-box">
+                    <p class="question-text">
+                        <i class="fas fa-question-circle"></i>
+                        ¿Cómo se siente conectar con mi cuerpo, con las palmas de mi mano frotándose y llevando ese calorcito propio a una parte del cuerpo que necesita aún más de mi presencia? ¿Cómo me recuerdo constantemente que me tengo, que estoy aquí para mí?
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Irene Criollo - Persona Card -->
+            <div class="person-card">
+                <div class="person-avatar" style="background: linear-gradient(135deg, var(--purple), var(--skyblue));">
+                    <i class="fas fa-user" style="color: white; font-size: 1.5rem;"></i>
+                </div>
+                <div class="person-content">
+                    <h3 class="person-name">Irene Criollo</h3>
+                    <p class="person-role">comparte su historia, escucharnos nos acerca</p>
+                    <div class="person-quote">
+                        <p>Gracias a sus experiencias vitales, llegó la necesidad de atender el cuidado propio y de sus entornos. Los prejuicios en torno a la atención de la salud mental y la ayuda brindada por profesionales psicólogos, fue el primer detonante creativo de Semilla Criolla en Barranquilla, conectando con la producción de un festival global que llega a la ciudad para potenciar el cuidado a gran escala.</p>
+                    </div>
+                    <p style="margin-top: 15px;">Este espacio abrió los campos de psicología y cultura; la gestión cultural como bandera de trabajo colectivo.</p>
+                </div>
+            </div>
+            
+            <!-- Los tres niveles de cuidado -->
+            <div style="margin-top: 40px;">
+                <h3 style="text-align: center; color: var(--skyblue); font-size: 1.3rem; margin-bottom: 25px;">El cuidado no es sólo uno</h3>
+                <p style="text-align: center; margin-bottom: 25px;">Podemos empezar a identificar tres niveles de cuidado:</p>
+                
+                <div class="card-grid">
+                    <!-- Nivel 1: Hacia afuera -->
+                    <div class="approach-card">
+                        <div class="approach-icon">
+                            <i class="fas fa-globe-americas" style="color: var(--skyblue); font-size: 1.5rem;"></i>
+                        </div>
+                        <h4 class="approach-title">Hacia afuera</h4>
+                        <p class="approach-description">Movimiento y territorio</p>
+                        <!-- Ilustración simple -->
+                        <svg width="100" height="60" viewBox="0 0 100 60" style="margin-top: 15px; opacity: 0.7;">
+                            <circle cx="50" cy="30" r="20" fill="none" stroke="var(--skyblue)" stroke-width="1" />
+                            <path d="M30,30 L70,30" stroke="var(--skyblue)" stroke-width="1" stroke-dasharray="2 2" />
+                            <path d="M50,10 L50,50" stroke="var(--skyblue)" stroke-width="1" stroke-dasharray="2 2" />
+                        </svg>
+                    </div>
+                    
+                    <!-- Nivel 2: Cuidado de la organización -->
+                    <div class="approach-card">
+                        <div class="approach-icon">
+                            <i class="fas fa-users" style="color: var(--purple); font-size: 1.5rem;"></i>
+                        </div>
+                        <h4 class="approach-title">Cuidado de la organización</h4>
+                        <p class="approach-description">Familias, vecinos, instituciones</p>
+                        <!-- Ilustración simple -->
+                        <svg width="100" height="60" viewBox="0 0 100 60" style="margin-top: 15px; opacity: 0.7;">
+                            <circle cx="30" cy="30" r="8" fill="rgba(138, 101, 201, 0.3)" />
+                            <circle cx="50" cy="20" r="8" fill="rgba(138, 101, 201, 0.3)" />
+                            <circle cx="70" cy="30" r="8" fill="rgba(138, 101, 201, 0.3)" />
+                            <circle cx="50" cy="40" r="8" fill="rgba(138, 101, 201, 0.3)" />
+                            <line x1="30" y1="30" x2="50" y2="20" stroke="var(--purple)" stroke-width="1" />
+                            <line x1="50" y1="20" x2="70" y2="30" stroke="var(--purple)" stroke-width="1" />
+                            <line x1="70" y1="30" x2="50" y2="40" stroke="var(--purple)" stroke-width="1" />
+                            <line x1="50" y1="40" x2="30" y2="30" stroke="var(--purple)" stroke-width="1" />
+                        </svg>
+                    </div>
+                    
+                    <!-- Nivel 3: Cuidado propio -->
+                    <div class="approach-card">
+                        <div class="approach-icon">
+                            <i class="fas fa-user" style="color: var(--pink); font-size: 1.5rem;"></i>
+                        </div>
+                        <h4 class="approach-title">Cuidado propio</h4>
+                        <p class="approach-description">Cuerpo y narrativa propia</p>
+                        <!-- Ilustración simple -->
+                        <svg width="100" height="60" viewBox="0 0 100 60" style="margin-top: 15px; opacity: 0.7;">
+                            <circle cx="50" cy="30" r="15" fill="none" stroke="var(--pink)" stroke-width="1" />
+                            <circle cx="50" cy="30" r="5" fill="rgba(227, 93, 134, 0.3)" />
+                            <path d="M40,20 Q50,10 60,20" stroke="var(--pink)" stroke-width="1" fill="none" />
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Nota sobre experiencias vitales -->
+                <div style="background: rgba(57, 109, 142, 0.2); border-radius: 12px; padding: 20px; margin-top: 30px; text-align: center; font-style: italic; border-left: 3px solid var(--skyblue);">
+                    <p>Las experiencias vitales de las mujeres y los feminismos han sido claves en la revolución de la mirada para que haya una visión más propia e íntima de las necesidades y formas del cuidado desde adentro y así a las demás organizaciones y territorios habitados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- DETONANTE II: El cuidado como proceso creativo -->
+    <section class="detonante-section" style="background: rgba(25, 43, 57, 0.3);">
+        <div class="content-container">
+            <div class="detonante-header">
+                <div class="detonante-number">02</div>
+                <div>
+                    <h2 class="detonante-title">El cuidado como proceso creativo</h2>
+                    <p class="detonante-subtitle">La gestión cultural y su relación con el bienestar</p>
+                </div>
+            </div>
+            
+            <!-- Contenido principal -->
+            <div class="question-bubble">
+                <p style="color: rgba(255, 255, 255, 0.9);">La gestión cultural ahora sostiene una pregunta sobre cómo en los espacios de intercambio, socialización y creación conjunta se cuida y sostiene el bienestar.</p>
+                <p style="color: rgba(255, 255, 255, 0.8); margin-top: 15px;">Las organizaciones necesitan reflexionar sobre su ciclicidad, sobre su crecimiento orgánico y transformaciones constantes, para que sus misiones no sean rígidas y en cambio los tiempos y ritmos se naveguen en armonía y de acuerdo a las necesidades individuales.</p>
+                
+                <!-- Ilustración de ciclos y ritmos -->
+                <div style="margin: 30px auto; width: 200px; height: 200px; position: relative;">
+                    <svg viewBox="0 0 200 200" width="200" height="200">
+                        <!-- Círculo exterior girando lentamente -->
+                        <circle cx="100" cy="100" r="90" fill="none" stroke="var(--skyblue)" stroke-width="1" stroke-dasharray="5 3" class="spin-slow" />
+                        
+                        <!-- Círculo intermedio -->
+                        <circle cx="100" cy="100" r="60" fill="none" stroke="var(--skyblue)" stroke-width="1" opacity="0.6" />
+                        
+                        <!-- Círculo interior -->
+                        <circle cx="100" cy="100" r="30" fill="none" stroke="var(--skyblue)" stroke-width="1" opacity="0.4" />
+                        
+                        <!-- Elementos orbitando -->
+                        <g class="float" style="transform-origin: 100px 100px;">
+                            <circle cx="160" cy="100" r="8" fill="rgba(82, 150, 197, 0.3)" />
+                            <text x="160" y="104" text-anchor="middle" fill="#ffffff" font-size="8">🌱</text>
+                        </g>
+                        
+                        <g class="float-alt" style="transform-origin: 100px 100px; animation-delay: 0.5s;">
+                            <circle cx="100" cy="40" r="8" fill="rgba(138, 101, 201, 0.3)" />
+                            <text x="100" y="44" text-anchor="middle" fill="#ffffff" font-size="8">🔄</text>
+                        </g>
+                        
+                        <g class="float" style="transform-origin: 100px 100px; animation-delay: 1s;">
+                            <circle cx="40" cy="100" r="8" fill="rgba(227, 93, 134, 0.3)" />
+                            <text x="40" y="104" text-anchor="middle" fill="#ffffff" font-size="8">🎨</text>
+                        </g>
+                        
+                        <!-- Centro del círculo -->
+                        <circle cx="100" cy="100" r="15" fill="rgba(57, 109, 142, 0.3)" stroke="var(--skyblue)" stroke-width="1" />
+                        <text x="100" y="104" text-anchor="middle" fill="#ffffff" font-size="10">⏱️</text>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Lina, Cofundadora de Platohedro - Persona Card -->
+            <div class="person-card">
+                <div class="person-avatar" style="background: linear-gradient(135deg, var(--skyblue), var(--teal));">
+                    <i class="fas fa-user" style="color: white; font-size: 1.5rem;"></i>
+                </div>
+                <div class="person-content">
+                    <h3 class="person-name">Lina</h3>
+                    <p class="person-role">Cofundadora de Platohedro</p>
+                    <div class="person-quote">
+                        <p>Comparte su reflexión sobre el ondulamiento y los diversos ritmos de cada una de las personas de los colectivos. Dos saberes son importantes en esta experiencia: <strong>saber escuchar</strong> y <strong>saber hablar</strong>.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Saberes importantes -->
+            <div style="margin: 40px 0;">
+                <div class="card-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div style="background: rgba(57, 109, 142, 0.2); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; align-items: center; border: 1px solid rgba(82, 150, 197, 0.2);">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(82, 150, 197, 0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 15px;" class="pulse-slow">
+                            <i class="fas fa-ear-listen" style="color: var(--skyblue); font-size: 1.5rem;"></i>
+                        </div>
+                        <h4 style="font-size: 1.2rem; font-weight: 600; margin: 0 0 10px; text-align: center; color: var(--skyblue);">Saber escuchar</h4>
+                        <svg width="100" height="40" viewBox="0 0 100 40" style="opacity: 0.7;">
+                            <path d="M10,20 Q50,5 90,20" stroke="var(--skyblue)" stroke-width="1" fill="none" stroke-dasharray="2 1" />
+                            <path d="M10,30 Q50,15 90,30" stroke="var(--skyblue)" stroke-width="1" fill="none" stroke-dasharray="2 1" />
+                        </svg>
+                    </div>
+                    
+                    <div style="background: rgba(57, 109, 142, 0.2); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; align-items: center; border: 1px solid rgba(82, 150, 197, 0.2);">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(82, 150, 197, 0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 15px;" class="pulse-slow">
+                            <i class="fas fa-comment" style="color: var(--skyblue); font-size: 1.5rem;"></i>
+                        </div>
+                        <h4 style="font-size: 1.2rem; font-weight: 600; margin: 0 0 10px; text-align: center; color: var(--skyblue);">Saber hablar</h4>
+                        <svg width="100" height="40" viewBox="0 0 100 40" style="opacity: 0.7;">
+                            <path d="M20,20 C30,15 40,25 50,20 C60,15 70,25 80,20" stroke="var(--skyblue)" stroke-width="1" fill="none" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Preguntas clave para la práctica creativa -->
+            <div style="margin: 40px 0;">
+                <h3 style="text-align: center; color: var(--skyblue); font-size: 1.3rem; margin-bottom: 25px; font-style: italic;">Preguntas clave para cerrar la reflexión</h3>
+                
+                <div class="question-box">
+                    <p class="question-text">
+                        <i class="fas fa-question-circle"></i>
+                        ¿Cómo se comparten los procesos creativos compartidos desde la escucha y la palabra puesta en común?
+                    </p>
+                </div>
+                
+                <div class="question-box">
+                    <p class="question-text">
+                        <i class="fas fa-question-circle"></i>
+                        ¿Cuáles son otras prácticas saludables, para el autocuidado y el de las organizaciones?
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Ilustración de procesos creativos -->
+            <div style="margin: 40px auto; max-width: 400px;">
+                <svg viewBox="0 0 400 150" width="100%" height="150">
+                    <!-- Fondo de la ilustración -->
+                    <rect x="10" y="10" width="380" height="130" rx="20" fill="rgba(57, 109, 142, 0.1)" stroke="var(--skyblue)" stroke-width="1" stroke-dasharray="5 3" />
+                    
+                    <!-- Elemento central: proceso creativo -->
+                    <circle cx="200" cy="75" r="30" fill="rgba(82, 150, 197, 0.3)" class="pulse-slow" />
+                    <text x="200" y="80" text-anchor="middle" fill="#ffffff" font-size="12">💡</text>
+                    
+                    <!-- Elementos alrededor: diferentes prácticas -->
+                    <g class="float">
+                        <circle cx="120" cy="50" r="15" fill="rgba(138, 101, 201, 0.3)" />
+                        <text x="120" y="55" text-anchor="middle" fill="#ffffff" font-size="10">🗣️</text>
+                        <path d="M140,60 L180,70" stroke="var(--skyblue)" stroke-width="1" stroke-dasharray="2 2" />
+                    </g>
+                    
+                    <g class="float-alt">
+                        <circle cx="120" cy="100" r="15" fill="rgba(138, 101, 201, 0.3)" />
+                        <text x="120" y="105" text-anchor="middle" fill="#ffffff" font-size="10">👂</text>
+                        <path d="M140,95 L180,80" stroke="var(--skyblue)" stroke-width="1" stroke-dasharray="2 2" />
+                    </g>
+                    
+                    <g class="float">
+                        <circle cx="280" cy="50" r="15" fill="rgba(227, 93, 134, 0.3)" />
+                        <text x="280" y="55" text-anchor="middle" fill="#ffffff" font-size="10">🤝</text>
+                        <path d="M260,60 L220,70" stroke="var(--skyblue)" stroke-width="1" stroke-dasharray="2 2" />
+                    </g>
+                    
+                    <g class="float-alt">
+                        <circle cx="280" cy="100" r="15" fill="rgba(227, 93, 134, 0.3)" />
+                        <text x="280" y="105" text-anchor="middle" fill="#ffffff" font-size="10">❤️</text>
+                        <path d="M260,95 L220,80" stroke="var(--skyblue)" stroke-width="1" stroke-dasharray="2 2" />
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </section>
+    
+    <!-- DETONANTE III: Modelos organizativos desde la naturaleza -->
+    <section class="detonante-section">
+        <div class="content-container">
+            <div class="detonante-header">
+                <div class="detonante-number">03</div>
+                <div>
+                    <h2 class="detonante-title">Modelos organizativos desde la naturaleza</h2>
+                    <p class="detonante-subtitle">Aprendiendo de los patrones orgánicos y naturales</p>
+                </div>
+            </div>
+            
+            <!-- Pregunta principal en burbuja -->
+            <div class="question-bubble">
+                <div class="question-icon">
+                    <i class="fas fa-seedling" style="color: white;"></i>
+                </div>
+                <h3 class="question-title">¿Cómo están las organizaciones a las que pertenecemos, reflejándose en modelos de la naturaleza?</h3>
+                <p style="margin-top: 20px;">Irene Criollo comparte la posibilidad de vernos como un rizoma, como los páramos o como los árboles; allí hay referentes de conexiones cíclicas y orgánicas que permiten a las organizaciones la apertura para generar los espacios necesarios para el cuidado.</p>
+            </div>
+            
+            <!-- Modelos naturales con ilustraciones -->
+            <div class="card-grid" style="margin-top: 40px;">
+                <!-- Modelo 1: Rizoma -->
+                <div class="approach-card" style="min-height: 320px;">
+                    <div class="approach-icon">
+                        <i class="fas fa-project-diagram" style="color: var(--teal); font-size: 1.5rem;"></i>
+                    </div>
+                    <h4 class="approach-title" style="color: var(--teal);">Rizoma</h4>
+                    <p class="approach-description">Conexiones horizontales y múltiples</p>
+                    
+                    <!-- Ilustración de rizoma -->
+                    <div style="margin: 25px auto 0; width: 180px; height: 140px;">
+                        <svg viewBox="0 0 180 140" width="180" height="140">
+                            <!-- Línea base horizontal -->
+                            <line x1="20" y1="70" x2="160" y2="70" stroke="var(--teal)" stroke-width="2" />
+                            
+                            <!-- Nodos principales -->
+                            <circle cx="40" cy="70" r="6" fill="rgba(59, 157, 157, 0.6)" class="pulse-slow" />
+                            <circle cx="70" cy="70" r="6" fill="rgba(59, 157, 157, 0.6)" class="pulse-slow" style="animation-delay: 0.3s" />
+                            <circle cx="100" cy="70" r="6" fill="rgba(59, 157, 157, 0.6)" class="pulse-slow" style="animation-delay: 0.6s" />
+                            <circle cx="130" cy="70" r="6" fill="rgba(59, 157, 157, 0.6)" class="pulse-slow" style="animation-delay: 0.9s" />
+                            
+                            <!-- Conexiones ascendentes -->
+                            <path d="M40,70 Q55,30 70,70" stroke="var(--teal)" stroke-width="1" fill="none" />
+                            <path d="M70,70 Q85,30 100,70" stroke="var(--teal)" stroke-width="1" fill="none" />
+                            <path d="M100,70 Q115,30 130,70" stroke="var(--teal)" stroke-width="1" fill="none" />
+                            
+                            <!-- Nodos secundarios arriba -->
+                            <circle cx="55" cy="40" r="4" fill="rgba(59, 157, 157, 0.4)" />
+                            <circle cx="85" cy="40" r="4" fill="rgba(59, 157, 157, 0.4)" />
+                            <circle cx="115" cy="40" r="4" fill="rgba(59, 157, 157, 0.4)" />
+                            
+                            <!-- Conexiones descendentes -->
+                            <path d="M40,70 Q55,110 70,70" stroke="var(--teal)" stroke-width="1" fill="none" />
+                            <path d="M70,70 Q85,110 100,70" stroke="var(--teal)" stroke-width="1" fill="none" />
+                            <path d="M100,70 Q115,110 130,70" stroke="var(--teal)" stroke-width="1" fill="none" />
+                            
+                            <!-- Nodos secundarios abajo -->
+                            <circle cx="55" cy="100" r="4" fill="rgba(59, 157, 157, 0.4)" />
+                            <circle cx="85" cy="100" r="4" fill="rgba(59, 157, 157, 0.4)" />
+                            <circle cx="115" cy="100" r="4" fill="rgba(59, 157, 157, 0.4)" />
+                        </svg>
+                    </div>
+                    
+                    <p style="font-size: 0.85rem; text-align: center; margin-top: 10px; font-style: italic; color: rgba(255, 255, 255, 0.7);">
+                        Un rizoma crece sin centro ni jerarquía, de forma horizontal, con conexiones entre todos sus puntos.
+                    </p>
+                </div>
+                
+                <!-- Modelo 2: Páramo -->
+                <div class="approach-card" style="min-height: 320px;">
+                    <div class="approach-icon">
+                        <i class="fas fa-mountain" style="color: var(--skyblue); font-size: 1.5rem;"></i>
+                    </div>
+                    <h4 class="approach-title" style="color: var(--skyblue);">Páramo</h4>
+                    <p class="approach-description">Ecosistema biodiverso y adaptable</p>
+                    
+                    <!-- Ilustración de páramo -->
+                    <div style="margin: 25px auto 0; width: 180px; height: 140px;">
+                        <svg viewBox="0 0 180 140" width="180" height="140">
+                            <!-- Línea de base (tierra) -->
+                            <path d="M20,120 L160,120" stroke="var(--skyblue)" stroke-width="2" />
+                            
+                            <!-- Montañas -->
+                            <path d="M20,120 L60,50 L80,90 L110,40 L140,80 L160,120" fill="rgba(82, 150, 197, 0.2)" stroke="var(--skyblue)" stroke-width="1" />
+                            
+                            <!-- Vegetación diversa (frailejones y plantas) -->
+                            <path d="M40,120 C42,110 44,115 46,120" stroke="var(--skyblue)" stroke-width="1" fill="none" class="float" />
+                            <path d="M50,120 C53,105 56,110 58,120" stroke="var(--skyblue)" stroke-width="1" fill="none" class="float-alt" />
+                            <path d="M65,120 C67,100 70,105 73,120" stroke="var(--skyblue)" stroke-width="1" fill="none" class="float" />
+                            <path d="M90,120 C92,110 94,115 96,120" stroke="var(--skyblue)" stroke-width="1" fill="none" class="float-alt" />
+                            <path d="M105,120 C108,100 111,105 114,120" stroke="var(--skyblue)" stroke-width="1" fill="none" class="float" />
+                            <path d="M130,120 C133,110 136,115 139,120" stroke="var(--skyblue)" stroke-width="1" fill="none" class="float-alt" />
+                            
+                            <!-- Nubes -->
+                            <path d="M40,40 Q50,30 60,40 Q70,30 80,40 Q70,50 60,40 Q50,50 40,40" fill="rgba(82, 150, 197, 0.2)" class="float" />
+                            <path d="M120,30 Q130,20 140,30 Q150,20 160,30 Q150,40 140,30 Q130,40 120,30" fill="rgba(82, 150, 197, 0.2)" class="float-alt" />
+                        </svg>
+                    </div>
+                    
+                    <p style="font-size: 0.85rem; text-align: center; margin-top: 10px; font-style: italic; color: rgba(255, 255, 255, 0.7);">
+                        Los páramos son ecosistemas biodiversos con gran capacidad de adaptación a condiciones extremas.
+                    </p>
+                </div>
+                
+                <!-- Modelo 3: Árboles -->
+                <div class="approach-card" style="min-height: 320px;">
+                    <div class="approach-icon">
+                        <i class="fas fa-tree" style="color: var(--purple); font-size: 1.5rem;"></i>
+                    </div>
+                    <h4 class="approach-title" style="color: var(--purple);">Árboles</h4>
+                    <p class="approach-description">Redes de apoyo y comunicación</p>
+                    
+                    <!-- Ilustración de árboles -->
+                    <div style="margin: 25px auto 0; width: 180px; height: 140px;">
+                        <svg viewBox="0 0 180 140" width="180" height="140">
+                            <!-- Línea de base (tierra) -->
+                            <rect x="20" y="110" width="140" height="20" fill="rgba(138, 101, 201, 0.1)" />
+                            
+                            <!-- Árbol 1 -->
+                            <line x1="50" y1="110" x2="50" y2="80" stroke="var(--purple)" stroke-width="2" />
+                            <ellipse cx="50" cy="65" rx="15" ry="20" fill="rgba(138, 101, 201, 0.3)" stroke="var(--purple)" stroke-width="1" />
+                            
+                            <!-- Árbol 2 -->
+                            <line x1="90" y1="110" x2="90" y2="70" stroke="var(--purple)" stroke-width="2" />
+                            <ellipse cx="90" cy="50" rx="20" ry="25" fill="rgba(138, 101, 201, 0.3)" stroke="var(--purple)" stroke-width="1" />
+                            
+                            <!-- Árbol 3 -->
+                            <line x1="130" y1="110" x2="130" y2="80" stroke="var(--purple)" stroke-width="2" />
+                            <ellipse cx="130" cy="65" rx="15" ry="20" fill="rgba(138, 101, 201, 0.3)" stroke="var(--purple)" stroke-width="1" />
+                            
+                            <!-- Red subterránea de conexiones (micorrizas) -->
+                            <path d="M50,115 C65,130 75,125 90,115 C105,125 115,130 130,115" stroke="var(--purple)" stroke-width="1" stroke-dasharray="3 2" />
+                            <circle cx="60" cy="120" r="2" fill="var(--purple)" class="pulse-slow" />
+                            <circle cx="75" cy="122" r="2" fill="var(--purple)" class="pulse-slow" style="animation-delay: 0.5s" />
+                            <circle cx="105" cy="122" r="2" fill="var(--purple)" class="pulse-slow" style="animation-delay: 1s" />
+                            <circle cx="120" cy="120" r="2" fill="var(--purple)" class="pulse-slow" style="animation-delay: 1.5s" />
+                        </svg>
+                    </div>
+                    
+                    <p style="font-size: 0.85rem; text-align: center; margin-top: 10px; font-style: italic; color: rgba(255, 255, 255, 0.7);">
+                        Los árboles se comunican y apoyan entre sí mediante redes subterráneas, compartiendo recursos.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Cita sobre laboratorios y espejos -->
+            <div style="background: rgba(57, 109, 142, 0.2); border-radius: 16px; padding: 25px; margin-top: 40px; text-align: center; font-style: italic; border: 1px solid rgba(82, 150, 197, 0.2);">
+                <i class="fas fa-quote-left" style="color: var(--skyblue); font-size: 1.5rem; margin-bottom: 10px; opacity: 0.6;"></i>
+                <p style="font-size: 1.2rem; margin-bottom: 15px;">
+                    No podemos olvidar que las organizaciones a las que pertenecemos, son laboratorios y espejos de las posibilidades que tenemos para habitar el mundo.
+                </p>
+            </div>
+            
+            <!-- Componente intergeneracional -->
+            <div style="margin-top: 40px;">
+                <div class="person-card">
+                    <div class="person-avatar" style="background: linear-gradient(135deg, var(--teal), var(--skyblue));">
+                        <i class="fas fa-users" style="color: white; font-size: 1.5rem;"></i>
+                    </div>
+                    <div class="person-content">
+                        <h3 class="person-name">El Eje</h3>
+                        <p class="person-role">Componente intergeneracional</p>
+                        <div class="person-quote">
+                            <p>El Eje compartió su reflexión sobre el componente intergeneracional y los intercambios en valores, necesidades e intereses que también merecen atención plena para el cuidado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ilustración de conexiones intergeneracionales -->
+            <div style="margin: 40px auto; max-width: 400px;">
+                <svg viewBox="0 0 400 120" width="100%" height="120">
+                    <!-- Círculo 1: Generación mayor -->
+                    <circle cx="80" cy="60" r="30" fill="rgba(59, 157, 157, 0.3)" class="pulse-slow" />
+                    <text x="80" y="65" text-anchor="middle" fill="#ffffff" font-size="14">👵</text>
+                    
+                    <!-- Círculo 2: Generación media -->
+                    <circle cx="200" cy="60" r="30" fill="rgba(82, 150, 197, 0.3)" class="pulse-slow" style="animation-delay: 0.5s" />
+                    <text x="200" y="65" text-anchor="middle" fill="#ffffff" font-size="14">👩</text>
+                    
+                    <!-- Círculo 3: Generación joven -->
+                    <circle cx="320" cy="60" r="30" fill="rgba(138, 101, 201, 0.3)" class="pulse-slow" style="animation-delay: 1s" />
+                    <text x="320" y="65" text-anchor="middle" fill="#ffffff" font-size="14">👧</text>
+                    
+                    <!-- Conexiones entre generaciones -->
+                    <path d="M110,60 L170,60" stroke="var(--skyblue)" stroke-width="1" stroke-dasharray="5 2" />
+                    <path d="M230,60 L290,60" stroke="var(--skyblue)" stroke-width="1" stroke-dasharray="5 2" />
+                    
+                    <!-- Flechas de intercambio -->
+                    <path d="M125,50 L155,50" stroke="var(--skyblue)" stroke-width="1" />
+                    <path d="M155,50 L150,45" stroke="var(--skyblue)" stroke-width="1" />
+                    <path d="M155,50 L150,55" stroke="var(--skyblue)" stroke-width="1" />
+                    
+                    <path d="M155,70 L125,70" stroke="var(--skyblue)" stroke-width="1" />
+                    <path d="M125,70 L130,65" stroke="var(--skyblue)" stroke-width="1" />
+                    <path d="M125,70 L130,75" stroke="var(--skyblue)" stroke-width="1" />
+                    
+                    <path d="M245,50 L275,50" stroke="var(--skyblue)" stroke-width="1" />
+                    <path d="M275,50 L270,45" stroke="var(--skyblue)" stroke-width="1" />
+                    <path d="M275,50 L270,55" stroke="var(--skyblue)" stroke-width="1" />
+                    
+                    <path d="M275,70 L245,70" stroke="var(--skyblue)" stroke-width="1" />
+                    <path d="M245,70 L250,65" stroke="var(--skyblue)" stroke-width="1" />
+                    <path d="M245,70 L250,75" stroke="var(--skyblue)" stroke-width="1" />
+                </svg>
+            </div>
+            
+            <!-- Los cuatro niveles de escucha -->
+            <div style="margin-top: 40px;">
+                <h3 style="text-align: center; color: var(--skyblue); font-size: 1.3rem; margin-bottom: 10px;">
+                    Los cuatro niveles de la escucha de Otto Scharmer
+                </h3>
+                <p style="text-align: center; margin-bottom: 20px;">
+                    <a href="#" style="color: var(--pink); text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-play-circle" style="font-size: 1.2rem;"></i>
+                        <span>Dar clic en la imagen para ver video</span>
+                    </a>
+                </p>
+                
+                <div style="display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: 0 auto;">
+                    <!-- Nivel 1 -->
+                    <div style="background: rgba(82, 150, 197, 0.1); padding: 15px; border-radius: 10px; display: flex; align-items: center; border-left: 3px solid var(--skyblue);">
+                        <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--skyblue); color: white; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-weight: bold;">1</div>
+                        <div>
+                            <h4 style="margin: 0; font-weight: 600; color: var(--skyblue);">Escucha de descarga</h4>
+                            <p style="margin: 5px 0 0; font-size: 1.2rem; color: rgba(255, 255, 255, 0.7);">Escuchamos confirmando lo que ya sabemos</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Nivel 2 -->
+                    <div style="background: rgba(82, 150, 197, 0.1); padding: 15px; border-radius: 10px; display: flex; align-items: center; border-left: 3px solid var(--skyblue);">
+                        <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--skyblue); color: white; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-weight: bold;">2</div>
+                        <div>
+                            <h4 style="margin: 0; font-weight: 600; color: var(--skyblue);">Escucha factual</h4>
+                            <p style="margin: 5px 0 0; font-size: 1.2rem; color: rgba(255, 255, 255, 0.7);">Prestamos atención a datos y hechos</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Nivel 3 -->
+                    <div style="background: rgba(82, 150, 197, 0.1); padding: 15px; border-radius: 10px; display: flex; align-items: center; border-left: 3px solid var(--skyblue);">
+                        <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--skyblue); color: white; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-weight: bold;">3</div>
+                        <div>
+                            <h4 style="margin: 0; font-weight: 600; color: var(--skyblue);">Escucha empática</h4>
+                            <p style="margin: 5px 0 0; font-size: 1.2rem; color: rgba(255, 255, 255, 0.7);">Escuchamos desde el lugar del otro</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Nivel 4 -->
+                    <div style="background: rgba(82, 150, 197, 0.1); padding: 15px; border-radius: 10px; display: flex; align-items: center; border-left: 3px solid var(--skyblue);">
+                        <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--skyblue); color: white; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-weight: bold;">4</div>
+                        <div>
+                            <h4 style="margin: 0; font-weight: 600; color: var(--skyblue);">Escucha generativa</h4>
+                            <p style="margin: 5px 0 0; font-size: 1.2rem; color: rgba(255, 255, 255, 0.7);">Escuchamos desde el campo emergente del futuro</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- DETONANTE IV: El cuidado -->
+    <section class="detonante-section" style="background: rgba(25, 43, 57, 0.3);">
+        <div class="content-container">
+            <div class="detonante-header">
+                <div class="detonante-number">04</div>
+                <div>
+                    <h2 class="detonante-title">El cuidado</h2>
+                    <p class="detonante-subtitle">Pausas, ritmos y prácticas de cuidado</p>
+                </div>
+            </div>
+
+            <!-- El autocuidado y la pausa -->
+            <div class="question-bubble">
+                <div class="question-icon">
+                    <i class="fas fa-heart-pulse" style="color: white;"></i>
+                </div>
+                <h3 class="question-title">El autocuidado, la pausa</h3>
+                <p>Identifica los ritmos propios que trae también la necesidad de identificar la pausa y de comunicar las necesidades.</p>
+                
+                <!-- Ilustración de ritmos y pausas -->
+                <div style="margin: 30px auto; width: 300px; height: 120px;">
+                    <svg viewBox="0 0 300 120" width="300" height="120">
+                        <!-- Ondas de ritmo -->
+                        <path d="M10,60 Q35,20 60,60 Q85,100 110,60 Q135,20 160,60 Q185,100 210,60 Q235,20 260,60 Q285,100 290,60" 
+                              stroke="var(--pink)" stroke-width="2" fill="none" class="pulse-slow"/>
+                        
+                        <!-- Puntos de pausa -->
+                        <circle cx="60" cy="60" r="6" fill="var(--pink)" class="pulse-slow"/>
+                        <circle cx="160" cy="60" r="6" fill="var(--pink)" class="pulse-slow" style="animation-delay: 0.5s"/>
+                        <circle cx="260" cy="60" r="6" fill="var(--pink)" class="pulse-slow" style="animation-delay: 1s"/>
+                        
+                        <!-- Iconos de pausa -->
+                        <text x="60" y="40" text-anchor="middle" fill="#ffffff" font-size="12">🧘</text>
+                        <text x="160" y="40" text-anchor="middle" fill="#ffffff" font-size="12">💆</text>
+                        <text x="260" y="40" text-anchor="middle" fill="#ffffff" font-size="12">🌱</text>
+                    </svg>
+                </div>
+                
+                <p style="font-style: italic; color: var(--pink);">Esto es el autocuidado, las acciones diarias que hacemos para atender nuestro bienestar.</p>
+                <div class="question-box">
+                    <p class="question-text">
+                        <i class="fas fa-sparkles"></i>
+                        ¿Cuáles son los estímulos que nos permiten conectarnos con esas acciones?
+                    </p>
+                </div>
+            </div>
+
+            <!-- Cuidados colectivos y ritmo -->
+            <div style="margin-top: 40px;">
+                <div class="card-grid">
+                    <!-- Ritmos -->
+                    <div class="approach-card">
+                        <div class="approach-icon">
+                            <i class="fas fa-wave-square" style="color: var(--purple); font-size: 1.5rem;"></i>
+                        </div>
+                        <h4 class="approach-title">Cuidados colectivos, el ritmo</h4>
+                        <p class="approach-description">El ritmo propio y el colectivo son diferentes</p>
+                        
+                        <!-- Ilustración de ritmos -->
+                        <svg width="200" height="100" viewBox="0 0 200 100" style="margin: 20px auto;">
+                            <!-- Ritmo individual -->
+                            <path d="M20,30 Q35,10 50,30 Q65,50 80,30 Q95,10 110,30" 
+                                  stroke="var(--purple)" stroke-width="1" fill="none" class="float"/>
+                            
+                            <!-- Ritmo colectivo -->
+                            <path d="M20,70 Q45,50 70,70 Q95,90 120,70 Q145,50 170,70" 
+                                  stroke="var(--skyblue)" stroke-width="1" fill="none" class="float-alt"/>
+                            
+                            <!-- Conexiones entre ritmos -->
+                            <line x1="50" y1="30" x2="50" y2="70" stroke="rgba(138, 101, 201, 0.3)" stroke-dasharray="2 2"/>
+                            <line x1="110" y1="30" x2="110" y2="70" stroke="rgba(138, 101, 201, 0.3)" stroke-dasharray="2 2"/>
+                        </svg>
+                    </div>
+
+                    <!-- Ritual -->
+                    <div class="approach-card">
+                        <div class="approach-icon">
+                            <i class="fas fa-infinity" style="color: var(--teal); font-size: 1.5rem;"></i>
+                        </div>
+                        <h4 class="approach-title">Ritualizar y compartir</h4>
+                        <p class="approach-description">Estrategias para sostener las intenciones colectivas</p>
+                        
+                        <!-- Ilustración de ritual -->
+                        <svg width="150" height="150" viewBox="0 0 150 150" style="margin: 20px auto;">
+                            <circle cx="75" cy="75" r="50" fill="none" stroke="var(--teal)" stroke-width="1" class="spin-slow"/>
+                            <circle cx="75" cy="75" r="35" fill="none" stroke="var(--teal)" stroke-width="1" class="spin-slow" style="animation-direction: reverse;"/>
+                            
+                            <!-- Símbolos de ritual -->
+                            <text x="75" y="55" text-anchor="middle" fill="#ffffff" font-size="12">🕯️</text>
+                            <text x="95" y="75" text-anchor="middle" fill="#ffffff" font-size="12">🌿</text>
+                            <text x="75" y="95" text-anchor="middle" fill="#ffffff" font-size="12">🎭</text>
+                            <text x="55" y="75" text-anchor="middle" fill="#ffffff" font-size="12">🪷</text>
+                        </svg>
+                    </div>
+
+                    <!-- Juego -->
+                    <div class="approach-card">
+                        <div class="approach-icon">
+                            <i class="fas fa-dice" style="color: var(--pink); font-size: 1.5rem;"></i>
+                        </div>
+                        <h4 class="approach-title">El juego como herramienta</h4>
+                        <p class="approach-description">Apaciguar los encuentros en las organizaciones</p>
+                        
+                        <!-- Ilustración de juego -->
+                        <div style="margin: 20px auto;">
+                            <div style="display: flex; justify-content: space-around; margin-bottom: 15px;">
+                                <span style="font-size: 24px;" class="float">🎲</span>
+                                <span style="font-size: 24px;" class="float-alt">🎮</span>
+                                <span style="font-size: 24px;" class="float">🎨</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-around;">
+                                <span style="font-size: 24px;" class="float-alt">🎭</span>
+                                <span style="font-size: 24px;" class="float">🎪</span>
+                                <span style="font-size: 24px;" class="float-alt">🎯</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preguntas orientadoras finales -->
+            <div style="margin: 40px 0;">
+                <h3 style="text-align: center; color: var(--skyblue); font-size: 1.3rem; margin-bottom: 25px;">Preguntas orientadoras para cerrar</h3>
+                
+                <div class="question-box">
+                    <p class="question-text">
+                        <i class="fas fa-star"></i>
+                        ¿Qué aprendí esta semana que me gustaría recordar?
+                    </p>
+                    <p style="font-size: 1.2rem; margin-top: 10px; color: rgba(255, 255, 255, 0.7);">
+                        Si lo escribes como un logro de la semana, por pequeño que sea, ya tienes un hábito positivo para reconocer avances en tu proceso creativo.
+                    </p>
+                </div>
+                
+                <div class="question-box">
+                    <p class="question-text">
+                        <i class="fas fa-heart"></i>
+                        ¿A quién puedes agradecer o felicitar?
+                    </p>
+                    <p style="font-size: 1.2rem; margin-top: 10px; color: rgba(255, 255, 255, 0.7);">
+                        ¡Hazlo! El reconocimiento es una forma de cuidado.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer con créditos -->
+    <!-- <footer>
+        <div class="content-container">
+            <div class="footer-logo">
+                <i class="fas fa-hands-holding-circle" style="color: white; font-size: 2rem;"></i>
+            </div>
+            <p class="footer-text">Copy Right NextWayCat</p>
+            <p class="footer-credits">Elaborado por: Stefanía Ramírez Gutierrez para Platohedro</p>
+        </div>
+    </footer> -->
+
+</div>
+
+<!-- Script para cargar Font Awesome si no está ya en el Layout -->
+<script>
+    if (!document.querySelector('link[href*="font-awesome"]')) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
+        document.head.appendChild(link);
+    }
+</script>
