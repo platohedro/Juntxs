@@ -1,0 +1,784 @@
+---
+---
+
+<!-- Componente Relatoria3 -->
+<!-- Font Awesome ya debe estar incluido en el Layout principal -->
+<!-- Si no está incluido en el Layout, descomentar la siguiente línea -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
+
+<!-- Google Fonts ya debe estar incluido en el Layout principal -->
+<!-- Si no está incluido en el Layout, descomentar la siguiente línea -->
+<!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
+
+<!-- Estilos CSS específicos para la relatoría -->
+    <style>
+        /* Variables de colores */
+        :root {
+            --navy: #192b39;
+            --skyblue: #5296c5;
+            --bluegreen: #396d8e;
+            --purple: #8a65c9;
+            --pink: #e35d86;
+            --teal: #3b9d9d;
+        }
+
+        /* No necesitamos estilos para body, ya que usamos el Layout */
+        /* Contenedor principal de la relatoría con fondo semitransparente para mejorar legibilidad */
+        .relatoria-container {
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            line-height: 1.6;
+            font-size: 16px;
+            background-color: rgba(25, 43, 57, 0.85);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 1200px;
+            margin: 2rem auto;
+            overflow: hidden;
+        }
+
+        /* Contenedor interno para el contenido */
+        .content-container {
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes float-alt {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes spin-slow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes flow {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -30; }
+        }
+
+        .float { animation: float 6s ease-in-out infinite; }
+        .float-alt { animation: float-alt 7s ease-in-out infinite; }
+        .pulse-slow { animation: pulse-slow 8s ease-in-out infinite; }
+        .spin-slow { animation: spin-slow 15s linear infinite; }
+        .flow { animation: flow 3s linear infinite; }
+
+        /* Elementos decorativos */
+        .decorative-element {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        /* Header y título */
+        header {
+            padding: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin: 0;
+            background: linear-gradient(135deg, var(--skyblue), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--skyblue);
+            font-style: italic;
+            opacity: 0.9;
+            margin: 10px 0;
+        }
+
+        .divider {
+            height: 3px;
+            width: 100px;
+            margin: 20px auto;
+            background: linear-gradient(90deg, var(--skyblue), var(--bluegreen));
+            border-radius: 2px;
+        }
+
+        /* Tarjetas y grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .info-card {
+            background: rgba(57, 109, 142, 0.3);
+            border: 1px solid rgba(82, 150, 197, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(82, 150, 197, 0.2);
+            background: rgba(57, 109, 142, 0.4);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(82, 150, 197, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            animation: pulse-slow 8s ease-in-out infinite;
+        }
+
+        /* Detonantes */
+        .detonante-section {
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detonante-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .detonante-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--skyblue);
+            opacity: 0.3;
+            margin-right: 15px;
+            line-height: 1;
+        }
+
+        .detonante-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        /* Timeline y conexiones */
+        .timeline-container {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--skyblue);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: rgba(82, 150, 197, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        /* Elementos específicos */
+        .city-connection {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .city-node {
+            text-align: center;
+            flex: 1;
+        }
+
+        .connection-line {
+            height: 2px;
+            flex: 2;
+            background: linear-gradient(90deg, var(--skyblue), var(--purple));
+            position: relative;
+        }
+
+        .connection-line::after {
+            content: '→';
+            position: absolute;
+            right: -5px;
+            top: -10px;
+            color: var(--purple);
+        }
+
+        /* Imágenes */
+        .img-container {
+            margin: 30px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .img-container img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .img-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(82, 150, 197, 0.2), rgba(138, 101, 201, 0.2));
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(90deg, var(--skyblue), var(--bluegreen));
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-text {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        /* Tablets y pantallas medianas */
+        @media (max-width: 1024px) {
+            .relatoria-container {
+                max-width: 95%;
+                padding: 1.5rem;
+            }
+            
+            .main-title {
+                font-size: 3.5rem;
+            }
+            
+            .card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            
+            .timeline-item {
+                padding-left: 25px;
+            }
+        }
+        
+        /* Dispositivos móviles en landscape y tablets pequeñas */
+        @media (max-width: 768px) {
+            .relatoria-container {
+                padding: 1.2rem;
+                margin: 1rem;
+                border-radius: 12px;
+            }
+            
+            .content-container {
+                padding: 0 15px;
+            }
+            
+            .main-title {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .detonante-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .detonante-number {
+                margin-bottom: 10px;
+            }
+            
+            .timeline-line {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: row !important;
+                padding-left: 50px;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .city-connection {
+                flex-direction: column;
+            }
+
+            .connection-line {
+                width: 2px;
+                height: 40px;
+                margin: 10px 0;
+            }
+        }
+        
+        /* Dispositivos móviles pequeños */
+        @media (max-width: 480px) {
+            .relatoria-container {
+                padding: 1rem;
+                margin: 0.8rem;
+                border-radius: 10px;
+            }
+            
+            .content-container {
+                padding: 0 10px;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .divider {
+                width: 60px;
+                margin: 10px auto;
+            }
+            
+            .detonante-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-card {
+                padding: 15px;
+            }
+            
+            .card-header {
+                margin-bottom: 12px;
+            }
+            
+            .card-icon {
+                width: 40px;
+                height: 40px;
+                margin-right: 10px;
+            }
+            
+            .card-title {
+                font-size: 1.1rem;
+            }
+            
+            .decorative-element {
+                display: none; /* Ocultar elementos decorativos en móviles muy pequeños */
+            }
+            
+            .timeline-item {
+                padding-left: 40px;
+            }
+            
+            .timeline-dot {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .city-node {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+
+<div class="relatoria-container">
+    <header>
+        <!-- Patrón de fondo con ondas -->
+        <div class="header-pattern">
+            <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <pattern id="wave-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M0,20 Q10,15 20,20 T40,20" fill="none" stroke="var(--skyblue)" stroke-width="1"/>
+                </pattern>
+                <rect width="100%" height="100%" fill="url(#wave-pattern)"/>
+            </svg>
+        </div>
+
+        <!-- Elementos decorativos flotantes -->
+        <div class="decorative-element" style="top: 10%; left: 5%;">
+            <svg width="150" height="150" viewBox="0 0 150 150">
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--skyblue);stop-opacity:0.3"/>
+                        <stop offset="100%" style="stop-color:var(--purple);stop-opacity:0.1"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="75" cy="75" r="70" fill="url(#grad1)" class="pulse-slow"/>
+                <path d="M75,20 A55,55 0 1,1 75,130 A55,55 0 1,1 75,20" fill="none" stroke="var(--purple)" stroke-width="1" stroke-dasharray="5,3" class="spin-slow"/>
+                <text x="75" y="80" text-anchor="middle" fill="var(--skyblue)" font-size="24" class="float">✨</text>
+            </svg>
+        </div>
+
+        <div class="content-container">
+            <div class="header-content">
+                <h1 class="main-title">JUNTX</h1>
+                <div class="divider"></div>
+                <p class="subtitle">Relatoría Gráfica - Encuentro IV</p>
+                <p style="text-align: center; color: rgba(82, 150, 197, 0.8); margin-top: 5px;">
+                    Proyecto apoyado por el Ministerio de las Culturas, las Artes y los Saberes
+                </p>
+                
+                <!-- Información del evento -->
+                <div class="card-grid" style="margin-top: 40px;">
+                    <div class="info-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-calendar" style="color: var(--skyblue);"></i>
+                            </div>
+                            <div>
+                                <h3 class="card-title">Detalles del Encuentro</h3>
+                                <p style="margin: 5px 0 0; color: rgba(255, 255, 255, 0.7);">
+                                    Jueves 20 de marzo de 2025
+                                </p>
+                                <p style="margin: 5px 0 0; color: rgba(255, 255, 255, 0.7);">
+                                    <i class="fas fa-map-marker-alt" style="margin-right: 5px;"></i>
+                                    Online, Platohedro, Medellín
+                                </p>
+                                <p style="margin: 5px 0 0; color: rgba(255, 255, 255, 0.7);">
+                                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
+                                    Duración: 2 horas
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Participantes -->
+                    <div class="info-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-users" style="color: var(--purple);"></i>
+                            </div>
+                            <div>
+                                <h3 class="card-title">Participantes</h3>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <div style="display: flex; align-items: center;">
+                                <i class="fas fa-user-circle" style="color: var(--purple); margin-right: 10px;"></i>
+                                <div>
+                                    <p style="margin: 0; color: white;">Laura Díaz García y Sandy Morales Serrato</p>
+                                    <p style="margin: 0; font-size: 1.2rem; color: rgba(255, 255, 255, 0.7);">
+                                        Integrantes del Colectivo El Eje
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Detonante I: Historia y antecedentes -->
+    <section class="detonante-section">
+        <!-- Elementos decorativos -->
+        <div class="decorative-element" style="top: 5%; right: 10%;">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+                <defs>
+                    <radialGradient id="glow1">
+                        <stop offset="0%" style="stop-color:var(--purple);stop-opacity:0.2"/>
+                        <stop offset="100%" style="stop-color:var(--purple);stop-opacity:0"/>
+                    </radialGradient>
+                </defs>
+                <circle cx="60" cy="60" r="55" fill="url(#glow1)" class="pulse-slow"/>
+                <path d="M60,20 A40,40 0 1,1 60,100 A40,40 0 1,1 60,20" fill="none" stroke="var(--purple)" stroke-width="1" class="spin-slow"/>
+                <text x="60" y="65" text-anchor="middle" fill="var(--purple)" font-size="24" class="float">🌱</text>
+            </svg>
+        </div>
+
+        <div class="content-container">
+            <div class="detonante-header">
+                <div class="detonante-number">01</div>
+                <h2 class="detonante-title">Raíces de las Juntanzas</h2>
+            </div>
+
+            <!-- Imagen principal -->
+            <div class="img-container">
+                <img src="images/encuentro4_img1.jpg" alt="Historia de las juntanzas">
+                <div class="img-overlay"></div>
+            </div>
+
+            <!-- Historia y antecedentes -->
+            <div class="info-card" style="margin-bottom: 30px;">
+                <p style="line-height: 1.8;">Las juntanzas tienen raíces profundas en la historia de nuestras organizaciones. Platohedro y El Eje se han integrado a través de intereses fundamentales como la movilización social, el activismo y la investigación académica, buscando fortalecer el sector cultural del país.</p>
+            </div>
+
+            <!-- Pilares fundamentales -->
+            <div class="card-grid">
+                <div class="info-card">
+                    <div style="text-align: center;">
+                        <i class="fas fa-fist-raised" style="font-size: 2rem; color: var(--skyblue);"></i>
+                        <h4 style="color: var(--skyblue);">Movilización Social</h4>
+                        <p>Base fundamental del trabajo colectivo y la transformación comunitaria. La dirección de Platohedro recuerda sus inicios como una apertura al amor y la convivencia con el otro.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div style="text-align: center;">
+                        <i class="fas fa-book-reader" style="font-size: 2rem; color: var(--purple);"></i>
+                        <h4 style="color: var(--purple);">Proyectos Históricos</h4>
+                        <p>El Eje recuerda proyectos como La Redada, Casa entre Comillas, 15-16 y La Kasita Audiovisual como centros de encuentro para el pensamiento independiente.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div style="text-align: center;">
+                        <i class="fas fa-heart" style="font-size: 2rem; color: var(--pink);"></i>
+                        <h4 style="color: var(--pink);">Intuiciones Personales</h4>
+                        <p>La juntanza se sostiene siguiendo las intuiciones personales que permiten mantener los ritmos y las emergencias de las búsquedas políticas de cada persona.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reflexión adicional -->
+            <div class="info-card" style="margin-top: 30px;">
+                <p style="line-height: 1.8;">A lo largo de los años, aunque las personas cambian de territorios, intereses y propósitos, las emociones e intuiciones fundamentales se mantienen y consolidan, permitiendo ver cómo, a través de las crisis políticas y sociales del país, la intención de trabajar y reflexionar en conjunto persiste.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detonante II: Conexiones Territoriales -->
+    <section class="detonante-section" style="background: rgba(57, 109, 142, 0.1);">
+        <!-- Elementos decorativos -->
+        <div class="decorative-element" style="bottom: 10%; left: 5%;">
+            <svg width="150" height="150" viewBox="0 0 150 150">
+                <defs>
+                    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--teal);stop-opacity:0.2"/>
+                        <stop offset="100%" style="stop-color:var(--skyblue);stop-opacity:0.1"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="75" cy="75" r="70" fill="url(#grad2)" class="pulse-slow"/>
+                <path d="M30,75 Q75,30 120,75 Q75,120 30,75" fill="none" stroke="var(--teal)" stroke-width="1" class="flow"/>
+                <text x="75" y="80" text-anchor="middle" fill="var(--teal)" font-size="24" class="float">🌊</text>
+            </svg>
+        </div>
+
+        <div class="content-container">
+            <div class="detonante-header">
+                <div class="detonante-number">02</div>
+                <h2 class="detonante-title">Territorios en Conexión</h2>
+            </div>
+
+            <!-- Mapa de conexiones -->
+            <div class="city-connection">
+                <div class="city-node">
+                    <i class="fas fa-map-marker-alt" style="color: var(--skyblue); font-size: 2rem;"></i>
+                    <p>Medellín</p>
+                    <small>Platohedro</small>
+                </div>
+                <div class="connection-line"></div>
+                <div class="city-node">
+                    <i class="fas fa-map-marker-alt" style="color: var(--purple); font-size: 2rem;"></i>
+                    <p>Bogotá</p>
+                    <small>Poemapa</small>
+                </div>
+                <div class="connection-line"></div>
+                <div class="city-node">
+                    <i class="fas fa-map-marker-alt" style="color: var(--pink); font-size: 2rem;"></i>
+                    <p>Pie de Cuesta</p>
+                    <small>Festival de la Tigra</small>
+                </div>
+            </div>
+
+            <!-- Contexto del proyecto -->
+            <div class="info-card" style="margin-bottom: 30px;">
+                <p style="line-height: 1.8;">Encuentros vivos, cultura en movimiento, es una reflexión sobre el reconocimiento de la historia y la importancia de exponer el cuerpo en los procesos. Las juntanzas con propósito de impacto comunitario han permitido tocar las fibras de cada individuo, potenciando la sostenibilidad a través de los intercambios territoriales.</p>
+            </div>
+
+            <!-- Intercambios territoriales -->
+            <div class="card-grid">
+                <div class="info-card">
+                    <div style="text-align: center;">
+                        <i class="fas fa-chalkboard-teacher" style="font-size: 2rem; color: var(--skyblue);"></i>
+                        <h4 style="color: var(--skyblue);">Medellín - Talleres</h4>
+                        <p>El Eje viajó a Medellín para fortalecer las capacidades en gestión cultural comunitaria, compartiendo experiencias y metodologías.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div style="text-align: center;">
+                        <i class="fas fa-palette" style="font-size: 2rem; color: var(--purple);"></i>
+                        <h4 style="color: var(--purple);">Bogotá - Poemapa</h4>
+                        <p>Platohedro visitó Poemapa y Ciudad Bolívar, explorando las residencias de artes visuales y tejiendo nuevas conexiones con 15 participantes.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div style="text-align: center;">
+                        <i class="fas fa-water" style="font-size: 2rem; color: var(--teal);"></i>
+                        <h4 style="color: var(--teal);">Pie de Cuesta - Festival</h4>
+                        <p>Las residentes del programa Juntxs compartieron saberes sobre el agua con La Guaricha Batucada y la biblioteca La Bellecera, expandiendo diálogos sobre territorio.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reflexión sobre el agua -->
+            <div class="info-card" style="margin-top: 30px;">
+                <p style="line-height: 1.8;">Se expandieron las conversaciones sobre ríos, lluvia, agua y territorio, contemplando formas diversas de acercarse, leer, reflexionar y experimentar con temas que atraviesan toda la realidad humana, especialmente relevantes en el contexto de la crisis climática actual.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detonante III: Continuidad -->
+    <section class="detonante-section">
+        <!-- Elementos decorativos -->
+        <div class="decorative-element" style="top: 15%; right: 8%;">
+            <svg width="130" height="130" viewBox="0 0 130 130">
+                <defs>
+                    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--pink);stop-opacity:0.2"/>
+                        <stop offset="100%" style="stop-color:var(--purple);stop-opacity:0.1"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="65" cy="65" r="60" fill="url(#grad3)" class="pulse-slow"/>
+                <circle cx="65" cy="65" r="45" fill="none" stroke="var(--pink)" stroke-width="1" stroke-dasharray="4,4" class="spin-slow"/>
+                <text x="65" y="75" text-anchor="middle" fill="var(--pink)" font-size="24" class="float">🌸</text>
+            </svg>
+        </div>
+
+        <div class="content-container">
+            <div class="detonante-header">
+                <div class="detonante-number">03</div>
+                <h2 class="detonante-title">El Futuro de las Juntanzas</h2>
+            </div>
+
+            <!-- Imagen de cierre -->
+            <div class="img-container">
+                <img src="images/encuentro4_img2.jpg" alt="Futuro de las juntanzas">
+                <div class="img-overlay"></div>
+            </div>
+
+            <!-- Invitación final -->
+            <div class="info-card" style="text-align: center; max-width: 600px; margin: 30px auto;">
+                <i class="fas fa-calendar-check" style="font-size: 2rem; color: var(--skyblue); margin-bottom: 15px;"></i>
+                <h3 style="color: var(--skyblue);">¡Únete a los Encuentros Vivos!</h3>
+                <p style="font-size: 1.2rem;">Últimos jueves de cada mes</p>
+                <p>Un espacio virtual para compartir conocimientos y mantener viva la comunidad de aprendizaje</p>
+            </div>
+
+            <!-- Contexto de continuidad -->
+            <div class="info-card" style="margin-bottom: 30px;">
+                <p style="line-height: 1.8;">Las juntanzas son inevitables y necesarias en nuestro contexto actual. Es fundamental mantener estas conexiones, cuidarlas y transformarlas según las exigencias de la contemporaneidad, sin perder de vista las intimidades de cada grupo.</p>
+            </div>
+
+            <!-- Elementos clave -->
+            <div class="card-grid">
+                <div class="info-card">
+                    <div style="text-align: center;">
+                        <i class="fas fa-seedling" style="font-size: 2rem; color: var(--teal);"></i>
+                        <h4 style="color: var(--teal);">Resistencia Creativa</h4>
+                        <p>Las juntanzas son una oportunidad para plantear resistencias frente a los sistemas que intentan comercializar la cultura perdiendo su función social.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div style="text-align: center;">
+                        <i class="fas fa-sync-alt" style="font-size: 2rem; color: var(--pink);"></i>
+                        <h4 style="color: var(--pink);">Liderazgos Rotativos</h4>
+                        <p>Fortalecimiento de los liderazgos rotativos en la colectividad, permitiendo la circulación de creaciones, aprendizajes y preguntas emergentes.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div style="text-align: center;">
+                        <i class="fas fa-users" style="font-size: 2rem; color: var(--purple);"></i>
+                        <h4 style="color: var(--purple);">Comunidad de Aprendizaje</h4>
+                        <p>Los últimos jueves de cada mes, este espacio virtual se mantiene como un experimento vivo para compartir conocimientos y reflexiones colectivas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reflexión final -->
+            <div class="info-card" style="margin-top: 30px;">
+                <p style="line-height: 1.8;">Sostener, cuidar y saber estar son los pilares que mantienen la experiencia como principal fuente de conocimiento. En la actualidad, la innovación más significativa que podemos permitirnos es el estar juntas y seguir sosteniendo estos espacios de encuentro y reflexión colectiva.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+</div>
+
+<!-- Script para cargar Font Awesome si no está ya en el Layout -->
+<script>
+    if (!document.querySelector('link[href*="font-awesome"]')) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
+        document.head.appendChild(link);
+    }
+</script>
