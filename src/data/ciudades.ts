@@ -26,7 +26,7 @@ export const ciudades: Ciudades = {
     eventos: [
       {
         id: 'actividad-en-plato',
-        titulo: 'Actividad en plato',
+        titulo: 'Escuela Ambulante',
         fecha: '21 Noviembre, 2024',
         descripcion: 'Intervenciones artísticas en diferentes espacios de la ciudad',
         imagen: '/imagenes/enplato.jpg'
