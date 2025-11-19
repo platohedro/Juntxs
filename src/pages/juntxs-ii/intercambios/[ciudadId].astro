@@ -1,0 +1,77 @@
+---
+import JuntxsIILayout from '../../../layouts/JuntxsIILayout.astro';
+import { ciudades } from '../../../data/ciudades';
+
+interface Evento {
+  titulo: string;
+  fecha: string;
+  descripcion: string;
+  imagen?: string;
+  video?: string;
+  id?: string;
+}
+
+interface Ciudad {
+  nombre: string;
+  descripcion: string;
+  imagen: string;
+  eventos: Evento[];
+}
+
+interface Ciudades {
+  [key: string]: Ciudad;
+}
+
+export async function getStaticPaths() {
+  return Object.keys(ciudades).map(ciudadId => ({
+    params: { ciudadId }
+  }));
+}
+
+const { ciudadId } = Astro.params;
+const ciudad: Ciudad = ciudades[ciudadId as keyof Ciudades];
+
+if (!ciudad) {
+  return Astro.redirect('/404');
+}
+---
+
+<JuntxsIILayout title={`Juntxs II - ${ciudad.nombre}`}>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+      <img src={ciudad.imagen} alt={ciudad.nombre} class="w-full h-96 object-cover" />
+      <div class="p-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">{ciudad.nombre}</h1>
+        <p class="text-xl text-gray-600">{ciudad.descripcion}</p>
+      </div>
+    </div>
+
+    <h2 class="text-3xl font-bold text-white mb-8">Eventos y Actividades</h2>
+    <p class="text-white m-8">
+      Los intercambios de Juntxs II fortalecen la relación entre comunidades artísticas de diferentes territorios, promoviendo metodologías compartidas y aprendizajes colectivos.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {ciudad.eventos.map((evento: Evento) => (
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          {evento.video ? (
+            <div class="aspect-w-16 aspect-h-9">
+              <iframe
+                src={evento.video}
+                class="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          ) : (
+            <img src={evento.imagen} alt={evento.titulo} class="w-full h-48 object-cover" />
+          )}
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">{evento.titulo}</h3>
+            <p class="text-gray-500 mb-2">{evento.fecha}</p>
+            <p class="text-gray-600 line-clamp-2">{evento.descripcion}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </main>
+</JuntxsIILayout>

@@ -4,7 +4,15 @@ interface Props {
   backgroundImageUrl?: string;
 }
 
-const defaultBackgroundImage = 'https://raw.githubusercontent.com/platohedro/Juntxs/refs/heads/main/Dise%C3%B1o%20sin%20t%C3%ADtulo.png';
+const navLinks = [
+  { label: 'Circulación', href: '/juntxs-ii/circulacion' },
+  { label: 'Intercambios', href: '/juntxs-ii/intercambios' },
+  { label: 'Sesiones Virtuales', href: '/juntxs-ii/sesiones-virtuales' },
+  { label: 'Relatorías', href: '/juntxs-ii/relatorias' },
+  { label: 'Acerca de', href: '/juntxs-ii/acercade' }
+];
+
+const defaultBackgroundImage = '/imagenes/BG-2.png';
 const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
 ---
 
@@ -16,16 +24,7 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/phb.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <!-- GLightbox CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-    <script>
-      // TypeScript declaration for GLightbox
-      interface Window {
-        GLightbox: any;
-      }
-    </script>
     <style>
-      /* Estilos para garantizar que el menú sea visible según el tamaño de pantalla */
       @media (min-width: 768px) {
         #desktop-menu {
           display: flex !important;
@@ -44,10 +43,9 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
         }
       }
       
-      /* Estilos del menú móvil */
       #mobile-menu {
         display: none;
-        background-color: rgba(55, 65, 81, 0.9);
+        background-color: rgba(12, 4, 45, 0.9);
         backdrop-filter: blur(4px);
       }
       
@@ -63,7 +61,7 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
       }
       
       .mobile-link:hover {
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: rgba(255, 94, 219, 0.2);
       }
 
       html, body {
@@ -94,29 +92,22 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
     </style>
   </head>
   <body style={`background-image: url('${backgroundImageUrl}');`}>
-    <nav class="bg-secondary/80 backdrop-blur-sm fixed w-full z-50">
+    <nav class="bg-j2-secondary/80 backdrop-blur-sm fixed w-full z-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-          <!-- Logo -->
           <div class="flex items-center space-x-4">
-            <a href="/" class="flex items-center">
-              <span class="text-xl font-bold text-white">Juntxs</span>
+            <a href="/juntxs-ii" class="flex items-center">
+              <span class="text-xl font-bold text-white">Juntxs II</span>
             </a>
-            <a href="/juntxs-ii" class="text-lg font-semibold text-white hover:text-primary transition-colors">
-              Juntxs II
-            </a>
+            <a href="/" class="text-sm text-j2-light hover:text-j2-accent transition-colors">Volver a Juntxs I</a>
           </div>
           
-          <!-- Menú Desktop -->
           <div id="desktop-menu" class="items-center space-x-4">
-            <a href="/circulacion" class="text-white hover:text-primary transition-colors">Circulación</a>
-            <a href="/intercambios" class="text-white hover:text-primary transition-colors">Intercambios</a>
-            <a href="/sesiones-virtuales" class="text-white hover:text-primary transition-colors">Sesiones Virtuales</a>
-            <a href="/relatorias" class="text-white hover:text-primary transition-colors">Relatorias</a>
-            <a href="/acercade" class="text-white hover:text-primary transition-colors">Acerca de</a>
+            {navLinks.map(link => (
+              <a href={link.href} class="text-white hover:text-j2-highlight transition-colors">{link.label}</a>
+            ))}
           </div>
           
-          <!-- Botón Menú Móvil -->
           <button id="mobile-menu-button" type="button" class="text-white">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -127,14 +118,12 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
         </div>
       </div>
       
-      <!-- Menú Móvil -->
       <div id="mobile-menu">
         <div class="px-2 pt-2 pb-3 space-y-1">
-          <a href="/juntxs-ii" class="mobile-link">Juntxs II</a>
-          <a href="/circulacion" class="mobile-link">Circulación</a>
-          <a href="/intercambios" class="mobile-link">Intercambios</a>
-          <a href="/sesiones-virtuales" class="mobile-link">Sesiones Virtuales</a>
-          <a href="/acercade" class="mobile-link">Acerca de</a>
+          {navLinks.map(link => (
+            <a href={link.href} class="mobile-link">{link.label}</a>
+          ))}
+          <a href="/" class="mobile-link text-j2-highlight">Volver a Juntxs I</a>
         </div>
       </div>
     </nav>
@@ -143,17 +132,16 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
       <slot />
     </div>
 
-    <footer id="site-footer" class="bg-secondary/80 backdrop-blur-sm text-white py-4 w-full">
+    <footer id="site-footer" class="bg-j2-secondary/80 backdrop-blur-sm text-white py-4 w-full">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="flex flex-col items-center justify-center gap-2">
           <img src="/imagenes/CULTURAS_BLANCO.png" alt="Ministerio de Cultura" class="h-10" />
-          <p class="text-sm">Proyecto apoyado por el Ministerio de Cultura de Colombia</p>
+          <p class="text-sm text-j2-light">Proyecto Juntxs II · Encuentros vivos, cultura en movimiento</p>
         </div>
       </div>
     </footer>
 
     <script is:inline>
-      // Código para el menú móvil
       window.addEventListener('load', function() {
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -164,7 +152,6 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
           });
         }
 
-        // Código para mostrar el footer al hacer scroll hasta abajo
         const footer = document.getElementById('site-footer');
         window.addEventListener('scroll', function() {
           if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 200) {
@@ -173,43 +160,6 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
             footer.classList.remove('visible');
           }
         });
-      });
-    </script>
-    <!-- GLightbox JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-    
-    <!-- Image optimization utilities -->
-    <script>
-      // Lazy loading for images
-      document.addEventListener('DOMContentLoaded', function() {
-        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-        
-        if ('loading' in HTMLImageElement.prototype) {
-          // Browser supports native lazy loading
-          console.log('Browser supports native lazy loading');
-        } else {
-          // Browser doesn't support native lazy loading
-          // Implement a fallback with Intersection Observer
-          const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                const image = entry.target as HTMLImageElement;
-                if (image.dataset.src) {
-                  image.src = image.dataset.src;
-                }
-                if (image.dataset.srcset) {
-                  image.srcset = image.dataset.srcset;
-                }
-                image.classList.remove('lazy');
-                observer.unobserve(image);
-              }
-            });
-          });
-          
-          lazyImages.forEach(image => {
-            imageObserver.observe(image);
-          });
-        }
       });
     </script>
   </body>
