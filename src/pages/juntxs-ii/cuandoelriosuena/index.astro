@@ -1,26 +1,145 @@
 ---
 import JuntxsIILayout from '../../../layouts/JuntxsIILayout.astro';
+import ImageSlider from '../../../components/juntxsII/ImageSlider.astro';
+
+const artistas = [
+  {
+    id: 'maria',
+    nombre: 'María C',
+    descripcion: 'Explora la relación entre tecnologías y cuidado del agua desde prácticas transdisciplinarias.',
+    imagen: '/imagenes/mariac.jpg'
+  },
+  {
+    id: 'laura',
+    nombre: 'Laura Sofia',
+    descripcion: 'Arquitecta y gestora cultural que aborda procesos de espacio público y pedagogía comunitaria.',
+    imagen: '/imagenes/luara2.png'
+  },
+  {
+    id: 'sandra',
+    nombre: 'Sandra Ramirez',
+    descripcion: 'Narradora visual y fotógrafa que trabaja memorias rurales y justicia ambiental.',
+    imagen: '/imagenes/sandra.jpeg'
+  }
+];
+
+const slidesCuandoElRioSuena = [
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Convocatoria_Juntxs_version_2.jpg', alt: 'Cuando el Río Suena 1' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Copia%20de%20DSC09154.JPG', alt: 'Cuando el Río Suena 2' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Copia%20de%20DSC09157.JPG', alt: 'Cuando el Río Suena 3' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Copia%20de%20DSC09169.JPG', alt: 'Cuando el Río Suena 4' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Copia%20de%20DSC09175.JPG', alt: 'Cuando el Río Suena 5' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Copia%20de%20DSC09183.JPG', alt: 'Cuando el Río Suena 6' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Copia%20de%20DSC09186.JPG', alt: 'Cuando el Río Suena 7' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Copia%20de%20DSC09194.JPG', alt: 'Cuando el Río Suena 8' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Copia%20de%20DSC09215.JPG', alt: 'Cuando el Río Suena 9' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Copia%20de%20DSC09220.JPG', alt: 'Cuando el Río Suena 10' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Copia%20de%20DSC09224.JPG', alt: 'Cuando el Río Suena 11' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Copia%20de%20IMG-20251114-WA0036.jpg', alt: 'Cuando el Río Suena 12' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Copia%20de%20IMG-20251114-WA0039.jpg', alt: 'Cuando el Río Suena 13' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Copia%20de%20IMG-20251114-WA0052.jpg', alt: 'Cuando el Río Suena 14' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Copia%20de%20IMG-20251114-WA0058.jpg', alt: 'Cuando el Río Suena 15' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Copia%20de%20IMG-20251114-WA0061.jpg', alt: 'Cuando el Río Suena 16' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/Copia%20de%20IMG_20251115_163008022_HDR.jpg', alt: 'Cuando el Río Suena 17' },
+  { src: '/imagenes/j2/slider-cuandoelriosuena/DSC09176.JPG', alt: 'Cuando el Río Suena 18' }
+];
 ---
 
-<JuntxsIILayout title="Juntxs II: Relatorías">
-  <section class="bg-j2-primary/20">
-    <div class="container mx-auto p-4 md:p-6 lg:p-8">
-      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-4 md:mb-6 lg:mb-8">Relatorías</h2>
-      <p class="text-center mb-4 md:mb-6 lg:mb-8 text-lg md:text-xl lg:text-2xl text-white bg-j2-primary/80 rounded-lg p-2">Aquí encontrarás las relatorías de los encuentros de Juntxs II.</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 lg:gap-8">
-        <a href="/juntxs-ii/relatorias/1" class="bg-j2-secondary/80 rounded-lg shadow-lg p-4 md:p-6 lg:p-8 border border-j2-light/30">
-          <h3 class="text-white text-lg md:text-xl lg:text-2xl font-bold">Relatoría 1</h3>
-          <p class="text-sm md:text-base lg:text-lg text-white">Encuentro 1</p>
+<JuntxsIILayout title="Juntxs II: Circulación">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <h1 class="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-8 text-center">Cuando el Río Suena "Medellín"</h1>
+
+    <img src="/imagenes/j2/cuando1.png" alt="Cuando el Río Suena" class="block mx-auto max-w-2xl max-h-96 w-auto h-auto rounded-lg mb-6 sm:mb-8" />
+<p class="bg-j2-primary/80 rounded-xl m-4 p-2 text-lg text-white mb-6 sm:mb-8">
+<b>Cuando el Río Suena</b> es un encuentro que trae hasta Medellín la fuerza creativa y comunitaria del Río de Oro, guiada por la psicóloga, educadora popular, muralista y rapera <b>Laura Velandia – Mandala</b>. Desde su trabajo en Piedecuesta (Santander), Mandala teje arte, territorio y cuidado del agua como práctica de resistencia y salud colectiva.
+
+
+ <br>
+  <br>
+
+En el marco de su residencia en Platohedro, activamos el <b>LAB Garabatear los Cuerpos de Agua</b>, un laboratorio que parte de un texto de Alfredo Mírez para abrir un diálogo fluido donde las palabras se vuelven corriente. Entre lecturas, conversaciones, garabatos y escrituras libres, exploramos nuestras experiencias cotidianas con las fuentes hídricas del territorio.
+  <br>
+  <br>
+Durante dos jornadas, creamos de manera colaborativa un <b>fanzine artesanal</b>, una memoria sensible del encuentro y del vínculo afectivo, político y cotidiano que tenemos con las aguas.
+  
+<br>
+  <br>
+  La circulación cerró en la <b>Quebrada Santa Elena</b>, donde llevamos palabras venidas del Río de Oro y ofrendamos vida en su cauce, siguiendo el puente que une ambos territorios.
+ Un gesto para recordar que las aguas conversan, viajan y nos conectan más allá de sus riberas.
+
+ <br>
+  <br>
+Este proceso hace parte de <b>Encuentros Vivos – Cultura en Movimiento</b>, en el marco de la Beca JUNTXS, siguiendo el propósito de tejer puentes entre las aguas de Antioquia y Santander, entre Medellín y Piedecuesta, entre la Quebrada Santa Elena y el Río de Oro.
+    </p>
+
+	    <div class="mt-6 sm:mt-10">
+	      <ImageSlider images={slidesCuandoElRioSuena} interval={5500} />
+	    </div>
+
+	    <section class="bg-white/95 rounded-xl p-4 sm:p-6 max-w-xl mx-auto mt-6 sm:mt-8 shadow-lg">
+	      <h2 class="font-bold text-black mb-2">Material de Apoyo:</h2>
+	      <ul class="space-y-1 text-black">
+	        <li>
+	          <span>- </span>
+	          <a
+	            href="https://drive.google.com/file/d/1VsieAAN6bC-3MDw8Azi81k_PvpQ0oI9-/view?usp=drive_link"
+	            target="_blank"
+	            rel="noopener noreferrer"
+	            class="text-blue-700 underline hover:text-blue-500"
+	          >
+	            Fanzine “En Chingue y Chanclas”
+	          </a>
+	        </li>
+	        <li>
+	          <span>- </span>
+	          <a
+	            href="https://www.youtube.com/watch?v=uJr5gevAajw&list=RDuJr5gevAajw&start_radio=1"
+	            target="_blank"
+	            rel="noopener noreferrer"
+	            class="text-blue-700 underline hover:text-blue-500"
+	          >
+	            Canción Batucada
+	          </a>
+	        </li>
+	        <li>
+	          <span>- </span>
+	          <a
+	            href="https://drive.google.com/file/d/10aSg0SpXppMezNekvIikS3SjdFTa9qW8/view?usp=drive_link"
+	            target="_blank"
+	            rel="noopener noreferrer"
+	            class="text-blue-700 underline hover:text-blue-500"
+	          >
+	            Texto Alfredo Mírez
+	          </a>
+	        </li>
+	        <li>
+	          <span>- </span>
+	          <a
+	            href="https://www.instagram.com/reel/DPuQSU0kmsr/"
+	            target="_blank"
+	            rel="noopener noreferrer"
+	            class="text-blue-700 underline hover:text-blue-500"
+	          >
+	            Experiencia Piedecuesta
+	          </a>
+	        </li>
+	      </ul>
+	    </section>
+
+    <!-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+
+    
+      {artistas.map(artista => (
+        <a href={`/juntxs-ii/circulacion/${artista.id}`} class="block group">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:scale-105">
+            <img src={artista.imagen} alt={artista.nombre} class="w-full h-40 sm:h-48 object-cover" />
+            <div class="p-4 sm:p-6">
+              <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-2">{artista.nombre}</h2>
+              <p class="text-lg text-gray-600">{artista.descripcion}</p>
+            </div>
+          </div>
         </a>
-        <a href="/juntxs-ii/relatorias/2" class="bg-j2-secondary/80 rounded-lg shadow-lg p-4 md:p-6 lg:p-8 border border-j2-light/30">
-          <h3 class="text-white text-lg md:text-xl lg:text-2xl font-bold">Relatoría 2</h3>
-          <p class="text-sm md:text-base lg:text-lg text-white">Encuentro 2</p>
-        </a>
-        <a href="/juntxs-ii/relatorias/3" class="bg-j2-secondary/80 rounded-lg shadow-lg p-4 md:p-6 lg:p-8 border border-j2-light/30">
-          <h3 class="text-white text-lg md:text-xl lg:text-2xl font-bold">Relatoría 3</h3>
-          <p class="text-sm md:text-base lg:text-lg text-white">Encuentro 3</p>
-        </a>
-      </div>
-    </div>
-  </section>
+      ))}
+    </div> -->
+  </main>
 </JuntxsIILayout>
