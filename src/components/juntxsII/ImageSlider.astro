@@ -1,0 +1,164 @@
+---
+interface ImageItem {
+  src: string;
+  alt?: string;
+}
+
+interface Props {
+  images: ImageItem[];
+  interval?: number;
+  autoPlay?: boolean;
+  className?: string;
+  id?: string;
+}
+
+const {
+  images = [],
+  interval = 5000,
+  autoPlay = true,
+  className = '',
+  id
+} = Astro.props as Props;
+
+const sliderId = id ?? `slider-${Math.random().toString(36).slice(2, 8)}`;
+const hasImages = images.length > 0;
+---
+
+{hasImages && (
+  <div
+    id={sliderId}
+    data-slider-root
+    class={`relative ${className}`.trim()}
+    data-interval={interval}
+    data-autoplay={autoPlay ? 'true' : 'false'}
+  >
+    <div class="relative overflow-hidden rounded-2xl bg-j2-secondary/70 backdrop-blur-sm border border-white/10 shadow-xl">
+      <div class="relative w-full h-[260px] sm:h-[360px] md:h-[480px]">
+        {images.map((image, index) => (
+          <div
+            class={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 ${index === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            data-slide
+            aria-hidden={index !== 0}
+          >
+            <img
+              src={image.src}
+              alt={image.alt ?? `Slide ${index + 1}`}
+              class="max-w-full max-h-full w-auto h-auto object-contain"
+              loading={index === 0 ? 'eager' : 'lazy'}
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-j2-deep/60 to-transparent" aria-hidden="true"></div>
+          </div>
+        ))}
+      </div>
+
+      <div class="absolute inset-0 flex items-center justify-between px-2 sm:px-4">
+        <button
+          type="button"
+          data-dir="prev"
+          class="p-2 sm:p-3 rounded-full bg-white/80 text-j2-primary hover:bg-white shadow-md backdrop-blur transition"
+          aria-label="Anterior"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          data-dir="next"
+          class="p-2 sm:p-3 rounded-full bg-white/80 text-j2-primary hover:bg-white shadow-md backdrop-blur transition"
+          aria-label="Siguiente"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex justify-center gap-2 mt-4">
+      {images.map((_, index) => (
+        <button
+          type="button"
+          data-dot={index}
+          class={`w-3 h-3 rounded-full border border-white/60 transition-all ${
+            index === 0 ? 'bg-j2-highlight shadow-[0_0_0_2px_rgba(194,255,59,0.7)]' : 'bg-white/30'
+          }`}
+          aria-label={`Ir al slide ${index + 1}`}
+        />
+      ))}
+    </div>
+  </div>
+)}
+
+<script is:inline define:vars={{ sliderId, intervalMs: interval, autoPlay }}>
+  (() => {
+    const root = document.getElementById(sliderId);
+    if (!root) return;
+
+    const slides = Array.from(root.querySelectorAll('[data-slide]'));
+    if (!slides.length) return;
+
+    const dots = Array.from(root.querySelectorAll('[data-dot]'));
+    const prev = root.querySelector('[data-dir="prev"]');
+    const next = root.querySelector('[data-dir="next"]');
+    const interval = Number(intervalMs) || 5000;
+
+    let current = 0;
+    let timer;
+
+    const setActive = (index) => {
+      current = index;
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('opacity-100', i === current);
+        slide.classList.toggle('opacity-0', i !== current);
+        slide.classList.toggle('pointer-events-none', i !== current);
+        slide.setAttribute('aria-hidden', i === current ? 'false' : 'true');
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('bg-j2-highlight', i === current);
+        dot.classList.toggle('bg-white/30', i !== current);
+        dot.classList.toggle('shadow-[0_0_0_2px_rgba(194,255,59,0.7)]', i === current);
+      });
+    };
+
+    const goTo = (step) => {
+      const nextIndex = (current + step + slides.length) % slides.length;
+      setActive(nextIndex);
+    };
+
+    const stop = () => {
+      if (timer) clearInterval(timer);
+    };
+
+    const start = () => {
+      if (!autoPlay || slides.length < 2) return;
+      stop();
+      timer = setInterval(() => goTo(1), interval);
+    };
+
+    prev?.addEventListener('click', () => {
+      goTo(-1);
+      start();
+    });
+
+    next?.addEventListener('click', () => {
+      goTo(1);
+      start();
+    });
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        setActive(index);
+        start();
+      });
+    });
+
+    root.addEventListener('pointerenter', stop);
+    root.addEventListener('pointerleave', start);
+
+    setActive(0);
+    start();
+  })();
+</script>

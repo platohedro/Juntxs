@@ -1,0 +1,79 @@
+---
+import JuntxsIILayout from '../../../layouts/JuntxsIILayout.astro';
+import ImageSlider from '../../../components/juntxsII/ImageSlider.astro';
+
+const artistas = [
+  {
+    id: 'maria',
+    nombre: 'María C',
+    descripcion: 'Explora la relación entre tecnologías y cuidado del agua desde prácticas transdisciplinarias.',
+    imagen: '/imagenes/mariac.jpg'
+  },
+  {
+    id: 'laura',
+    nombre: 'Laura Sofia',
+    descripcion: 'Arquitecta y gestora cultural que aborda procesos de espacio público y pedagogía comunitaria.',
+    imagen: '/imagenes/luara2.png'
+  },
+  {
+    id: 'sandra',
+    nombre: 'Sandra Ramirez',
+    descripcion: 'Narradora visual y fotógrafa que trabaja memorias rurales y justicia ambiental.',
+    imagen: '/imagenes/sandra.jpeg'
+  }
+];
+
+const slidesAsamblea = [
+  { src: '/imagenes/j2/slider-asamblea/1.png', alt: 'Asamblea del Agua 1' },
+  { src: '/imagenes/j2/slider-asamblea/2.jpg', alt: 'Asamblea del Agua 2' },
+  { src: '/imagenes/j2/slider-asamblea/3.png', alt: 'Asamblea del Agua 3' },
+  { src: '/imagenes/j2/slider-asamblea/4.jpg', alt: 'Asamblea del Agua 4' },
+  { src: '/imagenes/j2/slider-asamblea/5.png', alt: 'Asamblea del Agua 5' },
+  { src: '/imagenes/j2/slider-asamblea/6.jpg', alt: 'Asamblea del Agua 6' },
+  { src: '/imagenes/j2/slider-asamblea/7.jpg', alt: 'Asamblea del Agua 7' }
+];
+---
+
+<JuntxsIILayout title="Juntxs II: Circulación">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <h1 class="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-8 text-center">Asamblea</h1>
+
+    <img src="/imagenes/j2/asamblea1.jpg" alt="Circulación Juntxs II" class="w-full h-64 sm:h-96 object-cover rounded-lg mb-6 sm:mb-8" />
+
+    <p class="bg-j2-primary/80 rounded-xl m-4 p-2 text-lg text-white mb-6 sm:mb-8">
+  fue un encuentro para recordar la urgencia de entrelazar lenguajes —arte, ciencia, investigación, organización comunitaria y acción política— en defensa de lo vital: las aguas y los territorios.
+  <br>
+  <br>
+Este espacio, convocado por el Festival de la Tigra, reunió voces y oficios diversos que hoy ponen su mirada y su acción sobre los Páramos, uno de los ecosistemas más amenazados y esenciales del país. Allí afirmamos que el arte puede ser río: un lenguaje que moviliza, conecta y despierta nuevas formas de sensibilidad y cuidado.
+<br>
+  <br>
+Nuestra participación con la circulación de la Narradora Visual y lider del proyecto Hidropoéticas Ambientales, Sandra Ramírez Giraldo, convocó a remirar desde las artes y la conjunción de lenguajes nuestros vínculos con las aguas. La artista, igualmente, compartió su proceso y su proyecto visual “Correspondencia entre Aguas”. Esta circulación hizo parte de Encuentros Vivos – Cultura en Movimiento, en el marco de la beca JUNTXS: Circulación y Colaboración en Artes Plásticas y Visuales, un proceso que fortalece el diálogo entre las aguas de Antioquia y Santander, entre la Quebrada Santa Elena y el Río de Oro, tejiendo memoria y defensa colectiva.
+<br>
+  <br>
+La Asamblea fue la antesala de la Caravana del Agua: un recordatorio de que sin vínculo no hay cuidado, y que defender las aguas es defender la vida.
+<br>
+<br>
+Agradecimientos a quienes hicieron de esta Asamblea del Agua: @macristinaobregon @colombianofrack @tironeta @comite_santurban @pollo_jaimes @concienciabellezana @la_muchacha_isabel @elejecc @platohedro
+    </p>
+
+    <div class="mt-6 sm:mt-10">
+      <ImageSlider images={slidesAsamblea} interval={5500} />
+    </div>
+
+    <!-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+
+    
+      {artistas.map(artista => (
+        <a href={`/juntxs-ii/circulacion/${artista.id}`} class="block group">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:scale-105">
+            <img src={artista.imagen} alt={artista.nombre} class="w-full h-40 sm:h-48 object-cover" />
+            <div class="p-4 sm:p-6">
+              <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-2">{artista.nombre}</h2>
+              <p class="text-lg text-gray-600">{artista.descripcion}</p>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div> -->
+  </main>
+</JuntxsIILayout>

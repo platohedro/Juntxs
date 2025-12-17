@@ -1,0 +1,83 @@
+---
+import JuntxsIILayout from '../../../layouts/JuntxsIILayout.astro';
+import ImageSlider from '../../../components/juntxsII/ImageSlider.astro';
+
+const artistas = [
+  {
+    id: 'maria',
+    nombre: 'María C',
+    descripcion: 'Explora la relación entre tecnologías y cuidado del agua desde prácticas transdisciplinarias.',
+    imagen: '/imagenes/mariac.jpg'
+  },
+  {
+    id: 'laura',
+    nombre: 'Laura Sofia',
+    descripcion: 'Arquitecta y gestora cultural que aborda procesos de espacio público y pedagogía comunitaria.',
+    imagen: '/imagenes/luara2.png'
+  },
+  {
+    id: 'sandra',
+    nombre: 'Sandra Ramirez',
+    descripcion: 'Narradora visual y fotógrafa que trabaja memorias rurales y justicia ambiental.',
+    imagen: '/imagenes/sandra.jpeg'
+  }
+];
+
+const slidesCaravana = [
+  { src: '/imagenes/j2/slider-caravana/1000113563%20%281%29.jpg', alt: 'Caravana “Cuando el Río Suena” 1' },
+  { src: '/imagenes/j2/slider-caravana/1000113572.jpg', alt: 'Caravana “Cuando el Río Suena” 2' },
+  { src: '/imagenes/j2/slider-caravana/1000113595.jpg', alt: 'Caravana “Cuando el Río Suena” 3' },
+  { src: '/imagenes/j2/slider-caravana/1000113606.jpg', alt: 'Caravana “Cuando el Río Suena” 4' },
+  { src: '/imagenes/j2/slider-caravana/1000113611.jpg', alt: 'Caravana “Cuando el Río Suena” 5' },
+  { src: '/imagenes/j2/slider-caravana/1000116578.jpg', alt: 'Caravana “Cuando el Río Suena” 6' },
+  { src: '/imagenes/j2/slider-caravana/5170637684173638520.jpg', alt: 'Caravana “Cuando el Río Suena” 7' },
+  { src: '/imagenes/j2/slider-caravana/DSC08817.JPG', alt: 'Caravana “Cuando el Río Suena” 8' },
+  { src: '/imagenes/j2/slider-caravana/DSC08867.JPG', alt: 'Caravana “Cuando el Río Suena” 9' },
+  { src: '/imagenes/j2/slider-caravana/DSC08870.JPG', alt: 'Caravana “Cuando el Río Suena” 10' },
+  { src: '/imagenes/j2/slider-caravana/DSC08874.JPG', alt: 'Caravana “Cuando el Río Suena” 11' },
+  { src: '/imagenes/j2/slider-caravana/DSC08881.JPG', alt: 'Caravana “Cuando el Río Suena” 12' },
+  { src: '/imagenes/j2/slider-caravana/DSC08882.JPG', alt: 'Caravana “Cuando el Río Suena” 13' },
+  { src: '/imagenes/j2/slider-caravana/DSC08883.JPG', alt: 'Caravana “Cuando el Río Suena” 14' },
+  { src: '/imagenes/j2/slider-caravana/DSC08888.JPG', alt: 'Caravana “Cuando el Río Suena” 15' },
+  { src: '/imagenes/j2/slider-caravana/DSC08897.JPG', alt: 'Caravana “Cuando el Río Suena” 16' },
+  { src: '/imagenes/j2/slider-caravana/DSC08924.JPG', alt: 'Caravana “Cuando el Río Suena” 17' }
+];
+---
+
+<JuntxsIILayout title="Juntxs II: Circulación">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <h1 class="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-8 text-center">Caravana “Cuando el Río Suena”</h1>
+
+    <img src="/imagenes/j2/caravana1.jpg" alt="Circulación Juntxs II" class="w-full h-64 sm:h-96 object-cover rounded-lg mb-6 sm:mb-8" />
+
+    <p class="bg-j2-primary/80 rounded-xl m-4 p-2 text-lg text-white mb-6 sm:mb-8">La Caravana del Agua: Cuando el Río Suena fue un cauce de encuentro, movimiento y celebración del territorio. Comunidades, artistas, organizaciones y procesos ambientales se unieron para caminar las memorias hidrícas, sus luchas y el llamado urgente para proteger los cuerpos de agua. 
+ <br>
+  <br>Este recorrido articuló voces, saberes y sensibilidades de distintos territorios, que encontraron en el arte y en el caminar una forma de defensa y re-vinculación con lo común. La caravana tomó la fuerza sembrada en la Asamblea del Agua: Alienígenas en Santurbán y la expandió hacia un gesto colectivo más amplio: caminar para escuchar, aprender del territorio y fortalecer la organización comunitaria alrededor del agua. Desde la palabra, la música, el muralismo, la siembra y el ritual, se activaron diálogos urgentes sobre la protección del agua como sujeto de  derechos y memoria viva. La fuerza de las comunidades que cuidan estos territorios nos recordó que el agua no solo nutre: enseña, conecta y convoca al cuidado mutuo.
+<br>
+  <br>
+
+<br>
+<br>
+  </p>
+
+    <div class="mt-6 sm:mt-10">
+      <ImageSlider images={slidesCaravana} interval={5500} />
+    </div>
+
+    <!-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+
+    
+      {artistas.map(artista => (
+        <a href={`/juntxs-ii/circulacion/${artista.id}`} class="block group">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:scale-105">
+            <img src={artista.imagen} alt={artista.nombre} class="w-full h-40 sm:h-48 object-cover" />
+            <div class="p-4 sm:p-6">
+              <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-2">{artista.nombre}</h2>
+              <p class="text-lg text-gray-600">{artista.descripcion}</p>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div> -->
+  </main>
+</JuntxsIILayout>
