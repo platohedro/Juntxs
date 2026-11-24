@@ -26,7 +26,7 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
     </script>
     <style>
       /* Estilos para garantizar que el menú sea visible según el tamaño de pantalla */
-      @media (min-width: 768px) {
+      @media (min-width: 1024px) {
         #desktop-menu {
           display: flex !important;
         }
@@ -35,7 +35,7 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
         }
       }
       
-      @media (max-width: 767px) {
+      @media (width < 1024px) {
         #desktop-menu {
           display: none !important;
         }
@@ -98,12 +98,15 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <!-- Logo -->
-          <div class="flex items-center space-x-4">
+          <div class="flex items-center gap-3 sm:gap-4">
             <a href="/" class="flex items-center">
               <span class="text-xl font-bold text-white">Juntxs</span>
             </a>
             <a href="/juntxs-ii" class="text-lg font-semibold text-white hover:text-primary transition-colors">
               Juntxs II
+            </a>
+            <a href="/juntxs-iii" class="text-lg font-semibold text-white hover:text-primary transition-colors">
+              Juntxs III
             </a>
           </div>
           
@@ -130,7 +133,6 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
       <!-- Menú Móvil -->
       <div id="mobile-menu">
         <div class="px-2 pt-2 pb-3 space-y-1">
-          <a href="/juntxs-ii" class="mobile-link">Juntxs II</a>
           <a href="/circulacion" class="mobile-link">Circulación</a>
           <a href="/intercambios" class="mobile-link">Intercambios</a>
           <a href="/sesiones-virtuales" class="mobile-link">Sesiones Virtuales</a>

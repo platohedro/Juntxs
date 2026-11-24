@@ -1,0 +1,185 @@
+---
+import JuntxsIILayout from '../../layouts/JuntxsIILayout.astro';
+
+const title = 'Juntxs III: Conectadxs por la Montaña';
+const images = '/imagenes/juntxs-iii';
+const sections = [
+  { label: 'Residencia', href: '#residencia' },
+  { label: 'Artistas', href: '#artistas' },
+  { label: 'Sesiones', href: '#sesiones' },
+  { label: 'Circulación', href: '#circulacion' },
+];
+const panel = 'bg-[#193b20]/90 backdrop-blur-sm p-6 sm:p-8 rounded-lg text-white mx-auto';
+const heading = 'text-3xl sm:text-4xl font-bold mb-4 sm:mb-6';
+const button = 'inline-block bg-j2-accent text-j2-primary px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:bg-j2-accent/80 transition-colors';
+const artists = [
+  'Valentina Grisales Giraldo',
+  'Carolina Bedoya Pérez',
+  'Laura Ramos / Ratttus',
+  'Milena Contreras',
+  'Tau Luna',
+];
+const activities = [
+  {
+    id: 'manizales',
+    title: 'Circulación Manizales',
+    photos: [
+      { file: 'manizales-bosque', alt: 'Un grupo de participantes reunido en el bosque' },
+      { file: 'manizales-conversacion', alt: 'Participantes sentadas en círculo durante una conversación' },
+    ],
+  },
+  {
+    id: 'medellin',
+    title: 'Circulación Medellín',
+    photos: [
+      { file: 'medellin', alt: 'Siluetas de participantes frente a un espacio público en Medellín' },
+    ],
+  },
+  {
+    id: 'circuito',
+    title: 'Circuito Todo al Mismo Tiempo en Todas Partes MDA',
+    photos: [
+      { file: 'circuito-afiche', alt: 'Afiche de programación de Todo al mismo tiempo, en todas partes' },
+      { file: 'circuito-conversacion', alt: 'Conversación frente a una obra en la sala de exposición' },
+    ],
+  },
+  {
+    id: 'exposicion',
+    title: 'Expo Conectadxs por la Montaña · Alianza Francesa',
+    photos: [
+      { file: 'exposicion-sala', alt: 'Instalación de papel suspendido y pinturas en la sala de exposición' },
+      { file: 'exposicion-afiche', alt: 'Afiche de la exposición Conectadxs por la Montaña en la Alianza Francesa' },
+    ],
+  },
+];
+---
+
+<JuntxsIILayout
+  title={title}
+  edition="III"
+  description="Residencia artística de Platohedro, La Jaus y Lisérgico Lab entre territorios de Caldas y Antioquia."
+  backgroundImageUrl={`${images}/hoja.webp`}
+  sectionLinks={sections}
+  footerText="Juntxs III · Corporación Platohedro"
+>
+  <main>
+    <section class="min-h-screen flex items-center justify-center py-16 px-4" aria-labelledby="titulo">
+      <div class:list={[panel, "text-center max-w-3xl"]}>
+        <h1 id="titulo" class="text-3xl md:text-5xl font-bold mb-4 sm:mb-8">{title}</h1>
+        <img src={`${images}/bosque.webp`} alt="Vista de un árbol desde el suelo en blanco y negro" class="w-full h-48 sm:h-64 md:h-80 object-cover rounded-lg mb-4 sm:mb-8" />
+        <p class="text-lg max-w-2xl mx-auto">¿Qué pasa cuando las residencias artísticas se convierten en una forma de cuestionarnos y de encontrarnos con otrxs seres, otros territorios y otras formas de vida?</p>
+        <a href="#residencia" class:list={[button, 'mt-8']}>Ver más</a>
+      </div>
+    </section>
+
+    <section id="residencia" class="px-4 py-12 scroll-mt-16" aria-labelledby="residencia-titulo">
+      <div class:list={[panel, 'max-w-5xl grid gap-6 md:gap-8 md:grid-cols-[3fr_2fr]']}>
+        <div class="space-y-4 text-lg">
+          <h2 id="residencia-titulo" class={heading}>La residencia</h2>
+          <p>Las montañas son más que geografías. Son cuerpos vivos, territorios de memoria, fuentes de agua, caminos, refugios y espacios donde se entrelazan historias humanas y más que-humanas. En ellas se encuentran saberes, afectos, fricciones, resistencias y maneras diversas de imaginar el presente y el futuro.</p>
+          <p>Conectadxs por la Montaña es una residencia artística y un proceso de creación, encuentro y circulación, impulsado por Platohedro, en alianza con La Jaus y Lisérgico Lab, que nace de la pregunta por las formas en que nos relacionamos con los territorios que habitamos y con las múltiples vidas que los sostienen.</p>
+          <p>A través de la residencia, distintas artistas vinculadas a territorios de Caldas y Antioquia desarrollaron procesos de investigación y creación desde diversos lenguajes y cuestionamientos. Sus prácticas exploran las relaciones entre rocas, cuerpos de agua, montañas, territorios, memorias, cuerpos, identidades, comunidad y cuidado.</p>
+          <p>Las obras aquí reunidas son aproximaciones, preguntas y rastros de procesos que se han construido caminando, escuchando, observando y creando con otrxs. Algunas nacen de la investigación y la memoria; otras, de la experimentación con imágenes, sonidos, materia viva, archivos y relatos.</p>
+          <p>Es un proceso vivo de correspondencias, aprendizajes, vínculos y afectos. Una invitación a detenernos, observar y reconocer las interconexiones que existen entre todo lo vivo; a contemplar(nos) como parte de esas redes y a imaginar otros futuros posibles con la montaña, con la vida.</p>
+        </div>
+        <div class="grid content-start gap-4">
+          <a href={`${images}/afiche-residencia.webp`}>
+            <img src={`${images}/afiche-residencia.webp`} alt="Ver en tamaño completo el afiche de la residencia" class="w-full rounded-lg" width="1080" height="1350" loading="lazy" />
+          </a>
+          <img src={`${images}/encuentro.webp`} alt="Encuentro de participantes y público en una sala de exposición" class="w-full rounded-lg" width="1048" height="699" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <section id="artistas" class="px-4 py-12 scroll-mt-16" aria-labelledby="artistas-titulo">
+      <div class:list={[panel, "max-w-4xl grid gap-6 md:grid-cols-2 text-lg"]}>
+        <div>
+          <h2 id="artistas-titulo" class={heading}>Artistas</h2>
+          <ul class="divide-y divide-[#a9cf85]/40">
+            {artists.map(artist => <li class="py-2">{artist}</li>)}
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-4">Equipo</h3>
+          <dl class="grid grid-cols-[max-content_1fr] gap-x-3 gap-y-2 mb-4">
+            <dt class="font-semibold">Curaduría</dt><dd>Laura Puerta Barco</dd>
+            <dt class="font-semibold">Dirección</dt><dd>Lina Mejía Álvarez</dd>
+            <dt class="font-semibold">Coordinación</dt><dd>Sandra Ramírez Giraldo</dd>
+          </dl>
+          <p>Corporación Platohedro</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sesiones" class="px-4 py-12 scroll-mt-16" aria-labelledby="sesiones-titulo">
+      <div class:list={[panel, 'max-w-4xl flex flex-col-reverse md:flex-row-reverse gap-6 md:gap-8 items-center']}>
+        <div>
+          <h2 id="sesiones-titulo" class={heading}>Proceso formativo</h2>
+          <p class="text-xl mb-4 sm:mb-6">Sesiones virtuales</p>
+          <a class={button} href="https://drive.google.com/drive/folders/14qzVVI1vpGG7Hw0d_X06i9jfdxvn0V0K?usp=sharing">Consultar las sesiones en Google Drive</a>
+        </div>
+        <img src={`${images}/dibujo-montanas.webp`} alt="Ilustración de montañas, caminos y vegetación en blanco y negro" class="w-full md:w-1/2 rounded-lg" width="1280" height="854" loading="lazy" />
+      </div>
+    </section>
+
+    <section id="circulacion" class="px-4 py-12 scroll-mt-16" aria-labelledby="circulacion-titulo">
+      <div class:list={[panel, "max-w-5xl"]}>
+        <h2 id="circulacion-titulo" class={heading}>Circulación</h2>
+        <div class="grid gap-6 sm:grid-cols-2">
+          {activities.map(activity => (
+            <article class="min-w-0 rounded-lg bg-[#132e19]/90 p-4 flex flex-col gap-4" aria-labelledby={`${activity.id}-titulo`}>
+              <h3 id={`${activity.id}-titulo`} class="text-xl font-bold flex-1">{activity.title}</h3>
+              <div data-gallery>
+                <div id={`${activity.id}-fotos`} class="photos grid gap-3">
+                  {activity.photos.map(photo => (
+                    <a class="block rounded-lg bg-[#0c2111]" href={`${images}/${photo.file}.webp`} aria-label={`Ampliar imagen: ${photo.alt}`}>
+                      <img class="w-full aspect-[4/3] object-contain rounded-lg" src={`${images}/${photo.file}.webp`} alt={photo.alt} loading="lazy" />
+                    </a>
+                  ))}
+                </div>
+                {activity.photos.length > 1 && (
+                  <div class="gallery-controls mt-3 flex flex-wrap justify-between items-center gap-2" hidden>
+                    <button class="rounded-lg bg-j2-accent text-j2-primary font-semibold px-3 py-2 hover:bg-j2-accent/80 transition-colors" type="button" data-step="-1" aria-controls={`${activity.id}-fotos`}>Anterior</button>
+                    <span aria-live="polite" data-status></span>
+                    <button class="rounded-lg bg-j2-accent text-j2-primary font-semibold px-3 py-2 hover:bg-j2-accent/80 transition-colors" type="button" data-step="1" aria-controls={`${activity.id}-fotos`}>Siguiente</button>
+                  </div>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+</JuntxsIILayout>
+
+<script>
+  for (const gallery of document.querySelectorAll('[data-gallery]')) {
+    const controls = gallery.querySelector<HTMLElement>('.gallery-controls');
+    const status = gallery.querySelector('[data-status]');
+    const photos = Array.from(gallery.querySelectorAll<HTMLAnchorElement>('.photos a'));
+
+    if (!controls || !status) continue;
+    let current = 0;
+
+    const showPhoto = () => {
+      photos.forEach((photo, index) => { photo.hidden = index !== current; });
+      status.textContent = `${current + 1} / ${photos.length}`;
+    };
+
+    for (const button of controls.querySelectorAll<HTMLButtonElement>('button')) {
+      button.addEventListener('click', () => {
+        current = (current + Number(button.dataset.step) + photos.length) % photos.length;
+        showPhoto();
+      });
+    }
+
+    showPhoto();
+    controls.hidden = false;
+  }
+</script>
+
+<style>
+  [hidden] { display: none !important; }
+</style>

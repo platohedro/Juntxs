@@ -2,6 +2,10 @@
 interface Props {
   title: string;
   backgroundImageUrl?: string;
+  description?: string;
+  edition?: 'II' | 'III';
+  sectionLinks?: { label: string; href: string }[];
+  footerText?: string;
 }
 
 const navLinks = [
@@ -14,7 +18,19 @@ const navLinks = [
 ];
 
 const defaultBackgroundImage = '/imagenes/BG-2.png';
-const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
+const {
+  title,
+  backgroundImageUrl = defaultBackgroundImage,
+  description,
+  edition = 'II',
+  sectionLinks = navLinks,
+  footerText = 'Proyecto Juntxs II · Encuentros vivos, cultura en movimiento',
+} = Astro.props;
+const chromeBackground = edition === 'III' ? 'bg-[#193b20]/90' : 'bg-j2-secondary/80';
+const editionPath = edition === 'III' ? '/juntxs-iii' : '/juntxs-ii';
+const otherEdition = edition === 'III'
+  ? { label: 'Juntxs II', href: '/juntxs-ii' }
+  : { label: 'Juntxs III', href: '/juntxs-iii' };
 ---
 
 <!doctype html>
@@ -24,9 +40,10 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/phb.svg" />
     <meta name="generator" content={Astro.generator} />
+    {description && <meta name="description" content={description} />}
     <title>{title}</title>
     <style>
-      @media (min-width: 768px) {
+      @media (min-width: 1024px) {
         #desktop-menu {
           display: flex !important;
         }
@@ -35,7 +52,7 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
         }
       }
       
-      @media (max-width: 767px) {
+      @media (width < 1024px) {
         #desktop-menu {
           display: none !important;
         }
@@ -50,6 +67,10 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
         backdrop-filter: blur(4px);
       }
       
+      body[data-edition="III"] #mobile-menu {
+        background-color: rgb(25 59 32 / 95%);
+      }
+
       #mobile-menu.show {
         display: block;
       }
@@ -92,24 +113,25 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
       }
     </style>
   </head>
-  <body style={`background-image: url('${backgroundImageUrl}');`}>
-    <nav class="bg-j2-secondary/80 backdrop-blur-sm fixed w-full z-50">
+  <body data-edition={edition} style={`background-image: url('${backgroundImageUrl}');`}>
+    <nav aria-label={`Navegación de Juntxs ${edition}`} class:list={[chromeBackground, "backdrop-blur-sm fixed w-full z-50"]}>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <div class="flex items-center space-x-4">
-            <a href="/juntxs-ii" class="flex items-center">
-              <span class="text-xl font-bold text-white">Juntxs II</span>
+            <a href={editionPath} class="flex items-center">
+              <span class="text-xl font-bold text-white">Juntxs {edition}</span>
             </a>
-            <a href="/" class="text-sm text-j2-light hover:text-j2-accent transition-colors">Volver a Juntxs I</a>
+            <a href="/" class="text-sm text-j2-light hover:text-j2-accent transition-colors">Juntxs I</a>
+            <a href={otherEdition.href} class="text-sm text-j2-light hover:text-j2-accent transition-colors">{otherEdition.label}</a>
           </div>
           
           <div id="desktop-menu" class="items-center space-x-4">
-            {navLinks.map(link => (
+            {sectionLinks.map(link => (
               <a href={link.href} class="text-white hover:text-j2-highlight transition-colors">{link.label}</a>
             ))}
           </div>
           
-          <button id="mobile-menu-button" type="button" class="text-white">
+          <button id="mobile-menu-button" type="button" aria-label="Menú" aria-controls="mobile-menu" aria-expanded="false" class="text-white">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="3" y1="12" x2="21" y2="12"></line>
               <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -121,7 +143,7 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
       
       <div id="mobile-menu">
         <div class="px-2 pt-2 pb-3 space-y-1">
-          {navLinks.map(link => (
+          {sectionLinks.map(link => (
             <a href={link.href} class="mobile-link">{link.label}</a>
           ))}
           <a href="/" class="mobile-link text-j2-highlight">Volver a Juntxs I</a>
@@ -133,11 +155,11 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
       <slot />
     </div>
 
-    <footer id="site-footer" class="bg-j2-secondary/80 backdrop-blur-sm text-white py-4 w-full">
+    <footer id="site-footer" class:list={[chromeBackground, "backdrop-blur-sm text-white py-4 w-full"]}>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="flex flex-col items-center justify-center gap-2">
           <img src="/imagenes/CULTURAS_BLANCO.png" alt="Ministerio de Cultura" class="h-10" />
-          <p class="text-sm text-j2-light">Proyecto Juntxs II · Encuentros vivos, cultura en movimiento</p>
+          <p class="text-sm text-j2-light">{footerText}</p>
         </div>
       </div>
     </footer>
@@ -149,7 +171,15 @@ const { title, backgroundImageUrl = defaultBackgroundImage } = Astro.props;
         
         if (menuButton && mobileMenu) {
           menuButton.addEventListener('click', function() {
-            mobileMenu.classList.toggle('show');
+            const open = mobileMenu.classList.toggle('show');
+            menuButton.setAttribute('aria-expanded', String(open));
+          });
+
+          mobileMenu.addEventListener('click', function(event) {
+            if (event.target instanceof Element && event.target.closest('a')) {
+              mobileMenu.classList.remove('show');
+              menuButton.setAttribute('aria-expanded', 'false');
+            }
           });
         }
 
